@@ -1,9 +1,17 @@
 {
-  "name": "html-sass-jumpstart",
-  "description": "node-sass jumpstart",
+  "name": "fisheye",
+  "description": "Formation openclassroom Développeur Front-End projet 06 Créez un site accessible pour une plateforme de photographes",
   "version": "0.1.0",
   "main": "public/index.html",
   "author": "joska",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joskapotin/joskapotin_06_01092021.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joskapotin/joskapotin_06_01092021/issues"
+  },
   "scripts": {
     "scss": "sass src/sass:public/css",
     "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
@@ -15,7 +23,10 @@
     "watch": "npm-run-all --parallel watch:*",
     "serve": "browser-sync start --server public --files public --port 1337",
     "start": "npm-run-all copy:* scss --parallel watch serve",
-    "build": "npm-run-all copy:* scss css"
+    "build": "npm-run-all copy:* scss css",
+    "lint": "stylelint src/sass/**/*.scss src/sass/**/**/*.scss src/sass/**/**/**/*.scss -f verbose --color",
+    "lint:fix": "stylelint src/sass/**/*.scss src/sass/**/**/*.scss src/sass/**/**/**/*.scss --fix -f verbose --color",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "browserslist": [
     "last 4 versions"
@@ -25,10 +36,20 @@
     "browser-sync": "^2.27.5",
     "copyfiles": "^2.4.1",
     "cssnano": "^5.0.7",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "sass": "^1.37.2"
+    "prettier": "2.3.2",
+    "sass": "^1.37.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-sass-guidelines": "^8.0.0"
   }
 }
