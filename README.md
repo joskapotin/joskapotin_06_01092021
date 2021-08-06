@@ -1,6 +1,6 @@
 # Créez un site accessible pour une plateforme de photographes
 
-[La page est ici](public/)
+[La page est ici](https://joskapotin.github.io/joskapotin_06_01092021/public/)
 
 Depuis quelques semaines, vous êtes développeur junior chez Techasite, une société de conseil spécialisée dans le développement de sites web et d'applications mobiles.
 
