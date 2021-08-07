@@ -32,7 +32,7 @@ const addDatas = (photographers, medias) => {
     const createImagesPreview = array => {
       const imagesPreview = [];
       array.forEach(image => {
-        const path = mediasPath.concat("", firstname).concat("/", image);
+        const path = mediasPath.concat("", firstname).toLowerCase().concat("/", image);
         const imageSrc = `<img class="thumb-preview" src="${path}"/>`;
         imagesPreview.push(imageSrc);
       });
