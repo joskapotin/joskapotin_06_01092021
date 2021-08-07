@@ -223,6 +223,33 @@ rules:
   # Furthermore, generic qualifying selectors (e.g. `[dir="rtl"]`) can introduce yet another level.
   selector-max-compound-selectors: 4
   # Extremely useful for typos, and anything emergent can be ignored by this rule
+  # For specificity: disallow IDs (0). Allow for complex combinations of classes, pseudo-classes,
+  # attribute modifiers based on selector-max-compound-selectors, plus an addition for
+  # pseudo-classes (4). Allow for pseudo-elements (1).
+  selector-max-specificity: 0,4,1
+  at-rule-no-unknown:
+    - true
+    - ignoreAtRules:
+        - at-root
+        - content
+        - each
+        - else
+        - error
+        - for
+        - function
+        - include
+        - if
+        - mixin
+        - return
+        - warn
+  # Disallow "@extend" in scss.
+  # http://csswizardry.com/2016/02/mixins-better-for-performance/
+  # http://vanseodesign.com/css/sass-mixin-or-extend/
+  # Besides performance, @extend actually *changes* the selector precedence by creating a compound
+  # selector, which can lead to ambiguous results.
+  at-rule-disallowed-list:
+    - extend
+  # Extremely useful for typos, and anything emergent can be ignored by this rule
   property-no-unknown:
     - true
     - ignoreProperties:
