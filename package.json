@@ -13,19 +13,19 @@
     "url": "https://github.com/joskapotin/joskapotin_06_01092021/issues"
   },
   "scripts": {
-    "scss": "sass src/sass:public/css",
-    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "scss": "sass src/assets/sass:public/assets/css",
+    "css": "postcss public/assets/css/*.css -u autoprefixer cssnano -r -m",
     "copy:html": "copyfiles -u 1 ./src/*.html ./src/**/*.html public",
-    "copy:js": "copyfiles -u 1 ./src/js/*.js public",
+    "copy:js": "copyfiles -u 1 ./src/assets/js/*.js public",
     "watch:html": "onchange src/*.html src/**/*.html -- npm run copy:html",
-    "watch:sass": "sass --watch src/sass:public/css",
-    "watch:js": "onchange src/js/*.js -- npm run copy:js",
+    "watch:sass": "sass --watch src/assets/sass:public/assets/css",
+    "watch:js": "onchange src/assets/js/*.js -- npm run copy:js",
     "watch": "npm-run-all --parallel watch:*",
     "serve": "browser-sync start --server public --files public --port 1337",
     "start": "npm-run-all copy:* scss --parallel watch serve",
     "build": "npm-run-all copy:* scss css",
-    "lint": "stylelint src/sass/**/*.scss src/sass/**/**/*.scss src/sass/**/**/**/*.scss -f verbose --color  || echo 'lint failed for some file(s).'",
-    "lint:fix": "stylelint src/sass/**/*.scss src/sass/**/**/*.scss src/sass/**/**/**/*.scss --fix -f verbose --color || echo 'lint failed for some file(s).'",
+    "lint": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss -f verbose --color  || echo 'lint failed for some file(s).'",
+    "lint:fix": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss --fix -f verbose --color || echo 'lint failed for some file(s).'",
     "stylelint-check": "stylelint-config-prettier-check"
   },
   "browserslist": [

@@ -1,0 +1,14 @@
+/* Links */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  height: 30px;
+  padding: 8px;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+  background: #e77e23;
+}
+
+.skip-link:focus {
+  transform: translateY(0%);
+}

@@ -1,5 +1,6 @@
 // variables
-$font-family-sans: arial, helvetica, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+$font-family-sans: "DM Sans", sans-serif;
 
 $color-primary: #901c1c;
 $color-secondary: #db8876;
