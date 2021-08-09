@@ -22,22 +22,30 @@ const mediasFactory = (id, photographerId, title, image, video, tags, likes, dat
   return { id, photographerId, title, image, video, tags, likes, date, price, photographer, addPhotographer };
 };
 
-// get all the tags
-const getAllTheTag = elements => {
-  const tagArray = [];
+// create photographers
+const createPhotographers = elements => {
+  console.log(elements);
+  const photographers = [];
   elements.forEach(element => {
-    element.tags.forEach(item => {
-      if (!tagArray.includes(item)) {
-        tagArray.push(item);
-      }
-    });
+    const { id, name, city, country, tags, tagline, price, portrait } = element;
+    const fullname = name.split(" ");
+    const firstname = fullname[0];
+    const lastname = fullname[1];
+    const photographer = photographersFactory(id, firstname, lastname, city, country, tags, tagline, price, portrait);
+    photographers.push(photographer);
   });
-  return tagArray;
+  return photographers;
 };
 
-// get photographer by id
-const getPhotographerById = (array, id) => {
-  return array.find(element => element.id === id);
+// create medias
+const createMedias = elements => {
+  const mediasInit = [];
+  elements.forEach(element => {
+    const { id, photographerId, title, image, video, tags, likes, date, price } = element;
+    const media = mediasFactory(id, photographerId, title, image, video, tags, likes, date, price);
+    mediasInit.push(media);
+  });
+  return mediasInit;
 };
 
 // get media by photographer
@@ -46,65 +54,55 @@ const getMediasByPhotographer = (array, id) => {
   return photographerMedias;
 };
 
-// function initialisation photographers
-const buildPhotographers = elements => {
-  const photographersInitArray = [];
-  elements.forEach(element => {
-    const { id, name, city, country, tags, tagline, price, portrait } = element;
-    const fullname = name.split(" ");
-    const firstname = fullname[0];
-    const lastname = fullname[1];
-    const photographer = photographersFactory(id, firstname, lastname, city, country, tags, tagline, price, portrait);
-    photographersInitArray.push(photographer);
-  });
-  return photographersInitArray;
+// get photographer by id
+const getPhotographerById = (array, id) => {
+  return array.find(element => element.id === id);
 };
 
-// function initialisation media
-const buildMedias = elements => {
-  const mediasInitArray = [];
-  elements.forEach(element => {
-    const { id, photographerId, title, image, video, tags, likes, date, price } = element;
-    const media = mediasFactory(id, photographerId, title, image, video, tags, likes, date, price);
-    mediasInitArray.push(media);
-  });
-  return mediasInitArray;
-};
-
-// function expand photographers with medias
-const expandPhotographers = (photographers, medias) => {
-  photographers.forEach(photographer => {
-    const media = getMediasByPhotographer(medias, photographer.id);
+// add medias to photographers
+const addMediasToPhotographer = (photographersArray, mediasArray) => {
+  photographersArray.forEach(photographer => {
+    const media = getMediasByPhotographer(mediasArray, photographer.id);
     media.forEach(element => {
       photographer.addMedia(element);
     });
   });
-  return photographers;
+  return photographersArray;
 };
 
-// function expand medias with photographer
-const expandMedias = (photographers, medias) => {
-  medias.forEach(media => {
-    const photographer = getPhotographerById(photographers, media.photographerId);
-    media.addPhotographer(photographer.firstname);
-    media.addPhotographer(photographer.lastname);
+// add photographer to media
+const addPhotographerToMedia = (photographersArray, mediasArray) => {
+  mediasArray.forEach(media => {
+    const photographer = getPhotographerById(photographersArray, media.photographerId);
+    media.addPhotographer(photographer.firstname); // test only
+    media.addPhotographer(photographer.lastname); // test only
   });
-  return medias;
+  return mediasArray;
 };
 
-// function create photographers
-const constructData = ({ photographers, media }) => {
-  const photographersInitArray = buildPhotographers(photographers);
-  const mediasInitArray = buildMedias(media);
-
-  const photographersArray = expandPhotographers(photographersInitArray, mediasInitArray);
-  const mediasArray = expandMedias(photographersInitArray, mediasInitArray);
+// Expand Data
+const finalData = (photographers, media) => {
+  const photographersInit = initData(photographers, media).photographersInit;
+  const mediasInit = initData(photographers, media).mediasInit;
+  const photographersArray = addMediasToPhotographer(photographersInit, mediasInit);
+  const mediasArray = addPhotographerToMedia(photographersInit, mediasInit);
   return { photographersArray, mediasArray };
 };
 
-// function getDatas
-const getDatas = elements => {
-  return constructData(elements);
+// Init Data
+const initData = ({ photographers, media }) => {
+  const photographersInit = createPhotographers(photographers);
+  console.log(photographers);
+  const mediasInit = createMedias(media);
+  return { photographersInit, mediasInit };
+};
+
+// Populate HTML
+const populateHtml = ({ photographers, media }) => {
+  const photographersArray = finalData(photographers, media).photographersArray;
+  console.log(photographers);
+  // uiCreatePhotographersList(photographersArray);
+  // uiCreateTagList(photographersArray);
 };
 
 // Fetch function
@@ -119,14 +117,26 @@ const getData = async url => {
 // Get Datas from fetch function
 getData(url)
   .then(data => {
-    uiCreatePhotographersList(data);
-    uiCreateTagList(data);
+    populateHtml(data);
   })
   .catch(error => console.log(error));
 
+// get all the tags
+const getAllTheTag = elements => {
+  const tagArray = [];
+  elements.forEach(element => {
+    element.tags.forEach(item => {
+      if (!tagArray.includes(item)) {
+        tagArray.push(item);
+      }
+    });
+  });
+  return tagArray;
+};
+
 // create tags list
-const uiCreateTagList = ({ photographers }) => {
-  const tagArray = getAllTheTag(photographers);
+const uiCreateTagList = elements => {
+  const tagArray = getAllTheTag(elements);
   const tagList = tagArray.join('</button></li><li class="tag"><button class="btn-tag">#');
 
   const uiTagList = `<li class="tag"><button class="btn-tag">#${tagList}</button></li>`;
@@ -135,9 +145,8 @@ const uiCreateTagList = ({ photographers }) => {
 
 // create photographers list
 const uiCreatePhotographersList = elements => {
-  const photographers = getDatas(elements).photographersArray;
-  photographers.forEach(photographe => {
-    const { firstname, lastname, city, country, tags, tagline, price, portrait } = photographe;
+  elements.forEach(element => {
+    const { firstname, lastname, city, country, tags, tagline, price, portrait } = element;
     const thumbnail = photographeThumbPath.concat(portrait);
     const tagList = tags.join('</button></li><li class="tag"><button class="btn-tag">#');
 
