@@ -1,12 +1,26 @@
 /* Layouts */
+.container {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.page-wrapper {
+  position: relative;
+}
+
+.site-header {
+  padding-top: 40px;
+}
+
 .banner {
   width: 150px;
-  height: 37.5px;
-  margin: 40px auto auto 20px;
+  height: 38px;
+  margin: 0 0 0 20px;
 }
 
 .top-nav {
-  margin: 30px 0 0;
+  margin-top: 30px;
   padding: 0 40px;
 }
 
@@ -16,23 +30,15 @@
 
 .page-title {
   position: absolute;
-  top: 50px;
-  right: 22px;
-  color: $color-primary;
-  font-size: 0.875rem;
+  top: 47px;
+  right: 20px;
 }
 
 .section-photographers {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 247px;
-  row-gap: 30px;
-}
+  --min: 310px;
 
-.card {
-  flex-grow: 1;
-  flex-shrink: 0;
-  min-width: 263px;
+  grid-column-gap: 100px;
+  grid-row-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
 }
