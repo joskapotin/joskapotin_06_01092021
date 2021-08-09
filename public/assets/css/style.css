@@ -135,22 +135,6 @@ button:hover {
   transform: translate(-50%, 0);
 }
 
-a {
-  display: inline-block;
-  padding: 3px 6px;
-  border: 1px solid #c4c4c4;
-  border-radius: 21px;
-  background-color: transparent;
-  color: #901c1c;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  text-decoration: none;
-}
-a:hover, a:focus {
-  background-color: #901c1c;
-  color: #fff;
-}
-
 /* Buttons */
 .btn {
   padding: 23px 18px;
@@ -202,6 +186,7 @@ th {
 }
 
 .card {
+  animation: card-init 300ms ease-in-out forwards;
   text-align: center;
 }
 
@@ -213,6 +198,14 @@ th {
   object-fit: cover;
 }
 
+@keyframes card-init {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .tag-list {
   display: flex;
   flex-direction: row;
@@ -222,14 +215,40 @@ th {
   gap: 5px;
 }
 
+.tag-link,
 .tag {
-  margin: 0;
-  padding: 0;
+  display: inline-block;
+  padding: 3px 6px;
+  border: 1px solid #c4c4c4;
+  border-radius: 21px;
+  background-color: transparent;
+  color: #901c1c;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-decoration: none;
+}
+
+.tag-link:hover,
+.tag-link:focus {
+  background-color: #901c1c;
+  color: #fff;
+}
+
+.show {
+  transform: scale(1);
+  transition: opacity 200ms, transform 200ms;
+  opacity: 1;
+}
+
+.hide {
+  transform: scale(0);
+  transition: opacity 200ms, transform 200ms;
+  opacity: 0;
 }
 
 /* Layouts */
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin-right: auto;
   margin-left: auto;
 }

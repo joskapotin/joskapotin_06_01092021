@@ -1,3 +1,5 @@
+import { getPhotographerById, getMediasByPhotographer } from "./helpers.js";
+
 // photographers factory
 const photographersFactory = (id, firstname, lastname, city, country, tags, tagline, price, portrait) => {
   const medias = [];
@@ -14,30 +16,6 @@ const mediasFactory = (id, photographerId, title, image, video, tags, likes, dat
     photographer.push(element);
   };
   return { id, photographerId, title, image, video, tags, likes, date, price, photographer, addPhotographer };
-};
-
-// get all the tags
-const getAllTheTag = elements => {
-  const tagArray = [];
-  elements.forEach(element => {
-    element.tags.forEach(item => {
-      if (!tagArray.includes(item)) {
-        tagArray.push(item);
-      }
-    });
-  });
-  return tagArray;
-};
-
-// get photographer by id
-const getPhotographerById = (array, id) => {
-  return array.find(element => element.id === id);
-};
-
-// get media by photographer
-const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId === id);
-  return photographerMedias;
 };
 
 // function initialisation photographers
@@ -87,19 +65,15 @@ const expandMedias = (photographers, medias) => {
 };
 
 // function create photographers
-const buildData = ({ photographers, media }) => {
-  const photographersInitArray = buildPhotographers(photographers);
-  const mediasInitArray = buildMedias(media);
+const buildData = elements => {
+  // init
+  const photographersInit = buildPhotographers(elements.photographers);
+  const mediasInit = buildMedias(elements.media);
 
-  const photographersArray = expandPhotographers(photographersInitArray, mediasInitArray);
-  const mediasArray = expandMedias(photographersInitArray, mediasInitArray);
-  return { photographersArray, mediasArray };
+  // add medias photographers and photographers to media
+  const photographers = expandPhotographers(photographersInit, mediasInit);
+  const medias = expandMedias(photographersInit, mediasInit);
+  return { photographers, medias };
 };
 
-// function getDatas
-const getDatas = elements => {
-  return buildData(elements);
-};
-
-export default getDatas;
-export { getAllTheTag, getPhotographerById, getMediasByPhotographer };
+export default buildData;
