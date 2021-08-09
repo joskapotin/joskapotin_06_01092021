@@ -1,8 +1,11 @@
 const url = "./data/fisheyedata.json";
 const mediasPath = "medias/";
 const photographeThumbPath = mediasPath + "photographers-id-photos/";
-const photographersTable = document.querySelector("#photographes-table__body");
-const mediasTable = document.querySelector("#medias-table__body");
+const uiPhotographersList = document.querySelector("#photographers-list");
+const uiTagNav = document.querySelector("#tag-nav");
+
+const photographersTable = document.querySelector("#photographes-table__body"); // test only
+const mediasTable = document.querySelector("#medias-table__body"); // test only
 
 // photographers factory
 const photographersFactory = (id, firstname, lastname, city, country, tags, tagline, price, portrait) => {
@@ -73,8 +76,8 @@ const addMediasToPhotographer = (photographersArray, mediasArray) => {
 const addPhotographerToMedia = (photographersArray, mediasArray) => {
   mediasArray.forEach(media => {
     const photographer = getPhotographerById(photographersArray, media.photographerId);
-    media.addPhotographer(photographer.firstname);
-    media.addPhotographer(photographer.lastname);
+    media.addPhotographer(photographer.firstname); // test only
+    media.addPhotographer(photographer.lastname); // test only
   });
   return mediasArray;
 };
@@ -85,9 +88,11 @@ const construction = ({ photographers, media }) => {
   const mediasInit = createMedias(media);
   const photographersArray = addMediasToPhotographer(photographersInit, mediasInit);
   const mediasArray = addPhotographerToMedia(photographersInit, mediasInit);
-  addPhotographersTable(photographersArray);
-  addMediasTable(mediasArray);
+  uiCreatePhotographersList(photographersArray);
+  uiCreateTagList(photographersArray);
 };
+
+// Populate HTML
 
 // Fetch function
 const getData = async url => {
@@ -105,6 +110,41 @@ getData(url)
   })
   .catch(error => console.log(error));
 
+// get all the tags
+const getAllTheTag = elements => {
+  const tagArray = [];
+  elements.forEach(element => {
+    element.tags.forEach(item => {
+      if (!tagArray.includes(item)) {
+        tagArray.push(item);
+      }
+    });
+  });
+  return tagArray;
+};
+
+// create tags list
+const uiCreateTagList = elements => {
+  const tagArray = getAllTheTag(elements);
+  const tagList = tagArray.join('</button></li><li class="tag"><button class="btn-tag">#');
+
+  const uiTagList = `<li class="tag"><button class="btn-tag">#${tagList}</button></li>`;
+  uiTagNav.insertAdjacentHTML("beforeend", uiTagList);
+};
+
+// create photographers list
+const uiCreatePhotographersList = elements => {
+  elements.forEach(element => {
+    const { firstname, lastname, city, country, tags, tagline, price, portrait } = element;
+    const thumbnail = photographeThumbPath.concat(portrait);
+    const tagList = tags.join('</button></li><li class="tag"><button class="btn-tag">#');
+
+    const uiCard = `<article class="card"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2>${firstname} ${lastname}</h2><h3>${city}, ${country}</h3><p>${tagline}</p><p>${price}€/jour</p><ul class="tag-list"><li class="tag"><button class="btn-tag">#${tagList}</button></li></ul></article>`;
+    uiPhotographersList.insertAdjacentHTML("beforeend", uiCard);
+  });
+};
+
+// test only
 // add photographers to the table
 const addPhotographersTable = elements => {
   elements.forEach(element => {
@@ -120,6 +160,7 @@ const addPhotographersTable = elements => {
   });
 };
 
+// test only
 // add medias to the table
 const addMediasTable = elements => {
   elements.forEach(element => {
