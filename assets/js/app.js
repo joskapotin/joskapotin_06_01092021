@@ -21,9 +21,8 @@ const uiShowPhotographersbyTag = (photographers, tag) => {
 };
 
 // Add event listeners
-const initTagNav = photographers => {
-  const uiNavTags = uiTagNav.querySelectorAll(".tag-link");
-  uiNavTags.forEach(element => {
+const initTagNav = (photographers, uiElements) => {
+  uiElements.forEach(element => {
     element.addEventListener("click", function (event) {
       // event.preventDefault();
       const tag = event.target.getAttribute("href").substring(1);
@@ -45,11 +44,13 @@ const uiCreatePhotographersList = photographers => {
   photographers.forEach(photographe => {
     const { firstname, lastname, city, country, tags, tagline, price, portrait } = photographe;
     const thumbnail = photographeThumbPath.concat(portrait);
-    const tagList = tags.join('</li><li class="tag">');
+    const tagList = createTaglist(tags);
 
-    const uiCard = `<article class="card"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="name">${firstname} ${lastname}</h2><h3 class="location">${city}, ${country}</h3><p class="tagline">${tagline}</p><p class="pricing">${price}€/jour</p><ul class="tag-list"><li class="tag">${tagList}</li></ul></article>`;
+    const uiCard = `<article class="card"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="name">${firstname} ${lastname}</h2><h3 class="location">${city}, ${country}</h3><p class="tagline">${tagline}</p><p class="pricing">${price}€/jour</p><ul class="tag-list">${tagList}</ul></article>`;
     uiPhotographersList.insertAdjacentHTML("beforeend", uiCard);
   });
+  const uiElements = document.querySelectorAll(".card .tag-link");
+  return initTagNav(photographers, uiElements);
 };
 
 // Init HTML
@@ -77,6 +78,7 @@ fetchData(url)
     return initHtml(result);
   })
   .then(result => {
-    return initTagNav(result);
+    const uiElements = uiTagNav.querySelectorAll(".tag-link");
+    return initTagNav(result, uiElements);
   })
   .catch(error => console.log(error));
