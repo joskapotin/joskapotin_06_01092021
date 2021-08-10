@@ -18,11 +18,10 @@ homeLink.addEventListener("click", function (event) {
 
 // Init
 const initApp = () => {
-  // const currentUrl = location.href;
-  // const currentPath = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+  const currentPath = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
   // const isRoot = /^(\/|\/index\.html)$/i.test(location.pathname);
-  console.log(location.pathname);
-  if (location.pathname === "/" || location.pathname === "/index.html") {
+  console.log(currentPath);
+  if (currentPath === "" || currentPath === "index.html") {
     initHomepage();
   }
   // initHomepage();
