@@ -1,2 +1,289 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");@-webkit-keyframes opacify{0%{opacity:0}to{opacity:1}}@keyframes opacify{0%{opacity:0}to{opacity:1}}*,:after,:before{-webkit-box-sizing:border-box;box-sizing:border-box}html:focus-within{scroll-behavior:smooth}body,h1,h2,h3,h4,h5,h6,p{font-weight:400;margin:0}body{font-family:DM Sans,sans-serif;font-size:16px;line-height:1.5;min-height:100vh}ul:not([role=list]){list-style:none;margin:0;padding:0}img,picture{display:block;max-width:100%}img{height:auto;-o-object-fit:cover;object-fit:cover;width:100%}button,input,select,textarea{font:inherit}button:hover{cursor:pointer}@media (prefers-reduced-motion:reduce){html:focus-within{scroll-behavior:auto}*,:after,:before{-webkit-animation-duration:.01ms!important;animation-duration:.01ms!important;-webkit-animation-iteration-count:1!important;animation-iteration-count:1!important;scroll-behavior:auto!important;-webkit-transition-duration:.01ms!important;-o-transition-duration:.01ms!important;transition-duration:.01ms!important}}.visually-hidden:not(:focus):not(:active){clip:rect(0,0,0,0);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.page-title{color:#901c1c;font-size:.875rem}.name{font-size:2.25rem}.location,.name{color:#901c1c;font-weight:400}.location{font-size:.8125rem}.tagline{color:#000;font-size:.625rem;font-weight:400}.pricing{color:#757575;font-size:.5625rem;font-weight:400}.skip-link{left:50%;line-height:30px;position:absolute;-webkit-transform:translate(-50%,-100%);-ms-transform:translate(-50%,-100%);transform:translate(-50%,-100%);-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;-o-transition:transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s}.skip-link:focus{-webkit-transform:translate(-50%);-ms-transform:translate(-50%);transform:translate(-50%)}.btn{background-color:#901c1c;border-radius:5px;color:#fff;font-size:1.125rem;font-weight:700;padding:23px 18px}.btn:focus,.btn:hover{background-color:#db8876;color:#000}.thumb-preview,.thumbnail{max-height:100px;-o-object-fit:cover;object-fit:cover}.thumb-preview{display:inline-block;max-width:100px}table{border-collapse:collapse;width:100%}tr:nth-of-type(odd){background:#eee}th{background:#bcb2e6;color:fff;font-weight:700}td,th{border:1px solid #ccc;padding:6px;text-align:left}.card{-webkit-animation:opacify .3s ease-in-out forwards;animation:opacify .3s ease-in-out forwards;text-align:center}.card__img{border-radius:200px;height:200px;margin:auto;-o-object-fit:cover;object-fit:cover;width:200px}.tag-list{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-align:center;-ms-flex-align:center;-webkit-box-pack:center;-ms-flex-pack:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:5px;justify-content:center}.tag,.tag-link{background-color:transparent;border:1px solid #c4c4c4;border-radius:21px;color:#901c1c;display:inline-block;font-size:.75rem;line-height:1rem;padding:3px 6px;text-decoration:none}.tag-link:focus,.tag-link:hover{background-color:#901c1c;color:#fff}.show{display:block}.hide{display:none}.container{margin-left:auto;margin-right:auto;max-width:1440px}.page-wrapper{position:relative}.site-header{padding-top:40px}.banner{height:38px;margin:0 0 0 20px;width:150px}.top-nav{-webkit-animation:opacify .3s ease-in-out forwards;animation:opacify .3s ease-in-out forwards;margin-top:30px;padding:0 40px}.site-main{padding-top:46px}.page-title{position:absolute;right:20px;top:47px}.section-photographers{--min:310px;grid-column-gap:100px;grid-row-gap:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--min),1fr))}
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+@keyframes opacify {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* vendors */
+/* Base */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+ul:not([role=list]) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* Accessibility */
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
+
+/* Typography */
+.page-title {
+  color: #901c1c;
+  font-size: 0.875rem;
+}
+
+.name {
+  color: #901c1c;
+  font-size: 2.25rem;
+  font-weight: normal;
+}
+
+.location {
+  color: #901c1c;
+  font-size: 0.8125rem;
+  font-weight: normal;
+}
+
+.tagline {
+  color: #000;
+  font-size: 0.625rem;
+  font-weight: normal;
+}
+
+.pricing {
+  color: #757575;
+  font-size: 0.5625rem;
+  font-weight: normal;
+}
+
+/* Components */
+/* Links */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  transition: transform 0.3s;
+  line-height: 30px;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+/* Buttons */
+.btn {
+  padding: 23px 18px;
+  border-radius: 5px;
+  background-color: #901c1c;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.btn:hover, .btn:focus {
+  background-color: #db8876;
+  color: #000;
+}
+
+/* Images */
+.thumbnail {
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.thumb-preview {
+  display: inline-block;
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr:nth-of-type(odd) {
+  background: #eee;
+}
+
+th {
+  background: #bcb2e6;
+  color: fff;
+  font-weight: bold;
+}
+
+td,
+th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.card {
+  animation: opacify 300ms ease-in-out forwards;
+  text-align: center;
+}
+
+.card__img {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 200px;
+  object-fit: cover;
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.tag-link,
+.tag {
+  display: inline-block;
+  padding: 3px 6px;
+  border: 1px solid #c4c4c4;
+  border-radius: 21px;
+  background-color: transparent;
+  color: #901c1c;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-decoration: none;
+}
+
+.tag-link:hover,
+.tag-link:focus {
+  background-color: #901c1c;
+  color: #fff;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* Layouts */
+.container {
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.page-wrapper {
+  position: relative;
+}
+
+.site-header {
+  padding-top: 40px;
+}
+
+.banner {
+  width: 150px;
+  height: 38px;
+  margin: 0 0 0 20px;
+}
+
+.top-nav {
+  animation: opacify 300ms ease-in-out forwards;
+  margin-top: 30px;
+  padding: 0 40px;
+}
+
+.site-main {
+  padding-top: 46px;
+}
+
+.page-title {
+  position: absolute;
+  top: 47px;
+  right: 20px;
+}
+
+.section-photographers {
+  --min: 310px;
+  grid-column-gap: 100px;
+  grid-row-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+}
+
+/* Pages */
+/* Themes */
+
 /*# sourceMappingURL=style.css.map */

@@ -67,10 +67,10 @@ const uiShowElementsbyTag = (array, tag) => {
 
 // Add eventlistener on all tag-link
 const initTagNav = array => {
-  const uiElements = document.querySelectorAll(".tag-link");
+  const uiElements = document.querySelectorAll(".tag-list");
   uiElements.forEach(uiElement => {
-    uiElement.addEventListener("click", function (event) {
-      event.preventDefault();
+    uiElement.addEventListener("click", event => {
+      // event.preventDefault();
       const tag = event.target.getAttribute("href").substring(5);
       uiShowElementsbyTag(array, tag);
     });
