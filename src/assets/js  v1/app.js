@@ -7,35 +7,21 @@ const photographeThumbPath = mediasPath + "photographers-id-photos/";
 const uiPhotographersList = document.querySelector("#photographers-list");
 const uiTagNav = document.querySelector("#tag-nav");
 
-// hide uiElement visibility
-const hideElement = uiElement => {
-  uiElement.classList.remove("show");
-  uiElement.classList.add("hide");
-};
-
-// Show uiElement visibility
-const showElement = uiElement => {
-  uiElement.classList.remove("hide");
-  uiElement.classList.add("show");
+// Clear photographers list
+const uiClearPhotographersList = () => {
+  const uiPhotographers = document.querySelectorAll(".card");
+  return uiPhotographers.forEach(element => element.remove());
 };
 
 // showPhotographersbyTag
 const uiShowPhotographersbyTag = (photographers, tag) => {
-  // first hide everyone
-  uiPhotographersList.querySelectorAll(".card").forEach(element => hideElement(element));
-
-  // show the selected
   const photographersArray = getPhotographersByTag(photographers, tag);
-  photographersArray.forEach(element => {
-    const id = element.id;
-    const uiElement = uiPhotographersList.querySelector("#card" + id);
-    showElement(uiElement);
-  });
+  uiClearPhotographersList();
+  uiCreatePhotographersList(photographersArray);
 };
 
 // Add event listeners
-const initTagNav = photographers => {
-  const uiElements = document.querySelectorAll(".tag-link");
+const initTagNav = (photographers, uiElements) => {
   uiElements.forEach(element => {
     element.addEventListener("click", function (event) {
       // event.preventDefault();
@@ -56,13 +42,15 @@ const uiCreateTagList = photographers => {
 // Create photographers list
 const uiCreatePhotographersList = photographers => {
   photographers.forEach(photographe => {
-    const { id, firstname, lastname, city, country, tags, tagline, price, portrait } = photographe;
+    const { firstname, lastname, city, country, tags, tagline, price, portrait } = photographe;
     const thumbnail = photographeThumbPath.concat(portrait);
     const tagList = createTaglist(tags);
 
-    const uiCard = `<article class="card" id="card${id}"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="name">${firstname} ${lastname}</h2><h3 class="location">${city}, ${country}</h3><p class="tagline">${tagline}</p><p class="pricing">${price}€/jour</p><ul class="tag-list">${tagList}</ul></article>`;
+    const uiCard = `<article class="card"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="name">${firstname} ${lastname}</h2><h3 class="location">${city}, ${country}</h3><p class="tagline">${tagline}</p><p class="pricing">${price}€/jour</p><ul class="tag-list">${tagList}</ul></article>`;
     uiPhotographersList.insertAdjacentHTML("beforeend", uiCard);
   });
+  const uiElements = document.querySelectorAll(".card .tag-link");
+  return initTagNav(photographers, uiElements);
 };
 
 // Init HTML
@@ -90,6 +78,7 @@ fetchData(url)
     return initHtml(result);
   })
   .then(result => {
-    return initTagNav(result);
+    const uiElements = uiTagNav.querySelectorAll(".tag-link");
+    return initTagNav(result, uiElements);
   })
   .catch(error => console.log(error));
