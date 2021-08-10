@@ -1,4 +1,4 @@
-import { getPhotographerById, getMediasByPhotographer } from "./helpers.js";
+import { getElementById, getMediasByPhotographer } from "./helpers.js";
 
 // photographers factory
 const photographersFactory = (id, firstname, lastname, city, country, tags, tagline, price, portrait) => {
@@ -57,7 +57,7 @@ const expandPhotographers = (photographers, medias) => {
 // function expand medias with photographer
 const expandMedias = (photographers, medias) => {
   medias.forEach(media => {
-    const photographer = getPhotographerById(photographers, media.photographerId);
+    const photographer = getElementById(photographers, media.photographerId);
     media.addPhotographer(photographer.firstname);
     media.addPhotographer(photographer.lastname);
   });
