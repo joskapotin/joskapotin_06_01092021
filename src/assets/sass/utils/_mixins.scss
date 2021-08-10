@@ -1,1 +1,4 @@
 // mixins
+@mixin opacify {
+  animation: opacify 300ms ease-in-out forwards;
+}

@@ -1,5 +1,6 @@
 .card {
-  animation: card-init 300ms ease-in-out forwards;
+  @include opacify;
+
   text-align: center;
 }
 
@@ -9,13 +10,4 @@
   margin: auto;
   border-radius: 200px;
   object-fit: cover;
-}
-
-@keyframes card-init {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
