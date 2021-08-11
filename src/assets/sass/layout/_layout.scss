@@ -1,46 +1,46 @@
 /* Layouts */
 .container {
-  max-width: 1440px;
+  max-width: 90rem;
   margin-right: auto;
   margin-left: auto;
 }
 
 .page-wrapper {
   position: relative;
+  padding: 0 1.25rem;
 }
 
 .site-header {
-  padding-top: 40px;
+  padding: 2.5rem 0 2.875rem;
 }
 
-.banner {
-  width: 150px;
-  height: 38px;
-  margin: 0 0 0 20px;
+.link-home {
+  display: inline-block;
+}
+
+.svg-banner {
+  width: 9.375rem;
+  height: 2.375rem;
 }
 
 .top-nav {
   @include opacify;
 
-  margin-top: 30px;
-  padding: 0 40px;
-}
-
-.site-main {
-  padding-top: 46px;
+  margin-top: 1.875rem;
+  padding: 0 2.5rem;
 }
 
 .page-title {
   position: absolute;
-  top: 47px;
-  right: 20px;
+  top: 2.9375rem;
+  right: 1.25rem;
 }
 
 .section-photographers {
-  --min: 310px;
+  --min: 19.375rem;
 
-  grid-column-gap: 100px;
-  grid-row-gap: 30px;
+  grid-column-gap: 6.25rem;
+  grid-row-gap: 1.875rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
 }
