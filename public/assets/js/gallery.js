@@ -1,10 +1,11 @@
 import { apiUrl, photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
-import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer } from "./helpers.js"
+import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer, sumPropValue } from "./helpers.js"
+import { buildMedias } from "./factory.js"
 
-const uiCreateHeader = ({ name, city, country, tags, tagline, portrait }) => {
+const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
   const tagList = createTaglist(tags)
-  const header = `<section class="card card-cv" data-js="true"><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p><ul class="tag-list">${tagList}</ul><button class="btn card__btn">Contactez-moi</button></section>`
+  const header = `<section class="card card-single" data-js="true"><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p><ul class="tag-list">${tagList}</ul><button class="btn card__btn">Contactez-moi</button><footer class="card__footer"><span class="card__likes">297 081</span><span class="card__pricing">${price}€/jour</span></footer></section>`
   uiHeader.insertAdjacentHTML("beforeend", header)
 }
 
@@ -22,7 +23,7 @@ const uiCreateGallery = (medias, photographerId) => {
     }
 
     // Each media get an unique id and data-id from the photographer id
-    const uiMedia = `<article class="media__content" id="media-${id}" data-tag="${tagList}" data-date="${date}" data-price="${price}" data-like="${likes}"><figure class="media__figure">${thumbnail}<figcaption class="media__caption">${title}</figcaption></figure><button class="btn-like">Like</button></article>`
+    const uiMedia = `<article class="media__content" id="media-${id}" data-tag="${tagList}"><figure class="media__figure">${thumbnail}<figcaption class="media__caption">${title}<span class="date">${date}</span><span class="media__price">${price}€</span><span class="like-total">${likes}</span></figcaption></figure><button class="btn-like">Like</button></article>`
     uiGalleryArray.push(uiMedia)
   })
 
@@ -37,7 +38,10 @@ const initPhotographerPage = photographer => {
   const photographerId = photographer.id
   getMedias(apiUrl)
     .then(result => {
-      const medias = getMediasByPhotographer(result, photographerId)
+      const mediasArray = getMediasByPhotographer(result, photographerId)
+      const medias = buildMedias(mediasArray)
+      const totalLikes = sumPropValue(medias, "likes")
+      console.log(totalLikes)
       uiCreateGallery(medias, photographerId)
     })
     .catch(error => console.log(error))

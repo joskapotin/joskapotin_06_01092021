@@ -13,6 +13,7 @@
   color: $color-primary;
   font-size: 2.25rem;
   font-weight: normal;
+  line-height: 1;
 }
 
 .card__location {
@@ -41,7 +42,7 @@
   object-fit: cover;
 }
 
-.card-cv {
+.card-single {
   display: grid;
   position: relative;
   align-items: center;
@@ -49,7 +50,7 @@
   grid-template-columns: auto 1fr auto;
   text-align: left;
   z-index: 10;
-  grid-template-areas: "name button image" "location button image" "tagline button image" "taglist button image";
+  grid-template-areas: "name button image" "location location image" "tagline tagline image" "taglist taglist image";
 
   .card__name {
     margin-right: 1.0625rem;
@@ -91,6 +92,10 @@
     grid-area: image;
   }
 
+  .card__footer {
+    display: none;
+  }
+
   @media (min-width: $small-screen) {
     .card__name {
       font-size: 4rem;
@@ -113,7 +118,9 @@
     .card__btn {
       position: static;
       align-self: start;
+      padding: 1.3125rem 0.6875rem;
       transform: translateX(0);
+      font-size: 1.25rem;
       white-space: nowrap;
       justify-self: start;
     }
@@ -122,6 +129,30 @@
       width: 12.5rem;
       height: 12.5rem;
       border-radius: 12.5rem;
+    }
+
+    .card__footer {
+      display: block;
+      position: fixed;
+      right: 2.25rem;
+      bottom: 0;
+      padding: 1.25rem 1.875rem;
+      border-radius: 5px 5px 0 0;
+      background-color: $color-secondary;
+    }
+
+    .card__likes {
+      margin-right: 4.125rem;
+      padding-right: 1.5rem;
+      background-image: url("/assets/images/heart-black.svg");
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+
+    .card__likes,
+    .card__pricing {
+      color: $black;
+      font-size: 1.5rem;
     }
   }
 }

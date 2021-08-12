@@ -18,3 +18,28 @@
     color: $black;
   }
 }
+
+.btn-like,
+.btn-like::after {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.btn-like {
+  display: grid;
+  position: relative;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $white;
+    background-image: url("/assets/images/heart-red.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    content: "";
+  }
+}

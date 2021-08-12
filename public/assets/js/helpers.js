@@ -102,4 +102,8 @@ const resetApp = () => {
   })
 }
 
-export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp }
+const sumPropValue = (array, prop) => {
+  return array.reduce((prev, cur) => prev + cur[prop], 0)
+}
+
+export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp, sumPropValue }

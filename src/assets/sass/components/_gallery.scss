@@ -5,10 +5,12 @@
 }
 
 .media__content {
-  position: relative;
+  display: grid;
+  grid-template-areas: "grid";
 }
 
 .media__figure {
+  grid-area: grid;
   margin: 0;
   aspect-ratio: 335/190;
 
@@ -18,20 +20,25 @@
 }
 
 .media {
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 0.3125rem;
+  object-fit: cover;
 }
 
 .media__caption {
-  padding: 0.625rem 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 1.5rem 0.625rem 0;
   color: $color-primary;
   font-size: 0.875rem;
 }
 
 .btn-like {
+  grid-area: grid;
   display: block;
-  margin: auto 0 0 auto;
+  margin: auto 0 0.625rem auto;
 }
 
 @media (min-width: $small-screen) {
