@@ -1,6 +1,6 @@
 import { homeLink, apiUrl } from "./options.js"
 import { resetApp } from "./helpers.js"
-import initHomePage from "./homePage.js"
+import initHomePage from "./homepage.js"
 
 // Home link
 homeLink.addEventListener("click", event => {
