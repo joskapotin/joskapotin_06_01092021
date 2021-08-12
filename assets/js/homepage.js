@@ -1,59 +1,52 @@
-import buildData from "./builder.js";
-import { createTaglist, uiCreateTagNav, initTagNav, fetchData } from "./helpers.js";
+import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
+import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
+import initPhotographerPage from "./photographerPage.js"
 
-const url = "./data/fisheyedata.json";
-const mediasPath = "medias/";
-const photographeThumbPath = mediasPath + "photographers-id-photos/";
-const uiHeader = document.getElementById("site-header");
-const uiMain = document.getElementById("site-main");
+const uiCreateNavBar = photographers => {
+  const tagArray = getAllTheTag(photographers)
+  const tagList = createTaglist(tagArray)
+  const markup = `<nav class="top-nav" aria-label="photographers category" data-js="true"><ul id="tag-nav" class="tag-list">${tagList}</ul></nav>`
+  uiHeader.insertAdjacentHTML("beforeend", markup)
+}
 
-const uiInsertHeaderMarkup = () => {
-  const markup = '<nav class="top-nav" aria-label="photographers category"><ul id="tag-nav" class="tag-list"></ul></nav>';
-  uiHeader.insertAdjacentHTML("beforeend", markup);
-  const uiTagNav = document.getElementById("tag-nav");
-  return uiTagNav;
-};
-
-const uiInsertMainMarkup = () => {
-  const markup = `<h1 class="page-title">Nos photographes</h1><section id="photographers-list" class="section-photographers"></section>`;
-  uiMain.insertAdjacentHTML("beforeend", markup);
-  const uiPhotographersList = document.getElementById("photographers-list");
-  return uiPhotographersList;
-};
-
-// Create photographers list
-const uiCreatePhotographersList = (photographers, uiPhotographersList) => {
+const uiCreatePhotographersCards = photographers => {
+  const uiPhotographersArray = []
   photographers.forEach(photographe => {
-    const { id, firstname, lastname, city, country, tags, tagline, price, portrait } = photographe;
-    const thumbnail = photographeThumbPath.concat(portrait);
-    const tagList = createTaglist(tags);
+    const { id, name, city, country, tags, tagline, price, portrait } = photographe
+    const thumbnail = `${photographeThumbPath}/${portrait}`
+    const tagList = createTaglist(tags)
 
-    const uiCard = `<article class="card" id="card${id}"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="name">${firstname} ${lastname}</h2><h3 class="location">${city}, ${country}</h3><p class="tagline">${tagline}</p><p class="pricing">${price}€/jour</p><ul class="tag-list">${tagList}</ul></article>`;
-    uiPhotographersList.insertAdjacentHTML("beforeend", uiCard);
-  });
-};
+    // Each card get an unique id and data-id from the photographer id
+    const uiCard = `<article class="card card-photographer" id="card-${id}"><a href="#photographer-id-${id}" class="card-link" data-id="${id}"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="card__name">${name}</h2><h3 class="card__location">${city}, ${country}</h3><p class="card__tagline">${tagline}</p><p class="card__pricing">${price}€/jour</p><ul class="tag-list">${tagList}</ul></a></article>`
+    uiPhotographersArray.push(uiCard)
+  })
+  const uiPhotographers = uiPhotographersArray.join("")
+  const markup = `<h1 class="page-title" data-js="true">Nos photographes</h1><section id="photographers-list" class="section-photographers" data-js="true">${uiPhotographers}</section>`
+  uiMain.insertAdjacentHTML("beforeend", markup)
+}
 
-// Init Homepage
-const createHomepage = ({ photographers }) => {
-  const uiTagNav = uiInsertHeaderMarkup();
-  uiCreateTagNav(photographers, uiTagNav);
-  const uiPhotographersList = uiInsertMainMarkup();
-  uiCreatePhotographersList(photographers, uiPhotographersList);
-  return photographers;
-};
-
-const initHomepage = () => {
-  fetchData(url)
-    .then(result => {
-      return buildData(result);
+const initPhotographerNav = photographers => {
+  const cardsLink = uiMain.querySelectorAll(".card-link")
+  cardsLink.forEach(card => {
+    const photographer = getElementById(photographers, card.dataset.id)
+    card.addEventListener("click", event => {
+      initPhotographerPage(photographer)
     })
-    .then(result => {
-      return createHomepage(result);
-    })
-    .then(result => {
-      return initTagNav(result);
-    })
-    .catch(error => console.log(error));
-};
+  })
+}
 
-export default initHomepage;
+const initHomepage = async apiUrl => {
+  getPhotographers(apiUrl)
+    .then(photographers => {
+      uiCreateNavBar(photographers)
+      uiCreatePhotographersCards(photographers)
+      return photographers
+    })
+    .then(photographers => {
+      initTagNav(photographers)
+      initPhotographerNav(photographers)
+    })
+    .catch(error => console.log(error))
+}
+
+export default initHomepage
