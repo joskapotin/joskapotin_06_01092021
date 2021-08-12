@@ -1,4 +1,5 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
+import { buildPhotographers } from "./factory.js"
 import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
 import initPhotographerPage from "./gallery.js"
 
@@ -37,7 +38,9 @@ const initPhotographerNav = photographers => {
 
 const initHomepage = async apiUrl => {
   getPhotographers(apiUrl)
-    .then(photographers => {
+    .then(result => {
+      const photographers = buildPhotographers(result)
+      console.log(photographers)
       uiCreateNavBar(photographers)
       uiCreatePhotographersCards(photographers)
       return photographers
