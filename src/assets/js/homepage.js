@@ -1,6 +1,6 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
 import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
-import initPhotographerPage from "./gallery"
+import initPhotographerPage from "./gallery.js"
 
 const uiCreateNavBar = photographers => {
   const tagArray = getAllTheTag(photographers)
