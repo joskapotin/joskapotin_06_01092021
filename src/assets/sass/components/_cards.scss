@@ -4,10 +4,124 @@
   text-align: center;
 }
 
+.card-link {
+  display: block;
+  text-decoration: none;
+}
+
+.card__name {
+  color: $color-primary;
+  font-size: 2.25rem;
+  font-weight: normal;
+}
+
+.card__location {
+  color: $color-primary;
+  font-size: 0.8125rem;
+  font-weight: normal;
+}
+
+.card__tagline {
+  color: #000;
+  font-size: 0.625rem;
+  font-weight: normal;
+}
+
+.card__pricing {
+  color: $color-grey-400;
+  font-size: 0.5625rem;
+  font-weight: normal;
+}
+
 .card__img {
-  width: 200px;
-  height: 200px;
+  width: 12.5rem;
+  height: 12.5rem;
   margin: auto;
-  border-radius: 200px;
+  border-radius: 12.5rem;
   object-fit: cover;
+}
+
+.card-cv {
+  display: grid;
+  position: relative;
+  align-items: center;
+  margin-top: 1.875rem;
+  grid-template-columns: auto 1fr auto;
+  text-align: left;
+  z-index: 10;
+  grid-template-areas: "name button image" "location button image" "tagline button image" "taglist button image";
+
+  .card__name {
+    margin-right: 1.0625rem;
+    color: $color-secondary;
+    grid-area: name;
+  }
+
+  .card__location {
+    color: $color-primary;
+    grid-area: location;
+  }
+
+  .card__tagline {
+    color: $color-grey-500;
+    font-size: 0.8125rem;
+    grid-area: tagline;
+  }
+
+  .tag-list {
+    justify-content: flex-start;
+    grid-area: taglist;
+  }
+
+  .card__btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.125rem;
+    grid-area: button;
+  }
+
+  .card__img {
+    width: 6.25rem;
+    height: 6.25rem;
+    margin: 0 0 0 auto;
+    float: right;
+    border-radius: 6.25rem;
+    grid-area: image;
+  }
+
+  @media (min-width: $small-screen) {
+    .card__name {
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    .card__location {
+      align-self: start;
+      font-size: 1.5rem;
+    }
+
+    .card__tagline {
+      font-size: 1.125rem;
+    }
+
+    .tag-link {
+      font-size: 1.125rem;
+    }
+
+    .card__btn {
+      position: static;
+      align-self: start;
+      transform: translateX(0);
+      white-space: nowrap;
+      justify-self: start;
+    }
+
+    .card__img {
+      width: 12.5rem;
+      height: 12.5rem;
+      border-radius: 12.5rem;
+    }
+  }
 }

@@ -31,9 +31,9 @@ body {
   min-height: 100vh;
 }
 
-ul:not([role="list"]) {
-  margin: 0;
-  padding: 0;
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
   list-style: none;
 }
 
@@ -42,12 +42,8 @@ img,
 picture {
   display: block;
   max-width: 100%;
-}
-
-img {
   height: auto; // Make sure images are scaled correctly.
   object-fit: cover;
-  width: 100%; // Adhere to container width.
 }
 
 /* Inherit fonts for inputs and buttons */

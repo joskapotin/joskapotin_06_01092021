@@ -33,15 +33,17 @@ const createTaglist = array => {
   return array.map(element => wrapTag(element)).join("")
 }
 
-// get element by id
-const getElementById = (array, id) => {
-  return array.find(element => element.id == id)
+// Create ui tag nav
+const uiCreateTagNav = (array, uiElement) => {
+  const tagArray = getAllTheTag(array)
+  const tagList = createTaglist(tagArray)
+
+  uiElement.insertAdjacentHTML("beforeend", tagList)
 }
 
-// get media by photographer
-const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId == id)
-  return photographerMedias
+// get element by id
+const getElementById = (array, id) => {
+  return array.find(element => element.id === id)
 }
 
 // get element by tag
@@ -58,14 +60,14 @@ const uiShowElementsbyTag = (array, tag) => {
   const elements = getElementsByTag(array, tag)
   elements.forEach(element => {
     const id = element.id
-    const uiElement = document.querySelector("#card-" + id)
+    const uiElement = document.querySelector("#card" + id)
     showElement(uiElement)
   })
 }
 
 // Add eventlistener on all tag-link
 const initTagNav = array => {
-  const uiElements = document.querySelectorAll(".tag-link")
+  const uiElements = document.querySelectorAll(".tag-list")
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       // event.preventDefault();
@@ -75,31 +77,26 @@ const initTagNav = array => {
   })
 }
 
+// get media by photographer
+const getMediasByPhotographer = (array, id) => {
+  const photographerMedias = array.filter(element => element.photographerId === id)
+  return photographerMedias
+}
+
 // Fetch function
-const fetchData = async apiUrl => {
-  const response = await fetch(apiUrl)
+const fetchData = async url => {
+  const response = await fetch(url)
   if (!response.ok) {
     throw new Error(`Erreur HTTP ! statut : ${response.status}`)
   }
   return response.json()
 }
 
-const getPhotographers = async apiUrl => {
-  const { photographers } = await fetchData(apiUrl)
-  return photographers
-}
-
-const getMedias = async apiUrl => {
-  const { media } = await fetchData(apiUrl)
-  return media
-}
-
-// Remove all the elements
-const resetApp = () => {
-  const elements = document.querySelectorAll("[data-js]")
-  elements.forEach(element => {
+const removeFromDom = array => {
+  array.forEach(element => {
+    // TODO: test if element exist before removing it
     element.remove()
   })
 }
 
-export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp }
+export { createTaglist, uiCreateTagNav, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, removeFromDom }

@@ -15,7 +15,7 @@
 }
 
 .link-home {
-  display: inline-block;
+  display: inline-flex;
 }
 
 .svg-banner {
@@ -43,4 +43,59 @@
   grid-row-gap: 1.875rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
+}
+
+.sort-nav {
+  display: none;
+  position: relative;
+  margin-bottom: 3.625rem;
+  padding-right: 1.5625rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+
+  @media (min-width: $small-screen) {
+    display: inline-flex;
+  }
+}
+
+.sort-title {
+  font-weight: bold;
+}
+
+.sort-list {
+  position: absolute;
+  top: -0.875rem;
+  left: 100%;
+  height: 3.4375rem;
+  margin: 0;
+  padding: 0 0.625rem;
+  border-radius: 0.3125rem;
+  background-color: $color-primary;
+  color: $white;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    top: 1.3125rem;
+    right: 0.875rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    transform: rotate(45deg);
+    transform-origin: center;
+    border-top: 3px solid $white;
+    border-left: 3px solid $white;
+    content: "";
+  }
+}
+.sort-item {
+  padding: 0.875rem 2.625rem 0.875rem 0;
+}
+
+.sort-item:first-child {
+  border-bottom: 1px solid $white;
+}
+
+.sort-item:last-child {
+  border-top: 1px solid $white;
 }

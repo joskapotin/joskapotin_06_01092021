@@ -1,11 +1,16 @@
 /* Buttons */
 .btn {
-  padding: 23px 18px;
+  padding: 0.375rem 1.125rem;
+  border: 0;
   border-radius: 5px;
   background-color: $color-primary;
   color: $white;
   font-size: 1.125rem;
   font-weight: bold;
+
+  @media (min-width: $small-screen) {
+    padding: 23px 18px;
+  }
 
   &:hover,
   &:focus {
