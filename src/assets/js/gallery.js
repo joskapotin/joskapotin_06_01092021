@@ -1,6 +1,5 @@
 import { apiUrl, photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
 import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer } from "./helpers.js"
-import { buildMedias } from "./factory.js"
 
 const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
@@ -38,8 +37,7 @@ const initPhotographerPage = photographer => {
   const photographerId = photographer.id
   getMedias(apiUrl)
     .then(result => {
-      const mediasArray = getMediasByPhotographer(result, photographerId)
-      const medias = buildMedias(mediasArray)
+      const medias = getMediasByPhotographer(result, photographerId)
       uiCreateGallery(medias, photographerId)
     })
     .catch(error => console.log(error))

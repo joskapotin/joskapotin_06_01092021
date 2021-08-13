@@ -34,25 +34,17 @@ const getAllTheTag = apiUrl => {
 }
 
 // get element by tag
-const getElementsByTag = (array, tag) => {
-  return array.filter(element => element.tags.find(element => element === tag))
+const getElementsByTag = (apiUrl, elementType, tag) => {
+  if (elementType.includes("photographers")) {
+    const PhotographersArray = getPhotographers(apiUrl).then(result => {
+      return result.filter(element => element.tags.find(element => element === tag))
+    })
+    return PhotographersArray
 }
 
 // get element by id
 const getElementById = (array, id) => {
   return array.find(element => element.id === parseInt(id))
-}
-
-// hide uiElement
-const hideElement = uiElement => {
-  uiElement.classList.remove("show")
-  uiElement.classList.add("hide")
-}
-
-// Show uiElement
-const showElement = uiElement => {
-  uiElement.classList.remove("hide")
-  uiElement.classList.add("show")
 }
 
 // wrap tags
@@ -73,29 +65,41 @@ const getMediasByPhotographer = (array, id) => {
 }
 
 // show elements by tag
-const uiShowElementsbyTag = (element, tag) => {
+const uiShowElementsbyTag = (apiUrl, elementType, tag) => {
   // first hide everyone
   document.querySelectorAll("[data-filtrable]").forEach(element => hideElement(element))
 
   // show the selected
-  const elements = getElementsByTag(element, tag)
-  elements.forEach(element => {
-    const id = element.id
-    const uiElement = document.querySelector("#card-" + id)
-    showElement(uiElement)
+  getElementsByTag(apiUrl, elementType, tag).then(result => {
+    result.forEach(element => {
+      const id = element.id
+      const uiElement = document.querySelector("#card-" + id)
+      showElement(uiElement)
+    })
   })
 }
 
 // Add eventlistener on all tag-link
-const initTagNav = array => {
+const initTagNav = (apiUrl, elementType) => {
   const uiElements = document.querySelectorAll("[data-tag]")
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
-      // event.preventDefault();
       const tag = event.target.dataset.tag
-      uiShowElementsbyTag(array, tag)
+      uiShowElementsbyTag(apiUrl, elementType, tag)
     })
   })
+}
+
+// hide uiElement
+const hideElement = uiElement => {
+  uiElement.classList.remove("show")
+  uiElement.classList.add("hide")
+}
+
+// Show uiElement
+const showElement = uiElement => {
+  uiElement.classList.remove("hide")
+  uiElement.classList.add("show")
 }
 
 // Remove all the elements

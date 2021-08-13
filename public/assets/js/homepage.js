@@ -1,5 +1,4 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
-import { buildPhotographers } from "./factory.js"
 import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
 import initPhotographerPage from "./gallery.js"
 
@@ -35,19 +34,21 @@ const initPhotographerNav = photographers => {
 }
 
 const initHomepage = async apiUrl => {
-  getAllTheTag(apiUrl).then(result => {
-    const tagList = createTaglist(result)
-    uiCreateNavBar(tagList)
-  })
+  getAllTheTag(apiUrl)
+    .then(result => {
+      const tagList = createTaglist(result)
+      uiCreateNavBar(tagList)
+    })
+    .catch(error => console.log(error))
+
   getPhotographers(apiUrl)
     .then(result => {
-      const photographers = buildPhotographers(result)
-      uiCreatePhotographersCards(photographers)
-      return photographers
+      uiCreatePhotographersCards(result)
+      return apiUrl
     })
-    .then(photographers => {
-      initTagNav(photographers)
-      initPhotographerNav(photographers)
+    .then(apiUrl => {
+      initTagNav(apiUrl, "photographers")
+      // initPhotographerNav(photographers)
     })
     .catch(error => console.log(error))
 }
