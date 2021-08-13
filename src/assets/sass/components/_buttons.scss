@@ -37,9 +37,9 @@
     top: 0;
     left: 0;
     background-color: $white;
-    background-image: url("/assets/images/heart-red.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    content: "";
+    color: $color-primary;
+    font-size: 1.5rem;
+    line-height: 1.125rem;
+    content: "\2665";
   }
 }
