@@ -1,5 +1,5 @@
 // Fetch function
-const fetchData = async apiUrl => {
+const getData = async apiUrl => {
   const response = await fetch(apiUrl)
   if (!response.ok) {
     throw new Error(`Erreur HTTP ! statut : ${response.status}`)
@@ -7,22 +7,12 @@ const fetchData = async apiUrl => {
   return response.json()
 }
 
-const getPhotographers = async apiUrl => {
-  const { photographers } = await fetchData(apiUrl)
-  return photographers
-}
-
-const getMedias = async apiUrl => {
-  const { media } = await fetchData(apiUrl)
-  return media
-}
-
-// Create an array of all the tags without duplicate
 const getAllTheTag = async apiUrl => {
-  const response = await getMedias(apiUrl)
+  const { media } = await getData(apiUrl)
   const tagArray = []
-  response.forEach(element => {
+  media.forEach(element => {
     element.tags.forEach(item => {
+      // Create an array of all the tags without duplicate
       if (!tagArray.includes(item)) {
         tagArray.push(item)
       }
@@ -31,57 +21,56 @@ const getAllTheTag = async apiUrl => {
   return tagArray
 }
 
-// get element by tag. we need to request the api because we may not have all photographers loaded
-const getElementsByTag = async (apiUrl, elementType, tag) => {
-  if (elementType.match("photographers")) {
-    const response = await getPhotographers(apiUrl)
-    return response.filter(element => element.tags.find(element => element === tag))
+const getElementsByTag = async (apiUrl, elementName, tag) => {
+  const { photographers, media } = await getData(apiUrl)
+
+  if (elementName.match("photographers")) {
+    return photographers.filter(element => element.tags.find(element => element === tag))
+  } else if (elementName.match("medias")) {
+    return media.filter(element => element.tags.find(element => element === tag))
   }
 }
 
-// get media by photographer
-const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
-  return photographerMedias
+const getMediasByPhotographer = async (apiUrl, id) => {
+  const { media } = await getData(apiUrl)
+  const medias = media.filter(element => element.photographerId === parseInt(id))
+  return medias
 }
 
-// get element by id
 const getElementById = (array, id) => {
   return array.find(element => element.id === parseInt(id))
 }
 
-// wrap tags
 const wrapTag = element => {
   return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
 }
 
-// create tag list
 const createTaglist = array => {
-  const tagsLi = array.map(element => wrapTag(element)).join("")
-  return `<ul class="tag-list">${tagsLi}</ul>`
+  const tagsList = array.map(element => wrapTag(element)).join("")
+  return `<ul class="tag-list">${tagsList}</ul>`
 }
 
-// show elements by tag
-const uiShowElementsbyTag = (apiUrl, elementType, tag) => {
+const uiShowElementsbyTag = async (apiUrl, elementName, tag) => {
   // first hide everyone
   document.querySelectorAll("[data-filtrable]").forEach(element => hideElement(element))
 
   // show the selected
-  getElementsByTag(apiUrl, elementType, tag).then(result => {
-    result.forEach(element => {
-      const uiElement = document.querySelector(`[data-id="${element.id}"]`)
-      showElement(uiElement)
-    })
+  const response = await getElementsByTag(apiUrl, elementName, tag)
+  response.forEach(element => {
+    console.log(element.id)
+    const uiElement = document.querySelector(`[data-id="${element.id}"]`)
+    console.log(uiElement)
+    showElement(uiElement)
   })
 }
 
-// Init tag navigation elemenType can be "photographers" or "medias"
-const initTagNav = (apiUrl, elementType) => {
+const initTagNav = (apiUrl, elementName) => {
+  // This function is used for both photographer and media so we need to specifie which in elementName "photographers" or "medias"
   const uiElements = document.querySelectorAll("[data-tag]")
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       const tag = event.target.dataset.tag
-      uiShowElementsbyTag(apiUrl, elementType, tag)
+      uiShowElementsbyTag(apiUrl, elementName, tag)
     })
   })
 }
@@ -106,4 +95,4 @@ const resetApp = () => {
   })
 }
 
-export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp }
+export { getData, getAllTheTag, getMediasByPhotographer, getElementById, createTaglist, initTagNav, resetApp }

@@ -1,5 +1,5 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
-import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
+import { getData, getAllTheTag, getElementById, createTaglist, initTagNav } from "./helpers.js"
 import initPhotographerPage from "./photographer-page.js"
 
 const uiCreateNavBar = tagList => {
@@ -38,7 +38,7 @@ const initHomepage = async apiUrl => {
   const tagList = createTaglist(allTheTags)
   uiCreateNavBar(tagList)
 
-  const photographers = await getPhotographers(apiUrl)
+  const { photographers } = await getData(apiUrl)
   uiCreatePhotographersCards(photographers)
 
   initTagNav(apiUrl, "photographers")

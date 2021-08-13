@@ -382,8 +382,12 @@ th {
   grid-template-areas: "grid";
 }
 
-.media__figure {
+.media__link {
   grid-area: grid;
+  text-decoration: none;
+}
+
+.media__figure {
   margin: 0;
   aspect-ratio: 335/190;
 }

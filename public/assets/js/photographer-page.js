@@ -1,5 +1,5 @@
-import { apiUrl, photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
-import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer } from "./helpers.js"
+import { photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
+import { getMediasByPhotographer, createTaglist, initTagNav, resetApp } from "./helpers.js"
 
 const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
@@ -11,10 +11,9 @@ const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price })
 const uiCreateGallery = (medias, photographerId) => {
   const uiGalleryArray = []
   medias.forEach(media => {
-    const { id, title, image, video, tags, likes, date, price } = media
+    const { id, title, image, video, likes, date, price } = media
     const photographerMediaPath = `${mediasPath}/photographer-id-${photographerId}`
     let thumbnail = `<img class="media media-img" data-src="${photographerMediaPath}/${image}" src="${photographerMediaPath}/${image}">`
-    const tagList = tags.join(", ")
 
     if (video) {
       const ext = video.substr(video.lastIndexOf(".") + 1)
@@ -22,7 +21,7 @@ const uiCreateGallery = (medias, photographerId) => {
     }
 
     // Each media get an unique id and data-id from the photographer id
-    const uiMedia = `<article class="media__content" id="media-${id}" data-tag="${tagList}"><figure class="media__figure">${thumbnail}<figcaption class="media__caption">${title}<span class="date">${date}</span><span class="media__price">${price}€</span><span class="like-total">${likes}</span></figcaption></figure><button class="btn-like">Like</button></article>`
+    const uiMedia = `<article class="media__content" data-id="${id}" data-filtrable><a href="#media-id-${id}" class="media__link"><figure class="media__figure">${thumbnail}<figcaption class="media__caption">${title}<span class="date">${date}</span><span class="media__price">${price}€</span><span class="like-total">${likes}</span></figcaption></figure></a><button class="btn-like">Like</button></article>`
     uiGalleryArray.push(uiMedia)
   })
 
@@ -34,10 +33,10 @@ const uiCreateGallery = (medias, photographerId) => {
 const initPhotographerPage = async (apiUrl, photographer) => {
   resetApp()
   uiCreateHeader(photographer)
-  const allTheMedias = await getMedias(apiUrl)
-  const medias = getMediasByPhotographer(allTheMedias, photographer.id)
+  const medias = await getMediasByPhotographer(apiUrl, photographer.id)
   // we need the photographer id for the medias path
   uiCreateGallery(medias, photographer.id)
+  initTagNav(apiUrl, "medias")
 }
 
 export default initPhotographerPage
