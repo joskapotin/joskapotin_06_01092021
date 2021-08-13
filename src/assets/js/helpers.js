@@ -18,28 +18,25 @@ const getMedias = async apiUrl => {
 }
 
 // Create an array of all the tags without duplicate
-const getAllTheTag = apiUrl => {
-  const tagArray = getMedias(apiUrl).then(result => {
-    const array = []
-    result.forEach(element => {
-      element.tags.forEach(item => {
-        if (!array.includes(item)) {
-          array.push(item)
-        }
-      })
+const getAllTheTag = async apiUrl => {
+  const response = await getMedias(apiUrl)
+  const tagArray = []
+  response.forEach(element => {
+    element.tags.forEach(item => {
+      if (!tagArray.includes(item)) {
+        tagArray.push(item)
+      }
     })
-    return array
   })
   return tagArray
 }
 
-// get element by tag
-const getElementsByTag = (apiUrl, elementType, tag) => {
-  if (elementType.includes("photographers")) {
-    const PhotographersArray = getPhotographers(apiUrl).then(result => {
-      return result.filter(element => element.tags.find(element => element === tag))
-    })
-    return PhotographersArray
+// get element by tag. we need to request the api because we may not have all photographers loaded
+const getElementsByTag = async (apiUrl, elementType, tag) => {
+  if (elementType.match("photographers")) {
+    const response = await getPhotographers(apiUrl)
+    return response.filter(element => element.tags.find(element => element === tag))
+  }
 }
 
 // get element by id
@@ -79,7 +76,7 @@ const uiShowElementsbyTag = (apiUrl, elementType, tag) => {
   })
 }
 
-// Add eventlistener on all tag-link
+// Init tag navigation elemenType can be "photographers" or "medias"
 const initTagNav = (apiUrl, elementType) => {
   const uiElements = document.querySelectorAll("[data-tag]")
   uiElements.forEach(uiElement => {

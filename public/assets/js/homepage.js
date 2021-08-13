@@ -34,23 +34,15 @@ const initPhotographerNav = photographers => {
 }
 
 const initHomepage = async apiUrl => {
-  getAllTheTag(apiUrl)
-    .then(result => {
-      const tagList = createTaglist(result)
-      uiCreateNavBar(tagList)
-    })
-    .catch(error => console.log(error))
+  const allTheTags = await getAllTheTag(apiUrl)
+  const tagList = createTaglist(allTheTags)
+  uiCreateNavBar(tagList)
 
-  getPhotographers(apiUrl)
-    .then(result => {
-      uiCreatePhotographersCards(result)
-      return apiUrl
-    })
-    .then(apiUrl => {
-      initTagNav(apiUrl, "photographers")
-      // initPhotographerNav(photographers)
-    })
-    .catch(error => console.log(error))
+  const photographers = await getPhotographers(apiUrl)
+  uiCreatePhotographersCards(photographers)
+
+  initTagNav(apiUrl, "photographers")
+  initPhotographerNav(photographers)
 }
 
 export default initHomepage
