@@ -1,82 +1,3 @@
-// hide uiElement
-const hideElement = uiElement => {
-  uiElement.classList.remove("show")
-  uiElement.classList.add("hide")
-}
-
-// Show uiElement
-const showElement = uiElement => {
-  uiElement.classList.remove("hide")
-  uiElement.classList.add("show")
-}
-
-// Create an array of all the tags without duplicate
-const getAllTheTag = array => {
-  const tagArray = []
-  array.forEach(element => {
-    element.tags.forEach(item => {
-      if (!tagArray.includes(item)) {
-        tagArray.push(item)
-      }
-    })
-  })
-  return tagArray
-}
-
-// wrap tags
-const wrapTag = element => {
-  return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
-}
-
-// create tag list
-const createTaglist = array => {
-  const lis = array.map(element => wrapTag(element)).join("")
-  const ul = `<ul class="tag-list">${lis}</ul>`
-  return ul
-}
-
-// get element by id
-const getElementById = (array, id) => {
-  return array.find(element => element.id === parseInt(id))
-}
-
-// get media by photographer
-const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
-  return photographerMedias
-}
-
-// get element by tag
-const getElementsByTag = (array, tag) => {
-  return array.filter(element => element.tags.find(element => element === tag))
-}
-
-// show elements by tag
-const uiShowElementsbyTag = (array, tag) => {
-  // first hide everyone
-  document.querySelectorAll(".card").forEach(element => hideElement(element))
-
-  // show the selected
-  const elements = getElementsByTag(array, tag)
-  elements.forEach(element => {
-    const id = element.id
-    const uiElement = document.querySelector("#card-" + id)
-    showElement(uiElement)
-  })
-}
-
-// Add eventlistener on all tag-link
-const initTagNav = array => {
-  const uiElements = document.querySelectorAll("[data-tag]")
-  uiElements.forEach(uiElement => {
-    uiElement.addEventListener("click", event => {
-      // event.preventDefault();
-      const tag = event.target.dataset.tag
-      uiShowElementsbyTag(array, tag)
-    })
-  })
-}
-
 // Fetch function
 const fetchData = async apiUrl => {
   const response = await fetch(apiUrl)
@@ -94,6 +15,87 @@ const getPhotographers = async apiUrl => {
 const getMedias = async apiUrl => {
   const { media } = await fetchData(apiUrl)
   return media
+}
+
+// Create an array of all the tags without duplicate
+const getAllTheTag = apiUrl => {
+  const tagArray = getMedias(apiUrl).then(result => {
+    const array = []
+    result.forEach(element => {
+      element.tags.forEach(item => {
+        if (!array.includes(item)) {
+          array.push(item)
+        }
+      })
+    })
+    return array
+  })
+  return tagArray
+}
+
+// get element by tag
+const getElementsByTag = (array, tag) => {
+  return array.filter(element => element.tags.find(element => element === tag))
+}
+
+// get element by id
+const getElementById = (array, id) => {
+  return array.find(element => element.id === parseInt(id))
+}
+
+// hide uiElement
+const hideElement = uiElement => {
+  uiElement.classList.remove("show")
+  uiElement.classList.add("hide")
+}
+
+// Show uiElement
+const showElement = uiElement => {
+  uiElement.classList.remove("hide")
+  uiElement.classList.add("show")
+}
+
+// wrap tags
+const wrapTag = element => {
+  return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
+}
+
+// create tag list
+const createTaglist = array => {
+  const tagsLi = array.map(element => wrapTag(element)).join("")
+  return `<ul class="tag-list">${tagsLi}</ul>`
+}
+
+// get media by photographer
+const getMediasByPhotographer = (array, id) => {
+  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
+  return photographerMedias
+}
+
+// show elements by tag
+const uiShowElementsbyTag = (element, tag) => {
+  // first hide everyone
+  document.querySelectorAll("[data-filtrable]").forEach(element => hideElement(element))
+
+  // show the selected
+  const elements = getElementsByTag(element, tag)
+  elements.forEach(element => {
+    const id = element.id
+    const uiElement = document.querySelector("#card-" + id)
+    showElement(uiElement)
+  })
+}
+
+// Add eventlistener on all tag-link
+const initTagNav = array => {
+  const uiElements = document.querySelectorAll("[data-tag]")
+  uiElements.forEach(uiElement => {
+    uiElement.addEventListener("click", event => {
+      // event.preventDefault();
+      const tag = event.target.dataset.tag
+      uiShowElementsbyTag(array, tag)
+    })
+  })
 }
 
 // Remove all the elements
