@@ -35,12 +35,12 @@ const createTaglist = array => {
 
 // get element by id
 const getElementById = (array, id) => {
-  return array.find(element => element.id == id)
+  return array.find(element => element.id === parseInt(id))
 }
 
 // get media by photographer
 const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId == id)
+  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
   return photographerMedias
 }
 
@@ -96,7 +96,7 @@ const getMedias = async apiUrl => {
 
 // Remove all the elements
 const resetApp = () => {
-  const elements = document.querySelectorAll("[data-js]")
+  const elements = document.querySelectorAll("[data-reset]")
   elements.forEach(element => {
     element.remove()
   })

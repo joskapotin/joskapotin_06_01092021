@@ -5,7 +5,7 @@ import { buildMedias } from "./factory.js"
 const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
   const tagList = createTaglist(tags)
-  const header = `<section class="card card-single" data-js="true"><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p><ul class="tag-list">${tagList}</ul><button class="btn card__btn">Contactez-moi</button><footer class="card__footer"><span class="card__likes">297 081</span><span class="card__pricing">${price}€/jour</span></footer></section>`
+  const header = `<section class="card card-single" data-reset><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p><ul class="tag-list">${tagList}</ul><button class="btn card__btn">Contactez-moi</button><footer class="card__footer"><span class="card__likes">297 081</span><span class="card__pricing">${price}€/jour</span></footer></section>`
   uiHeader.insertAdjacentHTML("beforeend", header)
 }
 
@@ -28,7 +28,7 @@ const uiCreateGallery = (medias, photographerId) => {
   })
 
   const uiGallery = uiGalleryArray.join("")
-  const markup = `<nav class="sort-nav" data-js="true"><p class="sort-title">Trier par</p><ul class="sort-list"><li class="sort-item">Popularité</li><li class="sort-item">Date</li><li class="sort-item">Titre</li></ul></nav><section id="media-gallery" class="media-gallery" data-js="true">${uiGallery}</section>`
+  const markup = `<nav class="sort-nav" data-reset><p class="sort-title">Trier par</p><ul class="sort-list"><li class="sort-item">Popularité</li><li class="sort-item">Date</li><li class="sort-item">Titre</li></ul></nav><section id="media-gallery" class="media-gallery" data-reset>${uiGallery}</section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 }
 

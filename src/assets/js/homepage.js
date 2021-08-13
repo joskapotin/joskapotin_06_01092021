@@ -6,7 +6,7 @@ import initPhotographerPage from "./gallery.js"
 const uiCreateNavBar = photographers => {
   const tagArray = getAllTheTag(photographers)
   const tagList = createTaglist(tagArray)
-  const markup = `<nav class="top-nav" aria-label="photographers category" data-js="true"><ul id="tag-nav" class="tag-list">${tagList}</ul></nav>`
+  const markup = `<nav class="top-nav" aria-label="photographers category" data-reset><ul id="tag-nav" class="tag-list">${tagList}</ul></nav>`
   uiHeader.insertAdjacentHTML("beforeend", markup)
 }
 
@@ -22,7 +22,7 @@ const uiCreatePhotographersCards = photographers => {
     uiPhotographersArray.push(uiCard)
   })
   const uiPhotographers = uiPhotographersArray.join("")
-  const markup = `<h1 class="page-title" data-js="true">Nos photographes</h1><section id="photographers-list" class="section-photographers" data-js="true">${uiPhotographers}</section>`
+  const markup = `<h1 class="page-title" data-reset>Nos photographes</h1><section id="photographers-list" class="section-photographers" data-reset>${uiPhotographers}</section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 }
 
