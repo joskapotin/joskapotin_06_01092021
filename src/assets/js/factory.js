@@ -5,8 +5,7 @@ const photographersFactory = (id, name, city, country, tags, tagline, price, por
 
 // medias factory
 const mediasFactory = (id, photographerId, title, image, video, tags, likes, date, price) => {
-  const addLike = () => likes++
-  return { id, photographerId, title, image, video, tags, likes, date, price, addLike }
+  return { id, photographerId, title, image, video, tags, likes, date, price }
 }
 
 // photographers builder

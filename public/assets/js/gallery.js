@@ -1,5 +1,5 @@
 import { apiUrl, photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
-import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer, sumPropValue } from "./helpers.js"
+import { createTaglist, initTagNav, getMedias, resetApp, getMediasByPhotographer } from "./helpers.js"
 import { buildMedias } from "./factory.js"
 
 const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
@@ -40,8 +40,6 @@ const initPhotographerPage = photographer => {
     .then(result => {
       const mediasArray = getMediasByPhotographer(result, photographerId)
       const medias = buildMedias(mediasArray)
-      const totalLikes = sumPropValue(medias, "likes")
-      console.log(totalLikes)
       uiCreateGallery(medias, photographerId)
     })
     .catch(error => console.log(error))

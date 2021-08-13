@@ -25,12 +25,14 @@ const getAllTheTag = array => {
 
 // wrap tags
 const wrapTag = element => {
-  return `<li><a href="#tag-${element}" class="tag-link">#${element}</a></li>`
+  return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
 }
 
 // create tag list
 const createTaglist = array => {
-  return array.map(element => wrapTag(element)).join("")
+  const lis = array.map(element => wrapTag(element)).join("")
+  const ul = `<ul class="tag-list">${lis}</ul>`
+  return ul
 }
 
 // get element by id
@@ -65,11 +67,11 @@ const uiShowElementsbyTag = (array, tag) => {
 
 // Add eventlistener on all tag-link
 const initTagNav = array => {
-  const uiElements = document.querySelectorAll(".tag-link")
+  const uiElements = document.querySelectorAll("[data-tag]")
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       // event.preventDefault();
-      const tag = event.target.getAttribute("href").substring(5)
+      const tag = event.target.dataset.tag
       uiShowElementsbyTag(array, tag)
     })
   })
@@ -102,8 +104,4 @@ const resetApp = () => {
   })
 }
 
-const sumPropValue = (array, prop) => {
-  return array.reduce((prev, cur) => prev + cur[prop], 0)
-}
-
-export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp, sumPropValue }
+export { getAllTheTag, createTaglist, getElementById, uiShowElementsbyTag, initTagNav, getMediasByPhotographer, fetchData, getPhotographers, getMedias, resetApp }
