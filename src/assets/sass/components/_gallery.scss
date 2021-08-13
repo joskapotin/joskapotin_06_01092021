@@ -5,6 +5,8 @@
 }
 
 .media__content {
+  @include opacify;
+
   display: grid;
   grid-template-areas: "grid";
 }

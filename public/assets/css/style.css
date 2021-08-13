@@ -99,7 +99,7 @@ select {
 
 /* Components */
 .show {
-  display: block !important;
+  display: grid !important;
 }
 
 .hide {
@@ -378,6 +378,7 @@ th {
 }
 
 .media__content {
+  animation: opacify 300ms ease-in-out forwards;
   display: grid;
   grid-template-areas: "grid";
 }
@@ -445,6 +446,10 @@ th {
   }
 }
 /* Layouts */
+body {
+  overflow-y: scroll;
+}
+
 .container {
   max-width: 90rem;
   margin-right: auto;

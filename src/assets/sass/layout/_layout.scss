@@ -1,4 +1,7 @@
 /* Layouts */
+body {
+  overflow-y: scroll; // prevent screen flickering when loading content
+}
 .container {
   max-width: 90rem;
   margin-right: auto;
