@@ -1,6 +1,6 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
 import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
-import initPhotographerPage from "./gallery.js"
+import initPhotographerPage from "./photographer-page.js"
 
 const uiCreateNavBar = tagList => {
   const markup = `<nav class="top-nav" aria-label="photographers category" data-reset>${tagList}</nav>`

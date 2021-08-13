@@ -1,6 +1,6 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
 import { getAllTheTag, createTaglist, initTagNav, getElementById, getPhotographers } from "./helpers.js"
-import initPhotographerPage from "./gallery.js"
+import initPhotographerPage from "./photographer-page.js"
 
 const uiCreateNavBar = tagList => {
   const markup = `<nav class="top-nav" aria-label="photographers category" data-reset>${tagList}</nav>`
@@ -15,7 +15,7 @@ const uiCreatePhotographersCards = photographers => {
     const tagList = createTaglist(tags)
 
     // Each card get an unique id and data-id from the photographer id
-    const uiCard = `<article class="card card-photographer" id="card-${id}" data-filtrable><a href="#photographer-id-${id}" class="card-link" data-id="${id}"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="card__name">${name}</h2><h3 class="card__location">${city}, ${country}</h3><p class="card__tagline">${tagline}</p><p class="card__pricing">${price}€/jour</p></a><nav>${tagList}</nav></article>`
+    const uiCard = `<article class="card card-photographer" data-id="${id}" data-filtrable><a href="#photographer-id-${id}" class="card-link"><img class="card__img" src="${thumbnail}" height="200" width="200"><h2 class="card__name">${name}</h2><h3 class="card__location">${city}, ${country}</h3><p class="card__tagline">${tagline}</p><p class="card__pricing">${price}€/jour</p></a><nav>${tagList}</nav></article>`
     uiPhotographersArray.push(uiCard)
   })
   const uiPhotographers = uiPhotographersArray.join("")
@@ -23,12 +23,12 @@ const uiCreatePhotographersCards = photographers => {
   uiMain.insertAdjacentHTML("beforeend", markup)
 }
 
-const initPhotographerNav = photographers => {
+const initPhotographerNav = (apiUrl, photographers) => {
   const cardsLink = uiMain.querySelectorAll(".card-link")
   cardsLink.forEach(card => {
-    const photographer = getElementById(photographers, card.dataset.id)
+    const photographer = getElementById(photographers, card.parentNode.dataset.id)
     card.addEventListener("click", event => {
-      initPhotographerPage(photographer)
+      initPhotographerPage(apiUrl, photographer)
     })
   })
 }
@@ -42,7 +42,7 @@ const initHomepage = async apiUrl => {
   uiCreatePhotographersCards(photographers)
 
   initTagNav(apiUrl, "photographers")
-  initPhotographerNav(photographers)
+  initPhotographerNav(apiUrl, photographers)
 }
 
 export default initHomepage

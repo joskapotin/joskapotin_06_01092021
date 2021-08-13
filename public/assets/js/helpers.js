@@ -39,6 +39,12 @@ const getElementsByTag = async (apiUrl, elementType, tag) => {
   }
 }
 
+// get media by photographer
+const getMediasByPhotographer = (array, id) => {
+  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
+  return photographerMedias
+}
+
 // get element by id
 const getElementById = (array, id) => {
   return array.find(element => element.id === parseInt(id))
@@ -55,12 +61,6 @@ const createTaglist = array => {
   return `<ul class="tag-list">${tagsLi}</ul>`
 }
 
-// get media by photographer
-const getMediasByPhotographer = (array, id) => {
-  const photographerMedias = array.filter(element => element.photographerId === parseInt(id))
-  return photographerMedias
-}
-
 // show elements by tag
 const uiShowElementsbyTag = (apiUrl, elementType, tag) => {
   // first hide everyone
@@ -69,8 +69,7 @@ const uiShowElementsbyTag = (apiUrl, elementType, tag) => {
   // show the selected
   getElementsByTag(apiUrl, elementType, tag).then(result => {
     result.forEach(element => {
-      const id = element.id
-      const uiElement = document.querySelector("#card-" + id)
+      const uiElement = document.querySelector(`[data-id="${element.id}"]`)
       showElement(uiElement)
     })
   })

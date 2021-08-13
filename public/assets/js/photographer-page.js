@@ -31,16 +31,13 @@ const uiCreateGallery = (medias, photographerId) => {
   uiMain.insertAdjacentHTML("beforeend", markup)
 }
 
-const initPhotographerPage = photographer => {
+const initPhotographerPage = async (apiUrl, photographer) => {
   resetApp()
   uiCreateHeader(photographer)
-  const photographerId = photographer.id
-  getMedias(apiUrl)
-    .then(result => {
-      const medias = getMediasByPhotographer(result, photographerId)
-      uiCreateGallery(medias, photographerId)
-    })
-    .catch(error => console.log(error))
+  const allTheMedias = await getMedias(apiUrl)
+  const medias = getMediasByPhotographer(allTheMedias, photographer.id)
+  // we need the photographer id for the medias path
+  uiCreateGallery(medias, photographer.id)
 }
 
 export default initPhotographerPage
