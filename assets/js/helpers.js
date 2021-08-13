@@ -21,13 +21,13 @@ const getAllTheTag = async apiUrl => {
   return tagArray
 }
 
-const getElementsByTag = async (apiUrl, elementName, tag) => {
-  const { photographers, media } = await getData(apiUrl)
-
+const getElementsByTag = async (apiUrl, elementName, tag, photographerId) => {
+  const { photographers } = await getData(apiUrl)
   if (elementName.match("photographers")) {
     return photographers.filter(element => element.tags.find(element => element === tag))
   } else if (elementName.match("medias")) {
-    return media.filter(element => element.tags.find(element => element === tag))
+    const response = await getMediasByPhotographer(apiUrl, photographerId)
+    return response.filter(element => element.tags.find(element => element === tag))
   }
 }
 
@@ -50,16 +50,14 @@ const createTaglist = array => {
   return `<ul class="tag-list">${tagsList}</ul>`
 }
 
-const uiShowElementsbyTag = async (apiUrl, elementName, tag) => {
+const uiShowElementsbyTag = async (apiUrl, elementName, tag, photographerId) => {
   // first hide everyone
   document.querySelectorAll("[data-filtrable]").forEach(element => hideElement(element))
 
-  // show the selected
-  const response = await getElementsByTag(apiUrl, elementName, tag)
+  // we query the api maybe there is more than the one we are seeing currently on the page
+  const response = await getElementsByTag(apiUrl, elementName, tag, photographerId)
   response.forEach(element => {
-    console.log(element.id)
     const uiElement = document.querySelector(`[data-id="${element.id}"]`)
-    console.log(uiElement)
     showElement(uiElement)
   })
 }
@@ -70,24 +68,22 @@ const initTagNav = (apiUrl, elementName) => {
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       const tag = event.target.dataset.tag
-      uiShowElementsbyTag(apiUrl, elementName, tag)
+      const photographerId = event.target.parentNode.parentNode.parentNode.dataset.id
+      uiShowElementsbyTag(apiUrl, elementName, tag, photographerId)
     })
   })
 }
 
-// hide uiElement
 const hideElement = uiElement => {
   uiElement.classList.remove("show")
   uiElement.classList.add("hide")
 }
 
-// Show uiElement
 const showElement = uiElement => {
   uiElement.classList.remove("hide")
   uiElement.classList.add("show")
 }
 
-// Remove all the elements
 const resetApp = () => {
   const elements = document.querySelectorAll("[data-reset]")
   elements.forEach(element => {
