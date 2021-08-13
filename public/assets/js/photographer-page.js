@@ -1,10 +1,10 @@
 import { photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
 import { getMediasByPhotographer, createTaglist, initTagNav, resetApp } from "./helpers.js"
 
-const uiCreateHeader = ({ name, city, country, tags, tagline, portrait, price }) => {
+const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
   const tagList = createTaglist(tags)
-  const header = `<section class="card card-single" data-reset><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p><ul class="tag-list">${tagList}</ul><button class="btn card__btn">Contactez-moi</button><footer class="card__footer"><span class="card__likes">297 081</span><span class="card__pricing">${price}€/jour</span></footer></section>`
+  const header = `<section class="card card-single" data-id="${id}" data-reset><img class="card__img" src="${thumbnail}" height="auto" width="auto"><h1 class="card__name">${name}</h1><h2 class="card__location">${city}, ${country}</h2><p class="card__tagline">${tagline}</p>${tagList}<button class="btn card__btn">Contactez-moi</button><footer class="card__footer"><span class="card__likes">297 081</span><span class="card__pricing">${price}€/jour</span></footer></section>`
   uiHeader.insertAdjacentHTML("beforeend", header)
 }
 

@@ -41,7 +41,10 @@ const initHomepage = async apiUrl => {
   const { photographers } = await getData(apiUrl)
   uiCreatePhotographersCards(photographers)
 
+  // each click on a tag-link will request data for matching photographers
   initTagNav(apiUrl, "photographers")
+
+  // when a photographer cards is clicked we need to send the target photographer and the apiUrl so we can request the corresponding medias
   initPhotographerNav(apiUrl, photographers)
 }
 
