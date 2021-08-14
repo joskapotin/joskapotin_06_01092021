@@ -1,6 +1,6 @@
 /* Buttons */
 .btn {
-  padding: 0.375rem 1.125rem;
+  padding: clamp(0.375rem, 5%, 1.4375rem) clamp(1.125rem, 5%, 1.125rem);
   border: 0;
   border-radius: 5px;
   background-color: $color-primary;
@@ -8,13 +8,9 @@
   font-size: 1.125rem;
   font-weight: bold;
 
-  @media (min-width: $small-screen) {
-    padding: 23px 18px;
-  }
-
   &:hover,
   &:focus {
-    background-color: $color-secondary;
+    background-color: $color-tertiary;
     color: $black;
   }
 }
@@ -26,7 +22,7 @@
 }
 
 .btn-like {
-  display: grid;
+  display: inline-block;
   position: relative;
   border: 0;
   background: transparent;
@@ -38,8 +34,8 @@
     left: 0;
     background-color: $white;
     color: $color-primary;
-    font-size: 1.5rem;
-    line-height: 1.125rem;
+    font-size: 1.4rem;
+    line-height: 1;
     content: "\2665";
   }
 }

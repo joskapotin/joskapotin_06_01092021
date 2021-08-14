@@ -1,0 +1,133 @@
+.photographer-section {
+  display: grid;
+  position: relative;
+  margin-top: 1.3125rem;
+  grid-template-columns: auto 1fr auto;
+  z-index: 10;
+}
+
+.photographer__name {
+  padding-top: 0.5rem;
+  color: $color-secondary;
+  font-size: 2.25rem;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.photographer__location {
+  margin-top: 0.25 rem;
+  color: $color-primary;
+  font-size: 0.8125rem;
+  font-weight: normal;
+}
+
+.photographer__tagline {
+  margin-top: 0.125rem;
+  color: $color-grey-500;
+  font-size: 0.8125rem;
+  font-weight: normal;
+}
+
+.photographer-section .tag-list {
+  justify-content: flex-start;
+  margin-top: 0.3rem;
+}
+
+.photographer__btn-contact {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  padding: 0.375rem 1.125rem;
+  transform: translateX(-50%);
+  font-size: 1.125rem;
+}
+
+.photographer__picture {
+  justify-self: right;
+}
+
+.photographer__img {
+  object-fit: cover;
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+}
+
+.photographer__aside {
+  display: none;
+  position: fixed;
+  right: 2.25rem;
+  bottom: 0;
+  padding: 1.25rem 1.875rem;
+  border-radius: 5px 5px 0 0;
+  background-color: $color-secondary;
+}
+
+.photographer__likes {
+  position: relative;
+  margin-right: 4.125rem;
+  padding-right: 1.5rem;
+  &::after {
+    position: absolute;
+    right: 0;
+    color: $black;
+    font-size: 2.125rem;
+    line-height: 2.25rem;
+    content: "\2665";
+  }
+}
+
+.photographer__likes,
+.photographer__pricing {
+  color: $black;
+  font-size: 1.5rem;
+}
+
+@media (min-width: $small-screen) {
+  .photographer__name {
+    font-size: 4rem;
+  }
+
+  .photographer__location {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .photographer__tagline {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+  }
+
+  .photographer-section .tag-list {
+    margin-top: 1rem;
+  }
+
+  .photographer-section .tag-link {
+    font-size: 1.125rem;
+  }
+
+  .photographer__btn-contact {
+    position: static;
+    align-self: start;
+    margin-top: 0.5rem;
+    padding: 1.3125rem 0.6875rem;
+    transform: translateX(0);
+    font-size: 1.25rem;
+    white-space: nowrap;
+    justify-self: start;
+  }
+
+  .photographer__picture {
+    display: flex;
+    align-items: center;
+  }
+
+  .photographer__img {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+
+  .photographer__aside {
+    display: block;
+  }
+}

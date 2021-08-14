@@ -9,16 +9,14 @@
   padding: 0;
 }
 
-.tag-link,
-.tag {
+.tag-link {
   display: inline-block;
   padding: 3px 6px;
   border: 1px solid $color-grey-300;
   border-radius: 21px;
   background-color: transparent;
   color: $color-primary;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 12px;
   text-decoration: none;
 }
 

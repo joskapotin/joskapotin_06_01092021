@@ -31,6 +31,19 @@ body {
   min-height: 100vh;
 }
 
+p,
+li,
+h1,
+h2,
+h3,
+h4 {
+  // Help prevent overflow of long words/names/URLs
+  overflow-wrap: break-word;
+
+  // Optional, not supported for all languages
+  hyphens: auto;
+}
+
 /* Remove list styles on ul, ol elements with a class attribute */
 ul[class],
 ol[class] {

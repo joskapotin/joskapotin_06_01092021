@@ -9,31 +9,6 @@
   text-decoration: none;
 }
 
-.card__name {
-  color: $color-primary;
-  font-size: 2.25rem;
-  font-weight: normal;
-  line-height: 1;
-}
-
-.card__location {
-  color: $color-primary;
-  font-size: 0.8125rem;
-  font-weight: normal;
-}
-
-.card__tagline {
-  color: #000;
-  font-size: 0.625rem;
-  font-weight: normal;
-}
-
-.card__pricing {
-  color: $color-grey-400;
-  font-size: 0.5625rem;
-  font-weight: normal;
-}
-
 .card__img {
   width: 12.5rem;
   height: 12.5rem;
@@ -42,123 +17,29 @@
   object-fit: cover;
 }
 
-.card-single {
-  display: grid;
-  position: relative;
-  align-items: center;
-  margin-top: 1.875rem;
-  grid-template-columns: auto 1fr auto;
-  text-align: left;
-  z-index: 10;
-  grid-template-areas: "name button image" "location location image" "tagline tagline image" "taglist taglist image";
+.card__name {
+  margin-top: 1.25rem;
+  color: $color-secondary;
+  font-size: 2.25rem;
+  font-weight: normal;
+  line-height: 1;
+}
 
-  .card__name {
-    margin-right: 1.0625rem;
-    color: $color-secondary;
-    grid-area: name;
-  }
+.card__location {
+  margin-top: 0.25rem;
+  color: $color-primary;
+  font-size: 0.8125rem;
+  font-weight: normal;
+}
+.card__tagline {
+  color: #000;
+  font-size: 0.625rem;
+  font-weight: normal;
+}
 
-  .card__location {
-    color: $color-primary;
-    grid-area: location;
-  }
-
-  .card__tagline {
-    color: $color-grey-500;
-    font-size: 0.8125rem;
-    grid-area: tagline;
-  }
-
-  .tag-list {
-    justify-content: flex-start;
-    grid-area: taglist;
-  }
-
-  .card__btn {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.125rem;
-    grid-area: button;
-  }
-
-  .card__img {
-    width: 6.25rem;
-    height: 6.25rem;
-    margin: 0 0 0 auto;
-    float: right;
-    border-radius: 6.25rem;
-    grid-area: image;
-  }
-
-  .card__footer {
-    display: none;
-  }
-
-  @media (min-width: $small-screen) {
-    .card__name {
-      font-size: 4rem;
-      line-height: 1;
-    }
-
-    .card__location {
-      align-self: start;
-      font-size: 1.5rem;
-    }
-
-    .card__tagline {
-      font-size: 1.125rem;
-    }
-
-    .tag-link {
-      font-size: 1.125rem;
-    }
-
-    .card__btn {
-      position: static;
-      align-self: start;
-      padding: 1.3125rem 0.6875rem;
-      transform: translateX(0);
-      font-size: 1.25rem;
-      white-space: nowrap;
-      justify-self: start;
-    }
-
-    .card__img {
-      width: 12.5rem;
-      height: 12.5rem;
-      border-radius: 12.5rem;
-    }
-
-    .card__footer {
-      display: block;
-      position: fixed;
-      right: 2.25rem;
-      bottom: 0;
-      padding: 1.25rem 1.875rem;
-      border-radius: 5px 5px 0 0;
-      background-color: $color-secondary;
-    }
-
-    .card__likes {
-      position: relative;
-      margin-right: 4.125rem;
-      padding-right: 1.5rem;
-      &::after {
-        position: absolute;
-        right: 0;
-        color: $black;
-        font-size: 2.125rem;
-        line-height: 2.25rem;
-        content: "\2665";
-      }
-    }
-
-    .card__likes,
-    .card__pricing {
-      color: $black;
-      font-size: 1.5rem;
-    }
-  }
+.card__pricing {
+  margin-bottom: 0.25rem;
+  color: $color-grey-400;
+  font-size: 0.5625rem;
+  font-weight: normal;
 }

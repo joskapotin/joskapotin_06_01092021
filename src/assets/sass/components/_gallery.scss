@@ -1,18 +1,24 @@
 .media-gallery {
+  --min: 30ch;
+  --gap: 1.25rem;
+
   display: grid;
-  column-gap: 1.25rem;
-  grid-template-columns: 1fr;
+  grid-gap: var(--gap);
+  /* min() with 100% prevents overflow
+  in extra narrow spaces */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+
+  @media (min-width: $large-screen) {
+    column-gap: 5.9375rem;
+    row-gap: 1.875rem;
+  }
 }
 
 .media__content {
   @include opacify;
-
-  display: grid;
-  grid-template-areas: "grid";
 }
 
 .media__link {
-  grid-area: grid;
   text-decoration: none;
 }
 
@@ -22,6 +28,10 @@
 
   @supports not (aspect-ratio: 1/1) {
     height: max(25vh, 15rem);
+  }
+
+  @media (min-width: $medium-screen) {
+    aspect-ratio: 350/300;
   }
 }
 
@@ -33,44 +43,11 @@
   object-fit: cover;
 }
 
-.media__caption {
+.media__footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 0.625rem 1.5rem 0.625rem 0;
+  padding: 0.625rem 0;
   color: $color-primary;
   font-size: 0.875rem;
-}
-
-.btn-like {
-  grid-area: grid;
-  display: block;
-  margin: auto 0 0.625rem auto;
-}
-
-@media (min-width: $small-screen) {
-  .media-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: $medium-screen) {
-  .media-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .media__figure {
-    aspect-ratio: 350/300;
-  }
-}
-
-@media (min-width: $large-screen) {
-  .media-gallery {
-    column-gap: 5.9375rem;
-    row-gap: 1.875rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .media__figure {
-    aspect-ratio: 350/300;
-  }
 }
