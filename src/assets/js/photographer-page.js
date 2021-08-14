@@ -27,7 +27,7 @@ const uiCreateGallery = (medias, photographerId) => {
 
   const uiGallery = uiGalleryArray.join("")
   const markup = `
-  <nav class="sort-nav" data-reset><label class="sort-nav__label">Trier par<span class="sort-nav__select"><select><option value="Option 1">Popularité</option><option value="Option 2">Date</option><option value="Option 3">Titre</option></select><span class="sort-nav-focus"></span></span></label></nav><section id="media-gallery" class="media-gallery" data-reset>${uiGallery}</section>`
+  <nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par</span><ul class="sort-nav__list" tabindex="0"><li class="sort-nav__item" data-sorter="Likes">Popularité</li><li class="sort-nav__item" data-sorter="Date">Date</li><li class="sort-nav__item" data-sorter="Title">Titre</li></ul></nav><section id="media-gallery" class="media-gallery" data-reset>${uiGallery}</section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 }
 

@@ -68,7 +68,8 @@ const initTagNav = (apiUrl, elementName) => {
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       const tag = event.target.dataset.tag
-      const photographerId = event.target.parentNode.parentNode.parentNode.dataset.id
+      const photographerId = event.target.parentNode.parentNode.parentNode.parentNode.dataset.id
+      console.log(photographerId)
       uiShowElementsbyTag(apiUrl, elementName, tag, photographerId)
     })
   })
