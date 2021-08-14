@@ -1,0 +1,63 @@
+.sort-nav {
+  display: none;
+  position: relative;
+  margin-bottom: 3.625rem;
+  padding-right: 1.5625rem;
+  font-size: 1.125rem;
+
+  @media (min-width: $small-screen) {
+    display: block;
+  }
+}
+
+.sort-nav__label {
+  font-weight: bold;
+}
+
+.sort-nav__select {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  padding: 0.25em 0.5em;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  background-color: $color-primary;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  cursor: pointer;
+  grid-template-areas: "select";
+
+  &:focus-within {
+    outline: 3px solid blue;
+  }
+
+  select {
+    width: 100%;
+    margin: 0;
+    padding: 0 1em 0 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $white;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: inherit;
+    // A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    // Resets for consistency
+    grid-area: select;
+  }
+}
+
+.sort-nav__select::after {
+  grid-area: select;
+  width: 0.8em;
+  height: 0.5em;
+  background-color: $white;
+  content: "";
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}
