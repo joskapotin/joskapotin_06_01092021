@@ -1,5 +1,5 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
-import { getData, getAllTheTag, getElementById, createTaglist, initTagNav } from "./helpers.js"
+import { fetchData, fetchAllTheTag, getElementById, createTaglist, initTagNav } from "./helpers.js"
 import initPhotographerPage from "./photographer-page.js"
 
 const uiCreateNavBar = tagList => {
@@ -34,11 +34,11 @@ const initPhotographerNav = (apiUrl, photographers) => {
 }
 
 const initHomepage = async apiUrl => {
-  const allTheTags = await getAllTheTag(apiUrl)
+  const allTheTags = await fetchAllTheTag(apiUrl)
   const tagList = createTaglist(allTheTags)
   uiCreateNavBar(tagList)
 
-  const { photographers } = await getData(apiUrl)
+  const { photographers } = await fetchData(apiUrl)
   uiCreatePhotographersCards(photographers)
 
   // each click on a tag-link will request data for matching photographers
