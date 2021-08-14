@@ -1,5 +1,5 @@
 import { photographeThumbPath, mediasPath, uiHeader, uiMain } from "./options.js"
-import { getMediasByPhotographer, createTaglist, initTagNav, resetApp } from "./helpers.js"
+import { fetchMediasByPhotographer, createTaglist, initTagNav, resetApp } from "./helpers.js"
 
 const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`
@@ -33,7 +33,7 @@ const uiCreateGallery = (medias, photographerId) => {
 const initPhotographerPage = async (apiUrl, photographer) => {
   resetApp()
   uiCreateHeader(photographer)
-  const medias = await getMediasByPhotographer(apiUrl, photographer.id)
+  const medias = await fetchMediasByPhotographer(apiUrl, photographer.id)
   // we need the photographer id for the medias path
   uiCreateGallery(medias, photographer.id)
   initTagNav(apiUrl, "medias")
