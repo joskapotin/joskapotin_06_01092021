@@ -15,6 +15,12 @@ body {
 
 .site-header {
   padding: 2.5rem 0 2.875rem;
+  .tag-nav {
+    @include opacify;
+
+    margin-top: 1.875rem;
+    padding: 0 2.5rem;
+  }
 }
 
 .link-home {
@@ -29,13 +35,6 @@ body {
     width: 12.5rem;
     height: 3.125rem;
   }
-}
-
-.top-nav {
-  @include opacify;
-
-  margin-top: 1.875rem;
-  padding: 0 2.5rem;
 }
 
 .page-title {

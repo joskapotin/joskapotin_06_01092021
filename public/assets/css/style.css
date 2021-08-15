@@ -109,14 +109,7 @@ select {
 }
 
 /* Components */
-.show {
-  display: grid !important;
-}
-
-.hide {
-  display: none !important;
-}
-
+/* Helpers */
 /* Links */
 .skip-link {
   position: absolute;
@@ -394,6 +387,7 @@ th {
 
 .sort-nav__item {
   padding: 0.875rem 2.625rem 0.875rem 0;
+  white-space: nowrap;
 }
 
 .sort-nav__item:first-child {
@@ -423,6 +417,11 @@ body {
 .site-header {
   padding: 2.5rem 0 2.875rem;
 }
+.site-header .tag-nav {
+  animation: opacify 300ms ease-in-out forwards;
+  margin-top: 1.875rem;
+  padding: 0 2.5rem;
+}
 
 .link-home {
   display: inline-flex;
@@ -437,12 +436,6 @@ body {
     width: 12.5rem;
     height: 3.125rem;
   }
-}
-
-.top-nav {
-  animation: opacify 300ms ease-in-out forwards;
-  margin-top: 1.875rem;
-  padding: 0 2.5rem;
 }
 
 .page-title {
@@ -490,9 +483,13 @@ body {
   font-weight: normal;
 }
 
+.photographer-section .tag-nav {
+  margin: 0.3rem 0 0;
+  padding: 0;
+}
+
 .photographer-section .tag-list {
   justify-content: flex-start;
-  margin-top: 0.3rem;
 }
 
 .photographer__btn-contact {
@@ -554,7 +551,7 @@ body {
     font-size: 1.125rem;
   }
 
-  .photographer-section .tag-list {
+  .photographer-section .tag-nav {
     margin-top: 1rem;
   }
 

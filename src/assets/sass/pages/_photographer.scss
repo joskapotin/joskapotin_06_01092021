@@ -28,9 +28,13 @@
   font-weight: normal;
 }
 
+.photographer-section .tag-nav {
+  margin: 0.3rem 0 0;
+  padding: 0;
+}
+
 .photographer-section .tag-list {
   justify-content: flex-start;
-  margin-top: 0.3rem;
 }
 
 .photographer__btn-contact {
@@ -94,7 +98,7 @@
     font-size: 1.125rem;
   }
 
-  .photographer-section .tag-list {
+  .photographer-section .tag-nav {
     margin-top: 1rem;
   }
 
