@@ -35,8 +35,8 @@ const initPhotographersCards = (apiUrl, photographers) => {
   const uiPhotographersList = uiMain.querySelector("#photographers-list")
   insertPhotographersCards(photographersCard, uiPhotographersList)
 
-  const uiNavBar = document.querySelector(".card-photographer .tag-nav")
-  const filter = { apiUrl: apiUrl, type: "photographers", uiElements: [uiNavBar] }
+  const uiTagLinks = document.querySelectorAll(".card-photographer .tag-link")
+  const filter = { apiUrl: apiUrl, type: "photographers", uiElements: uiTagLinks }
   initTagNav(filter)
 
   const uiCardsLink = uiMain.querySelectorAll(".card-link")

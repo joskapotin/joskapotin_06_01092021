@@ -8,8 +8,8 @@ const initHomepage = async apiUrl => {
   const navBar = await createNavBar(apiUrl)
   uiHeader.insertAdjacentHTML("beforeend", navBar)
 
-  const uiNavBar = document.querySelector("#site-header .tag-nav")
-  const filter = { apiUrl: apiUrl, type: "photographers", uiElements: [uiNavBar] }
+  const uiTagLinks = document.querySelectorAll("#site-header .tag-link")
+  const filter = { apiUrl: apiUrl, type: "photographers", uiElements: uiTagLinks }
   initTagNav(filter)
 
   const markup = `<h1 class="page-title" data-reset>Nos photographes</h1><section id="photographers-list" class="section-photographers" data-reset></section>`

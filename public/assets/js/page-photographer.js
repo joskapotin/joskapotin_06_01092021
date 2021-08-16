@@ -21,31 +21,32 @@ const initPhotographerPage = async (apiUrl, photographer) => {
   const medias = sortByPopularity(unsortedMedias)
   initMediasCards(medias, photographer.id)
 
-  const uiNavBar = document.querySelector("#photographer-section .tag-nav")
-  const filter = { apiUrl: apiUrl, type: "medias", uiElement: [uiNavBar] }
+  const uiTagLinks = document.querySelectorAll("#photographer-section .tag-link")
+  console.log(uiTagLinks)
+  const filter = { apiUrl: apiUrl, type: "medias", uiElements: uiTagLinks }
   initTagNav(filter)
 
   // select dropdown
-  document.addEventListener("click", event => {
-    if (event.target.matches("[data-sorter]")) {
-      const target = event.target
-      const parent = event.target.parentNode
-      const current = parent.firstChild
-      if (!target.isSameNode(current)) {
-        parent.insertBefore(target, parent.firstChild)
-        const sorter = target.dataset.sorter
-        if (sorter === "Likes") {
-          const medias = sortByPopularity(unsortedMedias)
-          initMediasCards(medias, photographer.id)
-        } else if (sorter === "Title") {
-          const medias = sortByTitle(unsortedMedias)
-          initMediasCards(medias, photographer.id)
-        }
+  // document.addEventListener("click", event => {
+  //   if (event.target.matches("[data-sorter]")) {
+  //     const target = event.target
+  //     const parent = event.target.parentNode
+  //     const current = parent.firstChild
+  //     if (!target.isSameNode(current)) {
+  //       parent.insertBefore(target, parent.firstChild)
+  //       const sorter = target.dataset.sorter
+  //       if (sorter === "Likes") {
+  //         const medias = sortByPopularity(unsortedMedias)
+  //         initMediasCards(medias, photographer.id)
+  //       } else if (sorter === "Title") {
+  //         const medias = sortByTitle(unsortedMedias)
+  //         initMediasCards(medias, photographer.id)
+  //       }
 
-        // sortMedias(target.dataset.dataSorter.value)
-      }
-    }
-  })
+  //       // sortMedias(target.dataset.dataSorter.value)
+  //     }
+  //   }
+  // })
 
   // sorting
 }

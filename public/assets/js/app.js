@@ -1,5 +1,5 @@
 import { homeLink, apiUrl } from "./options.js"
-import initHomePage from "./home-page.js"
+import initHomePage from "./page-home.js"
 
 // Init
 const initApp = apiUrl => {

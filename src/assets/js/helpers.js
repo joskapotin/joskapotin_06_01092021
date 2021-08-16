@@ -67,10 +67,6 @@ const createNavBar = async apiUrl => {
 }
 
 const ShowElementsbyTag = async ({ apiUrl, type, tag, photographerId }) => {
-  // first hide everyone
-  // document.querySelectorAll("[data-tag-filtrable]").forEach(element => element.remove())
-
-  // we query the api maybe there is more than the one we are seeing currently on the page
   const elements = await requestElementsByTag(apiUrl, type, tag, photographerId)
   if (type === "photographers") {
     return initPhotographersCards(apiUrl, elements)
@@ -84,9 +80,8 @@ const initTagNav = filter => {
   filter.uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       filter.tag = event.target.dataset.tag
+      // uggly need to find a way
       filter.photographerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.id
-      console.log(filter.photographerId)
-      console.log(filter)
       ShowElementsbyTag(filter)
     })
   })
