@@ -1,6 +1,6 @@
 import { uiHeader, uiMain } from "./options.js"
 import { requestData, createNavBar, initTagNav, resetPage } from "./helpers.js"
-import initPhotographersCard from "./photographers-card.js"
+import initPhotographersCard from "./cards-photographers.js"
 
 const initHomepage = async apiUrl => {
   resetPage()

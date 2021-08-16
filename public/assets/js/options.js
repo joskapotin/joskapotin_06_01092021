@@ -2,9 +2,11 @@
 const apiUrl = "./data/fisheyedata.json"
 const mediasPath = "./medias"
 const photographeThumbPath = mediasPath.concat("/photographers-id-photos")
+const defaultSorting = "Likes"
+const defaulSortingtOrder = "DESC"
 // DOM elements
 const homeLink = document.getElementById("link-to-homepage")
 const uiHeader = document.getElementById("site-header")
 const uiMain = document.getElementById("site-main")
 
-export { apiUrl, mediasPath, photographeThumbPath, homeLink, uiHeader, uiMain }
+export { apiUrl, mediasPath, photographeThumbPath, homeLink, uiHeader, uiMain, defaultSorting, defaulSortingtOrder }

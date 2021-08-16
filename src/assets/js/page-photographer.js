@@ -1,6 +1,6 @@
 import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
 import { sortByPopularity, sortByTitle, requestMediasByPhotographer, createTagNav, initTagNav, resetPage } from "./helpers.js"
-import initMediasCards from "./medias-cards.js"
+import initMediasCards from "./cards-medias.js"
 
 const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, price }) => {
   const thumbnail = `${photographeThumbPath}/${portrait}`

@@ -164,8 +164,8 @@ select {
   left: 0;
   background-color: #fff;
   color: #901c1c;
-  font-size: 1.4rem;
-  line-height: 1;
+  font-size: 1.2rem;
+  line-height: 1.1;
   content: "♥";
 }
 
@@ -340,7 +340,7 @@ th {
   display: none;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 62rem) {
   .media__date,
 .media__price {
     display: inline;
