@@ -348,11 +348,9 @@ th {
 }
 .sort-nav {
   display: none;
-  position: relative;
   margin-bottom: 3.625rem;
   font-size: 1.125rem;
   font-weight: bold;
-  z-index: 10;
 }
 @media (min-width: 48rem) {
   .sort-nav {
@@ -362,8 +360,9 @@ th {
 }
 
 .sort-nav__label {
-  margin-right: 1.5625rem;
+  position: relative;
   font-weight: bold;
+  z-index: 10;
 }
 
 .sort-nav__list {
@@ -372,33 +371,47 @@ th {
   left: 100%;
   height: 3.4375rem;
   margin: 0;
-  padding: 0 0.625rem;
+  margin-left: 1.5625rem;
+  padding: 0;
+  transition: height 200ms ease-in-out;
   border-radius: 0.3125rem;
   background-color: #901c1c;
   color: #fff;
   cursor: default;
   overflow: hidden;
 }
-.sort-nav__list:focus {
+.sort-nav__list:focus-within {
   height: auto;
+}
+.sort-nav__list:hover::after, .sort-nav__list:focus-within::after {
+  border-color: #000;
+}
+.sort-nav__list:focus-within::after {
+  transform: rotate(225deg);
 }
 .sort-nav__list::after {
   display: block;
   position: absolute;
-  top: 1.3125rem;
+  top: 1em;
   right: 0.875rem;
   width: 0.875rem;
   height: 0.875rem;
   transform: rotate(45deg);
   transform-origin: center;
-  border-top: 3px solid #fff;
-  border-left: 3px solid #fff;
+  transition: transform 200ms ease-in-out;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  pointer-events: none;
   content: "";
 }
 
 .sort-nav__item {
-  padding: 0.875rem 2.625rem 0.875rem 0;
+  padding: 0.875rem 3.25rem 0.875rem 0.625rem;
   white-space: nowrap;
+}
+.sort-nav__item:hover, .sort-nav__item:focus {
+  background-color: #db8876;
+  color: #000;
 }
 
 .sort-nav__item:first-child {

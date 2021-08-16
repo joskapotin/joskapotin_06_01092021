@@ -10,12 +10,28 @@ const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, pric
   uiHeader.insertAdjacentHTML("beforeend", header)
 }
 
+const uiCreateSortNav = async (apiUrl, photographer) => {
+  const medias = await requestMediasByPhotographer(apiUrl, photographer.id)
+  const markup = `<li class="sort-nav__item" data-sorter="Likes" tabindex="0">Popularité</li><li class="sort-nav__item" data-sorter="Date" tabindex="0">Date</li><li class="sort-nav__item" data-sorter="Title" tabindex="0">Titre</li>`
+  return markup
+}
+
 const initPhotographerPage = async (apiUrl, photographer) => {
   resetPage()
   uiCreateHeader(photographer)
 
-  const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par</span><ul class="sort-nav__list" tabindex="0"><li class="sort-nav__item" data-sorter="Likes">Popularité</li><li class="sort-nav__item" data-sorter="Date">Date</li><li class="sort-nav__item" data-sorter="Title">Titre</li></ul></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
+  const sortNav = await uiCreateSortNav(apiUrl, photographer.id)
+  const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<ul class="sort-nav__list">${sortNav}</ul></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
+
+  document.addEventListener("click", event => {
+    if (event.target.matches("[data-sorter]")) {
+      const target = event.target
+      const parent = event.target.parentNode
+      const current = parent.firstChild
+      if (!target.isSameNode(current)) parent.insertBefore(target, parent.firstChild)
+    }
+  })
 
   const medias = await requestMediasByPhotographer(apiUrl, photographer.id)
   // we need the photographer id for the medias path
