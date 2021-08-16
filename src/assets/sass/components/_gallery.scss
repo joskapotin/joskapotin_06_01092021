@@ -51,3 +51,15 @@
   color: $color-primary;
   font-size: 0.875rem;
 }
+
+.media__date,
+.media__price {
+  display: none;
+}
+
+@media (min-width: $small-screen) {
+  .media__date,
+  .media__price {
+    display: inline;
+  }
+}
