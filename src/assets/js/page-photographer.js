@@ -1,5 +1,5 @@
-import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
-import { requestData, requestMediasByPhotographer, sortMedias, getElementById, createTagNav, resetPage } from "./helpers.js"
+import { apiUrl, photographeThumbPath, uiHeader, uiMain } from "./options.js"
+import { requestData, getElementById, createTagNav, resetPage } from "./helpers.js"
 import initMediasCards from "./cards-medias.js"
 
 const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, price }) => {
@@ -30,24 +30,57 @@ const initMediasTagNav = (apiUrl, photographerId, uiTagLinks) => {
   })
 }
 
+const requestMediasByPhotographer = async (apiUrl, id) => {
+  const { media } = await requestData(apiUrl)
+  const medias = media.filter(element => element.photographerId === parseInt(id))
+  return medias
+}
+
+const sortByPopularity = elements => {
+  return elements.sort((a, b) => b.likes - a.likes)
+}
+
+const sortByTitle = elements => {
+  return elements.sort((a, b) => a.title.localeCompare(b.title))
+}
+
+const sortByDate = elements => {}
+
+const sortMedias = async (apiUrl, photographerId, sorteBy) => {
+  const unsortedMedias = await requestMediasByPhotographer(apiUrl, photographerId)
+  if (sorteBy === "Likes") {
+    return sortByPopularity(unsortedMedias)
+  } else if (sorteBy === "Title") {
+    return sortByTitle(unsortedMedias)
+  }
+}
+
+const loadMedias = async (apiUrl, photographerId, sorteBy) => {
+  console.log(sorteBy)
+  const medias = await sortMedias(apiUrl, photographerId, sorteBy)
+  console.log(medias)
+  initMediasCards(medias, photographerId, sorteBy)
+}
+
 // select dropdown
-// const initSortSelect = photographerId => {
-//   const uiElements = document.querySelectorAll("[data-sorter]")
-//   console.log(uiElements)
-//   uiElements.forEach(uiElement => {
-//     uiElement.addEventListener("click", event => {
-//       const target = event.target
-//       const parent = event.target.parentNode
-//       const current = parent.firstChild
-//       if (target.isSameNode(current)) {
-//         return
-//       }
-//       parent.insertBefore(target, parent.firstChild)
-//       const sorter = target.dataset.sorter
-//       console.log(sorter)
-//     })
-//   })
-// }
+const initSortSelect = (apiUrl, photographerId) => {
+  const uiElements = document.querySelectorAll("[data-sorter]")
+  console.log(uiElements)
+  uiElements.forEach(uiElement => {
+    uiElement.addEventListener("click", event => {
+      // The first option is the current so we do nothing
+      const target = event.target
+      const parent = event.target.parentNode
+      const current = parent.firstChild
+      if (target.isSameNode(current)) {
+        return
+      }
+      parent.insertBefore(target, parent.firstChild)
+      const sorteBy = target.dataset.sorter
+      loadMedias(apiUrl, photographerId, sorteBy)
+    })
+  })
+}
 
 const initPhotographerPage = async (apiUrl, photographerId) => {
   resetPage()
@@ -59,14 +92,13 @@ const initPhotographerPage = async (apiUrl, photographerId) => {
   const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<div class="sort-nav__list" role="listbox" tabindex="0"><button class="btn sort-nav__item" data-sorter="Likes" role="option">Popularité</button><button class="btn sort-nav__item" data-sorter="Date" role="option">Date</button><button class="btn sort-nav__item" data-sorter="Title" role="option">Titre</button></div></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 
-  const unsortedMedias = await requestMediasByPhotographer(apiUrl, photographerId)
-  const medias = await sortMedias(unsortedMedias, "Likes")
+  const medias = await sortMedias(apiUrl, photographerId, "Likes")
   initMediasCards(medias, photographerId)
 
   const uiTagLinks = document.querySelectorAll("#photographer-section .tag-link")
   initMediasTagNav(apiUrl, photographerId, uiTagLinks)
 
-  // initSortSelect(photographerId)
+  initSortSelect(apiUrl, photographerId)
 }
 
 export default initPhotographerPage
