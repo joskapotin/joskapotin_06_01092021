@@ -5,7 +5,6 @@ import initPhotographerPage from "./page-photographer.js"
 // Init
 const initApp = apiUrl => {
   homeLink.addEventListener("click", event => {
-    event.preventDefault()
     initHomePage(apiUrl)
   })
 

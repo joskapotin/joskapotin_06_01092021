@@ -9,7 +9,7 @@ const createPhotographersCards = photographers => {
     const thumbnail = `${photographeThumbPath}/${portrait}`
     const tagNav = createTagNav(tags)
 
-    const uiCard = `<article class="card card-photographer" data-id="${id}" data-tag-filtrable><a href="photographer/${id}" class="card-link"><img class="card__img" src="${thumbnail}" alt="" height="200" width="200"><h2 class="card__name">${name}</h2><h3 class="card__location">${city}, ${country}</h3><p class="card__tagline">${tagline}</p><p class="card__pricing">${price}€/jour</p></a>${tagNav}</article>`
+    const uiCard = `<article class="card card-photographer" data-id="${id}" data-tag-filtrable><a href="#photographer-${id}" class="card-link"><img class="card__img" src="${thumbnail}" alt="" height="200" width="200"><h2 class="card__name">${name}</h2><h3 class="card__location">${city}, ${country}</h3><p class="card__tagline">${tagline}</p><p class="card__pricing">${price}€/jour</p></a>${tagNav}</article>`
     photographersCard.push(uiCard)
   })
   return photographersCard.join("")
