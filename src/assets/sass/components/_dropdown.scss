@@ -20,11 +20,9 @@
   position: absolute;
   top: -0.875rem;
   left: 100%;
-  height: 3.4375rem;
-  margin: 0;
+  max-height: 3.4375rem;
   margin-left: 1.5625rem;
-  padding: 0;
-  transition: height 200ms ease-in-out;
+  transition: max-height 200ms ease-in-out;
   border-radius: 0.3125rem;
   background-color: $color-primary;
   color: $white;
@@ -32,12 +30,7 @@
   overflow: hidden;
 
   &:focus-within {
-    height: auto;
-  }
-
-  &:hover::after,
-  &:focus-within::after {
-    border-color: $black;
+    max-height: 50rem;
   }
 
   &:focus-within::after {
@@ -62,20 +55,34 @@
 }
 
 .sort-nav__item {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.0625rem;
   padding: 0.875rem 3.25rem 0.875rem 0.625rem;
+  border: 0;
+  border-radius: 0;
   white-space: nowrap;
-
-  &:hover,
-  &:focus {
-    background-color: $color-tertiary;
-    color: $black;
-  }
-}
-
-.sort-nav__item:first-child {
-  border-bottom: 1px solid $white;
 }
 
 .sort-nav__item:last-child {
-  border-top: 1px solid $white;
+  margin-bottom: 0;
+}
+
+.sort-nav__item:first-child::after,
+.sort-nav__item:last-child::before {
+  position: absolute;
+  right: 0.625rem;
+  left: 0.625rem;
+  height: 0.0625rem;
+  background-color: $white;
+  content: "";
+}
+
+.sort-nav__item:first-child::after {
+  bottom: -0.0625rem;
+}
+
+.sort-nav__item:last-child::before {
+  top: -0.0625rem;
 }

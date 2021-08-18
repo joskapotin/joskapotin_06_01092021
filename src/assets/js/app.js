@@ -3,7 +3,6 @@ import initHomePage from "./page-home.js"
 
 // Init
 const initApp = apiUrl => {
-  // Home link
   homeLink.addEventListener("click", event => {
     initHomePage(apiUrl)
   })

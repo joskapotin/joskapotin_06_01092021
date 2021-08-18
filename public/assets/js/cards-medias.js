@@ -2,6 +2,7 @@ import { mediasPath, uiMain } from "./options.js"
 
 const createMediasCards = (medias, photographerId) => {
   const mediasCards = []
+
   medias.forEach(media => {
     const { id, title, image, video, likes, date, price } = media
     const photographerMediaPath = `${mediasPath}/photographer-id-${photographerId}`
@@ -15,19 +16,17 @@ const createMediasCards = (medias, photographerId) => {
     const uiMedia = `<article class="media__content" data-id="${id}" data-tag-filtrable><a href="#media-id-${id}" class="media__link"><figure class="media__figure">${thumbnail}</figure></a><footer class="media__footer"><h3 class="media__title">${title}</h3><span class="media__date">${date}</span><span class="media__price">${price}€</span><span class="media__total-likes">${likes}<button class="btn-like">Like</button></span></footer></article>`
     mediasCards.push(uiMedia)
   })
+
   return mediasCards.join("")
 }
 
-const insertMediasCards = (mediasCards, uiGallery) => {
-  uiGallery.insertAdjacentHTML("beforeend", mediasCards)
-}
-
-const initMediasCards = (medias, photographerId) => {
+const initMediasCards = async (medias, photographerId) => {
   document.querySelectorAll(".media__content[data-tag-filtrable]").forEach(element => element.remove())
 
   const mediasCards = createMediasCards(medias, photographerId)
   const uiGallery = uiMain.querySelector("#media-gallery")
-  insertMediasCards(mediasCards, uiGallery)
+
+  uiGallery.insertAdjacentHTML("beforeend", mediasCards)
 }
 
 export default initMediasCards
