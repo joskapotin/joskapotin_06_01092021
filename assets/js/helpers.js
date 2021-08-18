@@ -19,28 +19,6 @@ const requestAllTheTag = async apiUrl => {
   return tagArray
 }
 
-const requestMediasByPhotographer = async (apiUrl, id) => {
-  const { media } = await requestData(apiUrl)
-  const medias = media.filter(element => element.photographerId === parseInt(id))
-  return medias
-}
-
-const sortByPopularity = elements => {
-  return elements.sort((a, b) => b.likes - a.likes)
-}
-
-const sortByTitle = elements => {
-  return elements.sort((a, b) => a.title.localeCompare(b.title))
-}
-
-const sortMedias = async (unsortedMedias, sortedBy) => {
-  if (sortedBy === "Likes") {
-    return sortByPopularity(unsortedMedias)
-  } else if (sortedBy === "Title") {
-    return sortByTitle(unsortedMedias)
-  }
-}
-
 const getElementById = (array, id) => {
   return array.find(element => element.id === parseInt(id))
 }
@@ -66,4 +44,4 @@ const resetPage = () => {
   })
 }
 
-export { requestData, requestMediasByPhotographer, sortMedias, getElementById, createTagNav, createNavBar, resetPage }
+export { requestData, getElementById, createTagNav, createNavBar, resetPage }
