@@ -59,16 +59,13 @@ const sortMedias = async (apiUrl, photographerId, sorteBy) => {
 }
 
 const loadMedias = async (apiUrl, photographerId, sorteBy) => {
-  console.log(sorteBy)
   const medias = await sortMedias(apiUrl, photographerId, sorteBy)
-  console.log(medias)
   initMediasCards(medias, photographerId, sorteBy)
 }
 
 // select dropdown
 const initSortSelect = (apiUrl, photographerId) => {
   const uiElements = document.querySelectorAll("[data-sorter]")
-  console.log(uiElements)
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
       // The first option is the current so we do nothing
