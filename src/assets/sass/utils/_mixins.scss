@@ -2,11 +2,3 @@
 @mixin opacify {
   animation: opacify 300ms ease-in-out forwards;
 }
-
-@mixin clearfix() {
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-}

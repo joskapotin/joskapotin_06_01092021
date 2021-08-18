@@ -1,0 +1,44 @@
+.site-header {
+  .tag-nav {
+    @include opacify;
+
+    margin-top: 1.875rem;
+    padding: 0 2.5rem;
+  }
+}
+
+.page-title {
+  position: absolute;
+  top: 2.9375rem;
+  right: 1.25rem;
+  color: $color-primary;
+  font-size: 0.875rem;
+
+  @media (min-width: $small-screen) {
+    top: 2.3125rem;
+    font-size: 2.25rem;
+  }
+}
+
+.section-photographers {
+  --min: 19.375rem;
+
+  grid-column-gap: 6.25rem;
+  grid-row-gap: 1.875rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
+}
+
+@media (min-width: $large-screen) {
+  #page-home {
+    .site-header {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 12.5rem 1fr 19.0625rem;
+
+      .tag-nav {
+        margin: 0;
+      }
+    }
+  }
+}

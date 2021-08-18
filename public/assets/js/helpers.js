@@ -24,7 +24,7 @@ const getElementById = (array, id) => {
 }
 
 const wrapTag = element => {
-  return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
+  return `<li><a href="tag/${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
 }
 
 const createTagNav = array => {

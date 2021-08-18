@@ -1,10 +1,16 @@
 /* Accessibility */
-.visually-hidden:not(:focus):not(:active) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  clip-path: inset(50%);
+// class from bootstrap 5
+//  visually hidden remain accessible to assistive technologies such as screen readers.
+// visually-hidden-focusable becomes visible once focused
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
 }

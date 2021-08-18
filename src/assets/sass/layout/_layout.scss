@@ -15,12 +15,6 @@ body {
 
 .site-header {
   padding: 2.5rem 0 2.875rem;
-  .tag-nav {
-    @include opacify;
-
-    margin-top: 1.875rem;
-    padding: 0 2.5rem;
-  }
 }
 
 .link-home {
@@ -36,18 +30,6 @@ body {
     height: 3.125rem;
   }
 }
-
-.page-title {
-  position: absolute;
-  top: 2.9375rem;
-  right: 1.25rem;
-}
-
-.section-photographers {
-  --min: 19.375rem;
-
-  grid-column-gap: 6.25rem;
-  grid-row-gap: 1.875rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
+.site-main {
+  padding-bottom: 2.5rem;
 }
