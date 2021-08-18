@@ -4,6 +4,7 @@ import { initPhotographersCards, initPhotographersTagNav } from "./cards-photogr
 
 const initHomepage = async apiUrl => {
   resetPage()
+  document.body.id = "page-home"
 
   const navBar = await createNavBar(apiUrl)
   uiHeader.insertAdjacentHTML("beforeend", navBar)

@@ -8,7 +8,6 @@
     opacity: 1;
   }
 }
-/* vendors */
 /* Base */
 /* Box sizing rules */
 *,
@@ -92,20 +91,17 @@ select {
   }
 }
 /* Accessibility */
-.visually-hidden:not(:focus):not(:active) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  clip-path: inset(50%);
-}
-
-/* Typography */
-.page-title {
-  color: #901c1c;
-  font-size: 0.875rem;
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
 }
 
 /* Components */
@@ -180,29 +176,6 @@ select {
   max-width: 100px;
   max-height: 100px;
   object-fit: cover;
-}
-
-/* Tables */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-tr:nth-of-type(odd) {
-  background: #eee;
-}
-
-th {
-  background: #bcb2e6;
-  color: fff;
-  font-weight: bold;
-}
-
-td,
-th {
-  padding: 6px;
-  border: 1px solid #ccc;
-  text-align: left;
 }
 
 .card {
@@ -453,11 +426,6 @@ body {
 .site-header {
   padding: 2.5rem 0 2.875rem;
 }
-.site-header .tag-nav {
-  animation: opacify 300ms ease-in-out forwards;
-  margin-top: 1.875rem;
-  padding: 0 2.5rem;
-}
 
 .link-home {
   display: inline-flex;
@@ -474,10 +442,29 @@ body {
   }
 }
 
+.site-main {
+  padding-bottom: 2.5rem;
+}
+
+/* Pages */
+.site-header .tag-nav {
+  animation: opacify 300ms ease-in-out forwards;
+  margin-top: 1.875rem;
+  padding: 0 2.5rem;
+}
+
 .page-title {
   position: absolute;
   top: 2.9375rem;
   right: 1.25rem;
+  color: #901c1c;
+  font-size: 0.875rem;
+}
+@media (min-width: 45.3125rem) {
+  .page-title {
+    top: 2.3125rem;
+    font-size: 2.25rem;
+  }
 }
 
 .section-photographers {
@@ -488,7 +475,16 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
 }
 
-/* Pages */
+@media (min-width: 75rem) {
+  #page-home .site-header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 12.5rem 1fr 19.0625rem;
+  }
+  #page-home .site-header .tag-nav {
+    margin: 0;
+  }
+}
 .photographer-section {
   display: flex;
   position: relative;
@@ -619,6 +615,5 @@ body {
     column-gap: 4.1875rem;
   }
 }
-/* Themes */
 
 /*# sourceMappingURL=style.css.map */
