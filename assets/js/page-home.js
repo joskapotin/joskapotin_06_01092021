@@ -1,6 +1,6 @@
 import { uiHeader, uiMain } from "./options.js"
-import { requestData, createNavBar, initTagNav, resetPage } from "./helpers.js"
-import initPhotographersCard from "./cards-photographers.js"
+import { requestData, createNavBar, resetPage } from "./helpers.js"
+import { initPhotographersCards, initPhotographersTagNav } from "./cards-photographers.js"
 
 const initHomepage = async apiUrl => {
   resetPage()
@@ -9,14 +9,13 @@ const initHomepage = async apiUrl => {
   uiHeader.insertAdjacentHTML("beforeend", navBar)
 
   const uiTagLinks = document.querySelectorAll("#site-header .tag-link")
-  const filter = { apiUrl: apiUrl, type: "photographers", uiElements: uiTagLinks }
-  initTagNav(filter)
+  initPhotographersTagNav(apiUrl, uiTagLinks)
 
   const markup = `<h1 class="page-title" data-reset>Nos photographes</h1><section id="photographers-list" class="section-photographers" data-reset></section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 
   const { photographers } = await requestData(apiUrl)
-  initPhotographersCard(apiUrl, photographers)
+  initPhotographersCards(apiUrl, photographers)
 }
 
 export default initHomepage
