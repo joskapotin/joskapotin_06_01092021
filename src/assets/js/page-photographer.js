@@ -1,4 +1,4 @@
-import { apiUrl, photographeThumbPath, uiHeader, uiMain } from "./options.js"
+import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
 import { requestData, getElementById, createTagNav, resetPage } from "./helpers.js"
 import initMediasCards from "./cards-medias.js"
 
@@ -44,15 +44,18 @@ const sortByTitle = elements => {
   return elements.sort((a, b) => a.title.localeCompare(b.title))
 }
 
-const sortByDate = elements => {}
+const sortByDate = elements => {
+  return elements.sort((a, b) => new Date(b.date) - new Date(a.date))
+}
 
 const sortMedias = async (apiUrl, photographerId, sorteBy) => {
   const unsortedMedias = await requestMediasByPhotographer(apiUrl, photographerId)
-  if (sorteBy === "Likes") {
-    return sortByPopularity(unsortedMedias)
-  } else if (sorteBy === "Title") {
+  if (sorteBy === "Title") {
     return sortByTitle(unsortedMedias)
+  } else if (sorteBy === "Date") {
+    return sortByDate(unsortedMedias)
   }
+  return sortByPopularity(unsortedMedias)
 }
 
 const loadMedias = async (apiUrl, photographerId, sorteBy) => {
@@ -92,7 +95,7 @@ const initPhotographerPage = async (apiUrl, photographerId) => {
   const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<div class="sort-nav__list" role="listbox" tabindex="0"><button class="btn sort-nav__item" data-sorter="Likes" role="option">Popularité</button><button class="btn sort-nav__item" data-sorter="Date" role="option">Date</button><button class="btn sort-nav__item" data-sorter="Title" role="option">Titre</button></div></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 
-  const medias = await sortMedias(apiUrl, photographerId, "Likes")
+  const medias = await sortMedias(apiUrl, photographerId)
   initMediasCards(medias, photographerId)
 
   const uiTagLinks = document.querySelectorAll("#photographer-section .tag-link")
