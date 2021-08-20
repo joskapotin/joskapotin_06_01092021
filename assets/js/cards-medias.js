@@ -8,8 +8,6 @@ const createMediasCards = (medias, photographerId) => {
     const photographerMediaPath = `${mediasPath}/photographer-id-${photographerId}`
     const alt = image?.slice(0, -4).replaceAll("_", " ") ?? video?.slice(0, -4).replaceAll("_", " ")
 
-    console.log(alt)
-
     let thumbnail = `<img class="media media-img" alt="${alt}" data-src="${photographerMediaPath}/${image}" src="${photographerMediaPath}/${image}">`
 
     if (video) {
