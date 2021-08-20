@@ -1,12 +1,14 @@
+import { apiUrl } from "./config.js"
+
 // request function
-const requestData = async apiUrl => {
+const requestData = async () => {
   const response = await fetch(apiUrl)
   if (!response.ok) throw new Error(`Erreur HTTP ! statut : ${response.status}`)
   return await response.json()
 }
 
-const requestAllTheTag = async apiUrl => {
-  const { media } = await requestData(apiUrl)
+const requestAllTheTag = async () => {
+  const { media } = await requestData()
   const tagArray = []
   media.forEach(element => {
     element.tags.forEach(item => {
@@ -24,7 +26,7 @@ const getElementById = (array, id) => {
 }
 
 const wrapTag = element => {
-  return `<li><a href="#tag-${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
+  return `<li><a href="tag/${element}" class="tag-link" data-tag="${element}">#${element}</a></li>`
 }
 
 const createTagNav = array => {
@@ -32,8 +34,8 @@ const createTagNav = array => {
   return `<nav class="tag-nav" data-reset><ul class="tag-list">${tagNav}</ul></nav>`
 }
 
-const createNavBar = async apiUrl => {
-  const allTheTags = await requestAllTheTag(apiUrl)
+const createNavBar = async () => {
+  const allTheTags = await requestAllTheTag()
   return createTagNav(allTheTags)
 }
 

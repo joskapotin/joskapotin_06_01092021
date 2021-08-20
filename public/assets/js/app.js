@@ -1,21 +1,22 @@
-import { homeLink, apiUrl } from "./options.js"
+import { uiHomeLink } from "./config.js"
 import initHomePage from "./page-home.js"
-import initPhotographerPage from "./page-photographer.js"
 
 // Init
-const initApp = apiUrl => {
-  homeLink.addEventListener("click", event => {
-    initHomePage(apiUrl)
+// const initApp = apiUrl => {
+//   uiHomeLink.addEventListener("click", event => {
+//     initHomePage(apiUrl)
+//   })
+
+//   initHomePage(apiUrl)
+// }
+// initApp(apiUrl)
+
+// IIFE : Immediatly invoued functin expression
+;(() => {
+  uiHomeLink.addEventListener("click", event => {
+    event.preventDefault()
+    initHomePage()
   })
 
-  const currentPath = location.pathname.substring(location.pathname.lastIndexOf("/") + 1)
-  if (currentPath === "" || currentPath === "index.html") {
-    initHomePage(apiUrl)
-  } else {
-    initPhotographerPage(apiUrl, "925")
-  }
-  const pathPhotographer = "photographer/"
-  console.log(pathPhotographer)
-}
-
-initApp(apiUrl)
+  initHomePage()
+})()

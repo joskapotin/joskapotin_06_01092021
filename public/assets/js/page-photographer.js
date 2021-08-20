@@ -1,4 +1,4 @@
-import { photographeThumbPath, uiHeader, uiMain } from "./options.js"
+import { photographeThumbPath, uiHeader, uiMain } from "./config.js"
 import { requestData, getElementById, createTagNav, resetPage } from "./helpers.js"
 import initMediasCards from "./cards-medias.js"
 
@@ -11,28 +11,28 @@ const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, pric
   uiHeader.insertAdjacentHTML("beforeend", header)
 }
 
-const requestMediasByTag = async (apiUrl, photographerId, tag) => {
-  const medias = await requestMediasByPhotographer(apiUrl, photographerId)
+const requestMediasByTag = async (photographerId, tag) => {
+  const medias = await requestMediasByPhotographer(photographerId)
   return medias.filter(element => element.tags.find(element => element === tag))
 }
 
-const showMediasByTag = async (apiUrl, photographerId, tag) => {
-  const medias = await requestMediasByTag(apiUrl, photographerId, tag)
+const showMediasByTag = async (photographerId, tag) => {
+  const medias = await requestMediasByTag(photographerId, tag)
   initMediasCards(medias, photographerId)
 }
 
-const initMediasTagNav = (apiUrl, photographerId, uiTagLinks) => {
+const initMediasTagNav = (photographerId, uiTagLinks) => {
   uiTagLinks.forEach(uiTagLink => {
     uiTagLink.addEventListener("click", event => {
       event.preventDefault()
       const tag = event.target.dataset.tag
-      showMediasByTag(apiUrl, photographerId, tag)
+      showMediasByTag(photographerId, tag)
     })
   })
 }
 
-const requestMediasByPhotographer = async (apiUrl, id) => {
-  const { media } = await requestData(apiUrl)
+const requestMediasByPhotographer = async id => {
+  const { media } = await requestData()
   const medias = media.filter(element => element.photographerId === parseInt(id))
   return medias
 }
@@ -59,13 +59,13 @@ const sortMedias = async (apiUrl, photographerId, sorteBy) => {
   return sortByPopularity(unsortedMedias)
 }
 
-const loadMedias = async (apiUrl, photographerId, sorteBy) => {
-  const medias = await sortMedias(apiUrl, photographerId, sorteBy)
+const loadMedias = async (photographerId, sorteBy) => {
+  const medias = await sortMedias(photographerId, sorteBy)
   initMediasCards(medias, photographerId, sorteBy)
 }
 
 // select dropdown
-const initSortSelect = (apiUrl, photographerId) => {
+const initSortSelect = photographerId => {
   const uiElements = document.querySelectorAll("[data-sorter]")
   uiElements.forEach(uiElement => {
     uiElement.addEventListener("click", event => {
@@ -78,29 +78,29 @@ const initSortSelect = (apiUrl, photographerId) => {
       }
       parent.insertBefore(target, parent.firstChild)
       const sorteBy = target.dataset.sorter
-      loadMedias(apiUrl, photographerId, sorteBy)
+      loadMedias(photographerId, sorteBy)
     })
   })
 }
 
-const initPhotographerPage = async (apiUrl, photographerId) => {
+const initPhotographerPage = async photographerId => {
   resetPage()
   document.body.id = "page-photographer"
 
-  const { photographers } = await requestData(apiUrl)
+  const { photographers } = await requestData()
   const photographer = getElementById(photographers, photographerId)
   uiCreateHeader(photographer)
 
   const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<div class="sort-nav__list" role="listbox"><button class="btn sort-nav__item" data-sorter="Likes" role="option">Popularité</button><button class="btn sort-nav__item" data-sorter="Date" role="option">Date</button><button class="btn sort-nav__item" data-sorter="Title" role="option">Titre</button></div></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
   uiMain.insertAdjacentHTML("beforeend", markup)
 
-  const medias = await sortMedias(apiUrl, photographerId)
+  const medias = await sortMedias(photographerId)
   initMediasCards(medias, photographerId)
 
   const uiTagLinks = document.querySelectorAll("#photographer-section .tag-link")
-  initMediasTagNav(apiUrl, photographerId, uiTagLinks)
+  initMediasTagNav(photographerId, uiTagLinks)
 
-  initSortSelect(apiUrl, photographerId)
+  initSortSelect(photographerId)
 }
 
 export default initPhotographerPage

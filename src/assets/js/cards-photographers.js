@@ -1,4 +1,4 @@
-import { photographeThumbPath, uiMain } from "./options.js"
+import { photographeThumbPath, uiMain } from "./config.js"
 import { createTagNav, requestData } from "./helpers.js"
 import initPhotographerPage from "./page-photographer.js"
 
@@ -15,48 +15,52 @@ const createPhotographersCards = photographers => {
   return photographersCard.join("")
 }
 
-const requestPhotographersByTag = async (apiUrl, tag) => {
-  const { photographers } = await requestData(apiUrl)
+const requestPhotographersByTag = async tag => {
+  const { photographers } = await requestData()
   return photographers.filter(element => element.tags.find(element => element === tag))
 }
 
-const showPhotographerByTag = async (apiUrl, tag) => {
-  const photographerByTag = await requestPhotographersByTag(apiUrl, tag)
-  initPhotographersCards(apiUrl, photographerByTag)
+const showPhotographerByTag = async tag => {
+  const photographerByTag = await requestPhotographersByTag(tag)
+  initPhotographersCards(photographerByTag)
 }
 
-const initPhotographersTagNav = (apiUrl, uiTagLinks) => {
+const initPhotographersTagNav = uiTagLinks => {
   uiTagLinks.forEach(uiTagLink => {
     uiTagLink.addEventListener("click", event => {
       event.preventDefault()
       const tag = event.target.dataset.tag
-      showPhotographerByTag(apiUrl, tag)
+      showPhotographerByTag(tag)
     })
   })
 }
 
-const initPhotographerNav = (apiUrl, uiCardsLink) => {
+const initPhotographerNav = () => {
+  const uiCardsLink = uiMain.querySelectorAll(".card-link")
   uiCardsLink.forEach(card => {
     const photographerId = card.parentNode.dataset.id
     card.addEventListener("click", event => {
       event.preventDefault()
-      initPhotographerPage(apiUrl, photographerId)
+      initPhotographerPage(photographerId)
     })
   })
 }
 
-const initPhotographersCards = (apiUrl, photographers) => {
+const insertPhotographersCards = photographers => {
+  const photographersCards = createPhotographersCards(photographers)
+  const uiPhotographersList = uiMain.querySelector("#photographers-list")
+  uiPhotographersList.insertAdjacentHTML("beforeend", photographersCards)
+}
+
+const initPhotographersCards = photographers => {
   document.querySelectorAll(".card-photographer[data-tag-filtrable]").forEach(element => element.remove())
 
-  const photographersCard = createPhotographersCards(photographers)
-  const uiPhotographersList = uiMain.querySelector("#photographers-list")
-  uiPhotographersList.insertAdjacentHTML("beforeend", photographersCard)
+  insertPhotographersCards(photographers)
 
   const uiTagLinks = document.querySelectorAll(".card-photographer .tag-link")
-  initPhotographersTagNav(apiUrl, uiTagLinks)
+  initPhotographersTagNav(uiTagLinks)
 
-  const uiCardsLink = uiMain.querySelectorAll(".card-link")
-  initPhotographerNav(apiUrl, uiCardsLink)
+  initPhotographerNav()
 }
 
 export { initPhotographersCards, initPhotographersTagNav }
