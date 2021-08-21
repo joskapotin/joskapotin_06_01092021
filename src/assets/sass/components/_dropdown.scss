@@ -12,22 +12,22 @@
 
 .sort-nav__label {
   position: relative;
-  font-weight: bold;
   z-index: 10;
+  font-weight: bold;
 }
 
 .sort-nav__list {
   position: absolute;
   top: -0.875rem;
   left: 100%;
+  overflow: hidden;
   max-height: 3.4375rem;
   margin-left: 1.5625rem;
-  transition: max-height 200ms ease-in-out;
-  border-radius: 0.3125rem;
   background-color: $color-primary;
+  border-radius: 0.3125rem;
   color: $white;
   cursor: default;
-  overflow: hidden;
+  transition: max-height 200ms ease-in-out;
 
   &:focus-within {
     max-height: 50rem;
@@ -38,29 +38,29 @@
   }
 
   &::after {
-    display: block;
     position: absolute;
     top: 1em;
     right: 0.875rem;
+    display: block;
     width: 0.875rem;
     height: 0.875rem;
+    border-right: 3px solid $white;
+    border-bottom: 3px solid $white;
+    content: "";
+    pointer-events: none;
     transform: rotate(45deg);
     transform-origin: center;
     transition: transform 200ms ease-in-out;
-    border-right: 3px solid $white;
-    border-bottom: 3px solid $white;
-    pointer-events: none;
-    content: "";
   }
 }
 
 .sort-nav__item {
-  display: block;
   position: relative;
+  display: block;
   width: 100%;
-  margin-bottom: 0.0625rem;
   padding: 0.875rem 3.25rem 0.875rem 0.625rem;
   border: 0;
+  margin-bottom: 0.0625rem;
   border-radius: 0;
   white-space: nowrap;
 }

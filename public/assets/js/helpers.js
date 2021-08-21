@@ -2,9 +2,14 @@ import { apiUrl } from "./config.js"
 
 // request function
 const requestData = async () => {
-  const response = await fetch(apiUrl)
-  if (!response.ok) throw new Error(`Erreur HTTP ! statut : ${response.status}`)
-  return await response.json()
+  try {
+    const response = await fetch(apiUrl)
+    if (!response.ok) throw new Error(`Erreur HTTP ! statut : ${response.status}`)
+    const data = await response.json()
+    return data
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 const requestAllTheTag = async () => {

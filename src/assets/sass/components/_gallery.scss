@@ -47,25 +47,25 @@
 
   &::before,
   &::after {
-    box-sizing: content-box;
-    opacity: 0.5;
-    content: "";
     z-index: 10;
+    box-sizing: content-box;
+    content: "";
     grid-area: grid;
+    opacity: 0.5;
   }
 
   &::before {
-    margin-left: var(--delta2);
+    z-index: 20;
     border-top: var(--triangle-side) solid transparent;
     border-bottom: var(--triangle-side) solid transparent;
     border-left: var(--overlay-size) solid $color-primary;
-    z-index: 20;
+    margin-left: var(--delta2);
   }
 
   &::after {
-    box-sizing: content-box;
     width: var(--circle-diameter);
     height: var(--circle-diameter);
+    box-sizing: content-box;
     border: var(--circle-border) solid $color-primary;
     border-radius: var(--circle-diameter);
   }
