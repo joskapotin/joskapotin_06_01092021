@@ -32,4 +32,8 @@ body {
 }
 .site-main {
   padding-bottom: 2.5rem;
+
+  @media (min-width: $small-screen) {
+    padding-bottom: 4.75rem;
+  }
 }

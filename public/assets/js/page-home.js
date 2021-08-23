@@ -1,15 +1,15 @@
-import { uiHeader, uiMain } from "./config.js"
-import { requestData, createNavBar, resetPage } from "./helpers.js"
+import { config } from "./config.js"
+import { getPhotographers, createNavBar, resetPage } from "./helpers.js"
 import { initPhotographersCards, initPhotographersTagNav } from "./cards-photographers.js"
 
 const insertTopNavBar = async () => {
   const navBar = await createNavBar()
-  uiHeader.insertAdjacentHTML("beforeend", navBar)
+  config.uiHeader.insertAdjacentHTML("beforeend", navBar)
   return document.querySelectorAll("#site-header .tag-link")
 }
 
 const insertPhotographersCards = async () => {
-  const { photographers } = await requestData()
+  const photographers = await getPhotographers()
   initPhotographersCards(photographers)
 }
 
@@ -21,7 +21,7 @@ const initHomepage = async () => {
   initPhotographersTagNav(uiTagLinks)
 
   const markup = `<h1 class="page-title" data-reset>Nos photographes</h1><section id="photographers-list" class="section-photographers" data-reset></section>`
-  uiMain.insertAdjacentHTML("beforeend", markup)
+  config.uiMain.insertAdjacentHTML("beforeend", markup)
 
   insertPhotographersCards()
 }

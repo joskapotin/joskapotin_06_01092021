@@ -1,14 +1,20 @@
-import { photographeThumbPath, uiHeader, uiMain } from "./config.js"
-import { requestData, getElementById, createTagNav, resetPage } from "./helpers.js"
+import { config } from "./config.js"
+import { getPhotographers, getMedias, getElementById, createTagNav, resetPage } from "./helpers.js"
 import initMediasCards from "./cards-medias.js"
 
 const uiCreateHeader = ({ id, name, city, country, tags, tagline, portrait, price }) => {
-  const thumbnail = `${photographeThumbPath}/${portrait}`
+  const thumbnail = `${config.photographeThumbPath}/${portrait}`
   const tagNav = createTagNav(tags)
   const header = `<section id="photographer-section" class="photographer-section" data-id="${id}" data-reset><article class="photographer__resume">
     <h1 class="photographer__name">${name}</h1><h2 class="photographer__location">${city}, ${country}</h2><p class="photographer__tagline">${tagline}</p>${tagNav}
   </article><button class="btn photographer__btn-contact">Contactez-moi</button><picture class="photographer__picture"><img class="photographer__img" alt="" src="${thumbnail}"></picture><aside class="photographer__aside"><span class="photographer__likes">297 081</span><span class="photographer__pricing">${price}€/jour</span></aside></section>`
-  uiHeader.insertAdjacentHTML("beforeend", header)
+  config.uiHeader.insertAdjacentHTML("beforeend", header)
+}
+
+const requestMediasByPhotographer = async id => {
+  const Allmedias = await getMedias()
+  const medias = Allmedias.filter(element => element.photographerId === parseInt(id))
+  return medias
 }
 
 const requestMediasByTag = async (photographerId, tag) => {
@@ -31,12 +37,6 @@ const initMediasTagNav = (photographerId, uiTagLinks) => {
   })
 }
 
-const requestMediasByPhotographer = async id => {
-  const { media } = await requestData()
-  const medias = media.filter(element => element.photographerId === parseInt(id))
-  return medias
-}
-
 const sortByPopularity = elements => {
   return elements.sort((a, b) => b.likes - a.likes)
 }
@@ -46,11 +46,12 @@ const sortByTitle = elements => {
 }
 
 const sortByDate = elements => {
-  return elements.sort((a, b) => new Date(b.date) - new Date(a.date))
+  elements.forEach(e => console.log(e, Date.parse(e.date)))
+  return elements.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
 }
 
-const sortMedias = async (apiUrl, photographerId, sorteBy) => {
-  const unsortedMedias = await requestMediasByPhotographer(apiUrl, photographerId)
+const sortMedias = async (photographerId, sorteBy) => {
+  const unsortedMedias = await requestMediasByPhotographer(photographerId)
   if (sorteBy === "Title") {
     return sortByTitle(unsortedMedias)
   } else if (sorteBy === "Date") {
@@ -87,12 +88,12 @@ const initPhotographerPage = async photographerId => {
   resetPage()
   document.body.id = "page-photographer"
 
-  const { photographers } = await requestData()
+  const photographers = await getPhotographers()
   const photographer = getElementById(photographers, photographerId)
   uiCreateHeader(photographer)
 
   const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<div class="sort-nav__list" role="listbox"><button class="btn sort-nav__item" data-sorter="Likes" role="option">Popularité</button><button class="btn sort-nav__item" data-sorter="Date" role="option">Date</button><button class="btn sort-nav__item" data-sorter="Title" role="option">Titre</button></div></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
-  uiMain.insertAdjacentHTML("beforeend", markup)
+  config.uiMain.insertAdjacentHTML("beforeend", markup)
 
   const medias = await sortMedias(photographerId)
   initMediasCards(medias, photographerId)

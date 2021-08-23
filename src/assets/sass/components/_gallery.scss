@@ -92,7 +92,10 @@
   font-size: 0.875rem;
 }
 
-.media__date,
+.media__date {
+  // display: none;
+}
+
 .media__price {
   display: none;
 }

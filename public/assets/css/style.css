@@ -343,7 +343,6 @@ select {
   font-size: 0.875rem;
 }
 
-.media__date,
 .media__price {
   display: none;
 }
@@ -472,6 +471,11 @@ body {
 
 .site-main {
   padding-bottom: 2.5rem;
+}
+@media (min-width: 45.3125rem) {
+  .site-main {
+    padding-bottom: 4.75rem;
+  }
 }
 
 /* Pages */
