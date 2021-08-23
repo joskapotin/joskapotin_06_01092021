@@ -1,9 +1,9 @@
-import { apiUrl } from "./config.js"
+import { config } from "./config.js"
 
 // request function
 const requestData = async () => {
   try {
-    const response = await fetch(apiUrl)
+    const response = await fetch(config.apiUrl)
     if (!response.ok) throw new Error(`Erreur HTTP ! statut : ${response.status}`)
     const data = await response.json()
     return data
@@ -12,10 +12,20 @@ const requestData = async () => {
   }
 }
 
-const requestAllTheTag = async () => {
+const getPhotographers = async () => {
+  const { photographers } = await requestData()
+  return photographers
+}
+
+const getMedias = async () => {
   const { media } = await requestData()
+  return media
+}
+
+const requestAllTheTag = async () => {
+  const medias = await getMedias()
   const tagArray = []
-  media.forEach(element => {
+  medias.forEach(element => {
     element.tags.forEach(item => {
       // Create an array of all the tags without duplicate
       if (!tagArray.includes(item)) {
@@ -24,6 +34,10 @@ const requestAllTheTag = async () => {
     })
   })
   return tagArray
+}
+
+const formatAlternativeText = text => {
+  return text.slice(0, -4).replaceAll("_", " ")
 }
 
 const getElementById = (array, id) => {
@@ -51,4 +65,4 @@ const resetPage = () => {
   })
 }
 
-export { requestData, getElementById, createTagNav, createNavBar, resetPage }
+export { requestData, getPhotographers, getMedias, formatAlternativeText, getElementById, createTagNav, createNavBar, resetPage }

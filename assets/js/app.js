@@ -1,4 +1,4 @@
-import { uiHomeLink } from "./config.js"
+import { config } from "./config.js"
 import initHomePage from "./page-home.js"
 
 // Init
@@ -13,7 +13,7 @@ import initHomePage from "./page-home.js"
 
 // IIFE : Immediatly invoued functin expression
 ;(() => {
-  uiHomeLink.addEventListener("click", event => {
+  config.uiHomeLink.addEventListener("click", event => {
     event.preventDefault()
     initHomePage()
   })
