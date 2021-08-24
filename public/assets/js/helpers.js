@@ -4,7 +4,6 @@ import { config } from "./config.js"
 const requestData = async () => {
   try {
     const response = await fetch(config.apiUrl)
-    if (!response.ok) throw new Error(`Erreur HTTP ! statut : ${response.status}`)
     const data = await response.json()
     return data
   } catch (err) {
@@ -24,20 +23,28 @@ const getMedias = async () => {
 
 const requestAllTheTag = async () => {
   const medias = await getMedias()
-  const tagArray = []
-  medias.forEach(element => {
-    element.tags.forEach(item => {
-      // Create an array of all the tags without duplicate
-      if (!tagArray.includes(item)) {
-        tagArray.push(item)
-      }
-    })
+  // Create an array of all the tags with duplicate
+  const allTheTagsDup = medias.map(media => {
+    return media.tags.join()
   })
-  return tagArray
+  // Create an array of all the tags without duplicate
+  return [...new Set(allTheTagsDup)]
 }
 
 const formatAlternativeText = text => {
   return text.slice(0, -4).replaceAll("_", " ")
+}
+
+const sortByPopularity = elements => {
+  return elements.sort((a, b) => b.likes - a.likes)
+}
+
+const sortByTitle = elements => {
+  return elements.sort((a, b) => a.title.localeCompare(b.title))
+}
+
+const sortByDate = elements => {
+  return elements.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
 }
 
 const getElementById = (array, id) => {
@@ -49,7 +56,10 @@ const wrapTag = element => {
 }
 
 const createTagNav = array => {
-  const tagNav = array.map(element => wrapTag(element)).join("")
+  const tagNav = array
+    .sort()
+    .map(element => wrapTag(element))
+    .join("")
   return `<nav class="tag-nav" data-reset><ul class="tag-list">${tagNav}</ul></nav>`
 }
 
@@ -65,4 +75,4 @@ const resetPage = () => {
   })
 }
 
-export { requestData, getPhotographers, getMedias, formatAlternativeText, getElementById, createTagNav, createNavBar, resetPage }
+export { requestData, getPhotographers, getMedias, formatAlternativeText, sortByPopularity, sortByTitle, sortByDate, getElementById, createTagNav, createNavBar, resetPage }
