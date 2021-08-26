@@ -2,12 +2,19 @@ import { config } from "./config.js"
 import { getPhotographers, getMedias, sortByPopularity, sortByTitle, sortByDate, getElementById, createTagNav, resetPage } from "./helpers.js"
 import { mediaFactory } from "./factory.js"
 
+/**
+ * Insert the static HTML
+ */
 const prepPhotographerPage = () => {
   document.body.id = "page-photographer"
   const markup = `<nav class="sort-nav" data-reset><span class="sort-nav__label">Trier par<div class="sort-nav__list" role="listbox"><button class="btn sort-nav__item" data-sorter="Likes" role="option">Popularité</button><button class="btn sort-nav__item" data-sorter="Date" role="option">Date</button><button class="btn sort-nav__item" data-sorter="Title" role="option">Titre</button></div></span></nav><section id="media-gallery" class="media-gallery" data-reset></section>`
   config.uiMain.insertAdjacentHTML("beforeend", markup)
 }
 
+/**
+ * get the photographer by his id and insert his informations in the DOM
+ * @param {string} photographerId
+ */
 const insertPhotographerInfos = async photographerId => {
   const photographers = await getPhotographers()
   const { id, name, city, country, tags, tagline, portrait, price } = getElementById(photographers, photographerId)
@@ -19,6 +26,11 @@ const insertPhotographerInfos = async photographerId => {
   config.uiHeader.insertAdjacentHTML("beforeend", header)
 }
 
+/**
+ * pass an array of medias object through the factory and return the html reday to be inserted
+ * @param {Array} medias
+ * @returns {string}
+ */
 const createMediasCards = medias => {
   const mediasCards = medias
     .map(media => {
@@ -29,7 +41,11 @@ const createMediasCards = medias => {
   return mediasCards
 }
 
-const insertMediasCards = async medias => {
+/**
+ * remove existing medias from the dom and insert the requested ones
+ * @param {Array} medias an array of medias objects
+ */
+const insertMediasCards = medias => {
   document.querySelectorAll(".media__content[data-tag-filtrable]").forEach(element => element.remove())
 
   const mediasCards = createMediasCards(medias)
@@ -37,22 +53,43 @@ const insertMediasCards = async medias => {
   uiGallery.insertAdjacentHTML("beforeend", mediasCards)
 }
 
+/**
+ * Get medias of a photographer
+ * @param {string} id
+ * @returns {Promise<Array>} an array of medias objects
+ */
 const requestMediasByPhotographer = async id => {
   const Allmedias = await getMedias()
   const medias = Allmedias.filter(element => element.photographerId === parseInt(id))
   return medias
 }
 
+/**
+ * Get the medias of aphotographer with a specific tag
+ * @param {string} photographerId
+ * @param {string} tag
+ * @returns {Promise<Array>} an array of medias objects
+ */
 const requestMediasByPhotographerAndTag = async (photographerId, tag) => {
   const medias = await requestMediasByPhotographer(photographerId)
   return medias.filter(element => element.tags.find(element => element === tag))
 }
 
+/**
+ * Insert the media of aphotographer with a specific tag
+ * @param {string} photographerId
+ * @param {string} tag
+ */
 const showMediasByTag = async (photographerId, tag) => {
   const medias = await requestMediasByPhotographerAndTag(photographerId, tag)
   insertMediasCards(medias, photographerId)
 }
 
+/**
+ * Add eventlistener to filter medias by tag
+ * @param {string} photographerId of the current photographer
+ * @param {Array} uiTagLinks array of nodes
+ */
 const initMediasTagNav = (photographerId, uiTagLinks) => {
   uiTagLinks.forEach(uiTagLink => {
     uiTagLink.addEventListener("click", event => {
@@ -63,6 +100,12 @@ const initMediasTagNav = (photographerId, uiTagLinks) => {
   })
 }
 
+/**
+ * Sort medias and insert them
+ * @param {string} photographerId of the current photographer
+ * @param {string} sorteBy can be "Title", "Date", any other value or undefine sort by popularity
+ * @callback insertMediasCards(sortedMedias)
+ */
 const sortMedias = async (photographerId, sorteBy) => {
   const unsortedMedias = await requestMediasByPhotographer(photographerId)
   if (sorteBy === "Title") {
@@ -76,7 +119,10 @@ const sortMedias = async (photographerId, sorteBy) => {
   return insertMediasCards(sortedMedias)
 }
 
-// select dropdown
+/**
+ * build the select menu and sort medias on click
+ * @param {string} photographerId
+ */
 const initSortSelect = photographerId => {
   const uiElements = document.querySelectorAll("[data-sorter]")
   uiElements.forEach(uiElement => {
@@ -95,12 +141,14 @@ const initSortSelect = photographerId => {
   })
 }
 
-const initPhotographerPage = async photographerId => {
+/**
+ * Display the photographer page and initiate the gallery
+ * @param {string} photographerId
+ */
+const initPhotographerPage = photographerId => {
   resetPage()
   prepPhotographerPage()
-
-  await insertPhotographerInfos(photographerId)
-
+  insertPhotographerInfos(photographerId)
   sortMedias(photographerId)
 
   const uiTagLinks = document.querySelectorAll("#photographer-section .tag-link")
