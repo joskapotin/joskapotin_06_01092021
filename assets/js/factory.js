@@ -1,6 +1,19 @@
 import { config } from "./config.js"
 import { createTagNav, formatAlternativeText } from "./helpers.js"
 
+/**
+ * Take an object photographer from the APi and return html element ready to be inserted in the DOM
+ * @param {object} photographer
+ * @param {string} photographer.name
+ * @param {string} photographer.id
+ * @param {string} photographer.city
+ * @param {string} photographer.country
+ * @param {Array} photographer.tags
+ * @param {string} photographer.tagline
+ * @param {string} photographer.price
+ * @param {string} photographer.portrait
+ * @returns {string}
+ */
 const photographerFactory = ({ name, id, city, country, tags, tagline, price, portrait }) => {
   const uiPortrait = `<img class="card__img" src="${config.photographeThumbPath}/${portrait}" alt="" height="200" width="200">`
   const uiName = `<h2 class="card__name">${name}</h2>`
@@ -15,6 +28,19 @@ const photographerFactory = ({ name, id, city, country, tags, tagline, price, po
   return uiCard
 }
 
+/**
+ * Take an object media from the APi and return html element ready to be inserted in the DOM
+ * @param {object} media
+ * @param {string} media.id
+ * @param {string} media.photographerId
+ * @param {string} media.title
+ * @param {string} media.image
+ * @param {string} media.video
+ * @param {Array} media.likes
+ * @param {string} media.date
+ * @param {string} media.price
+ * @returns {string}
+ */
 const mediaFactory = ({ id, photographerId, title, image, video, likes, date, price }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const uiAlt = image ? formatAlternativeText(image) : formatAlternativeText(video)
