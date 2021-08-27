@@ -94,14 +94,14 @@ select {
 .visually-hidden,
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
   position: absolute !important;
+  overflow: hidden !important;
   width: 1px !important;
   height: 1px !important;
-  margin: -1px !important;
   padding: 0 !important;
   border: 0 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
+  margin: -1px !important;
   clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
 }
 
 /* Components */
@@ -348,6 +348,8 @@ select {
 }
 
 .sort-nav {
+  position: relative;
+  z-index: 10;
   display: none;
   margin-bottom: 3.625rem;
   font-size: 1.125rem;
@@ -361,8 +363,6 @@ select {
 }
 
 .sort-nav__label {
-  position: relative;
-  z-index: 10;
   font-weight: bold;
 }
 
