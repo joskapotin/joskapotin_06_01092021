@@ -11,4 +11,4 @@ const config = {
   uiMain: document.getElementById("site-main"),
 }
 
-export { config }
+export default config

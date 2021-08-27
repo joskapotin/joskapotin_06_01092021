@@ -1,10 +1,10 @@
-import { config } from "./config.js"
-import initHomePage from "./page-home.js"
+import config from "./api/config.js"
+import { initHomepage } from "./pages/page.home.js"
 ;(() => {
   config.uiHomeLink.addEventListener("click", event => {
     event.preventDefault()
-    initHomePage()
+    initHomepage()
   })
 
-  initHomePage()
+  initHomepage()
 })()
