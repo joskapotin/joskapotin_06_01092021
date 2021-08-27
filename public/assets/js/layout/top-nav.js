@@ -4,6 +4,7 @@ import { showPhotographersByTag } from "../pages/page.home.js"
 const topNav = async () => {
   const uiTagNav = await allTagList()
   uiTagNav.id = "top-nav"
+  uiTagNav.classList.add("top-nav")
   uiTagNav.dataset.reset = "true"
   const uiTagLink = uiTagNav.querySelectorAll(".tag-link")
   uiTagLink.forEach(uiTagLink => {

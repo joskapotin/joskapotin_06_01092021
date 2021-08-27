@@ -2,6 +2,13 @@ import config from "../../api/config.js"
 import { getPhotographersById } from "./photographer.service.js"
 import { tagList } from "../tags/tag.list.js"
 import { showMediasByTag } from "../../pages/page.photographer.js"
+import { getMediasByPhotographer } from "../medias/media.service.js"
+
+const countTotalLikes = async photographerId => {
+  const medias = await getMediasByPhotographer(photographerId)
+  const totalLikes = medias.reduce((accumulateur, media) => accumulateur + media.likes, 0)
+  return totalLikes
+}
 
 const photographerResume = async photographerId => {
   const { name, id, city, country, tags, tagline, price, portrait } = await getPhotographersById(photographerId)
@@ -55,7 +62,7 @@ const photographerResume = async photographerId => {
 
   const uiLikes = document.createElement("span")
   uiLikes.className = "photographer__likes"
-  uiLikes.textContent = "297 081"
+  uiLikes.textContent = await countTotalLikes(photographerId)
 
   const uiPricing = document.createElement("span")
   uiPricing.className = "photographer__pricing"

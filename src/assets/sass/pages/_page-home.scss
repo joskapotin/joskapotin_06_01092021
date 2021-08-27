@@ -1,44 +1,55 @@
-.site-header {
-  .tag-nav {
-    @include opacify;
-
-    margin-top: 1.875rem;
-    padding: 0 2.5rem;
+#page-home {
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2.5rem;
+    row-gap: 1.875rem;
   }
-}
 
-.page-title {
-  position: absolute;
-  top: 2.9375rem;
-  right: 1.25rem;
-  color: $color-primary;
-  font-size: 0.875rem;
+  .link-home {
+    order: 1;
+  }
 
-  @media (min-width: $small-screen) {
-    top: 2.3125rem;
-    font-size: 2.25rem;
+  .top-nav {
+    @include opacify;
+    width: 100%;
+    order: 3;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    flex-shrink: 0;
+    order: 2;
+    margin: 0.6em 0 0 auto;
+    color: $color-primary;
+    font-size: 0.875rem;
+    @media (min-width: $small-screen) {
+      margin-top: 0;
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: $large-screen) {
+    .site-header {
+      flex-wrap: nowrap;
+    }
+
+    .top-nav {
+      width: auto;
+      order: 2;
+    }
+
+    .page-title {
+      order: 3;
+    }
   }
 }
 
 .section-photographers {
   --min: 19.375rem;
+  display: grid;
 
   grid-column-gap: 6.25rem;
   grid-row-gap: 1.875rem;
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--min), auto));
-}
-
-@media (min-width: $large-screen) {
-  #page-home {
-    .site-header {
-      display: grid;
-      align-items: center;
-      grid-template-columns: 12.5rem 1fr 19.0625rem;
-
-      .tag-nav {
-        margin: 0;
-      }
-    }
-  }
 }

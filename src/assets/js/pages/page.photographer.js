@@ -19,7 +19,7 @@ const showMediasByTag = async params => {
 const initPhotographerPage = async photographerId => {
   resetPage()
   document.body.id = "page-photographer"
-  config.uiHeader.append(await photographersResume(photographerId))
+  config.uiHeader.appendChild(await photographersResume(photographerId))
 
   config.uiMain.append(uiSortNav(photographerId))
 
