@@ -1,8 +1,8 @@
 import config from "../../api/config.js"
 import { getPhotographersById } from "./photographer.service.js"
 import { tagList } from "../tags/tag.list.js"
-import { showMediasByTag } from "../../pages/page.photographer.js"
-import { getMediasByPhotographer } from "../medias/media.service.js"
+import { showMedias } from "../../pages/page.photographer.js"
+import { getMediasByPhotographer, getMediasByPhotographerAndTag } from "../medias/media.service.js"
 
 const countTotalLikes = async photographerId => {
   const medias = await getMediasByPhotographer(photographerId)
@@ -37,11 +37,12 @@ const photographerResume = async photographerId => {
   const uiTagNav = tagList(tags)
   const uiTagLink = uiTagNav.querySelectorAll(".tag-link")
   uiTagLink.forEach(uiTagLink => {
-    uiTagLink.addEventListener("click", event => {
+    uiTagLink.addEventListener("click", async event => {
       event.preventDefault()
       const tag = event.target.dataset.tag
       const params = { id: id, tag: tag }
-      showMediasByTag(params)
+      const medias = await getMediasByPhotographerAndTag(params)
+      showMedias(medias)
     })
   })
 
