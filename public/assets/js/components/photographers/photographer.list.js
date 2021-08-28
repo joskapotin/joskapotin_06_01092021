@@ -9,9 +9,13 @@ const AllPhotographersList = async () => {
   list.className = "section-photographers"
   list.dataset.reset = "true"
 
-  for (const photographer of photographers) {
+  // for (const photographer of photographers) {
+  //   list.append(photographerCard(photographer))
+  // }
+
+  photographers.forEach(photographer => {
     list.append(photographerCard(photographer))
-  }
+  })
 
   return list
 }

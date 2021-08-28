@@ -15,7 +15,7 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   uiMedia.dataset.tagFiltrable = "true"
 
   const uiLink = document.createElement("a")
-  uiLink.href = `#media-${id}`
+  uiLink.href = image ? `${photographerMediaPath}/${image}` : `${photographerMediaPath}/${video}`
   uiLink.className = "media__link"
 
   const uiFigure = document.createElement("figure")

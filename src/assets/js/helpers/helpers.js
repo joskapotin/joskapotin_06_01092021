@@ -5,4 +5,10 @@ const resetPage = () => {
   })
 }
 
-export { resetPage }
+const removeNode = node => {
+  if (node) {
+    node.remove()
+  }
+}
+
+export { resetPage, removeNode }
