@@ -2,8 +2,8 @@ import config from "../api/config.js"
 import { resetPage, removeNode } from "../helpers/helpers.js"
 import photographersResume from "../components/photographers/photographer.resume.js"
 import { getMediasByPhotographer } from "../components/medias/media.service.js"
-import { uiSortNav } from "../layout/sort-nav.js"
-import { mediasList } from "../components/medias/media.list.js"
+import sortNav from "../layout/sort-nav.js"
+import mediasList from "../components/medias/media.list.js"
 import Lightbox from "../modules/lightbox/lightbox.js"
 import lightbox2 from "../modules/lightbox/lightbox2.js"
 
@@ -20,7 +20,7 @@ const initPhotographerPage = async photographerId => {
 
   config.uiHeader.appendChild(await photographersResume(photographerId))
 
-  config.uiMain.append(uiSortNav(photographerId))
+  config.uiMain.append(sortNav(photographerId))
 
   showMedias(await getMediasByPhotographer(photographerId))
 }

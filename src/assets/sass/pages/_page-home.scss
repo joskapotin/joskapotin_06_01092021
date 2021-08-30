@@ -1,47 +1,33 @@
-#page-home {
+.page-home {
   .site-header {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     column-gap: 2.5rem;
+    grid-template-areas: "home-link empty title" "nav nav nav";
+    grid-template-columns: auto 1fr auto;
     row-gap: 1.875rem;
-  }
 
-  .link-home {
-    order: 1;
+    @media (min-width: $large-screen) {
+      grid-template-areas: "home-link nav title";
+      grid-template-columns: 12.5rem 1fr auto;
+    }
   }
 
   .top-nav {
-    @include opacify;
     width: 100%;
+    align-self: center;
     order: 3;
     margin: 0 auto;
+    grid-area: nav;
   }
 
   .page-title {
-    flex-shrink: 0;
-    order: 2;
-    margin: 0.6em 0 0 auto;
+    margin-top: 0.5em;
     color: $color-primary;
     font-size: 0.875rem;
+    grid-area: title;
     @media (min-width: $small-screen) {
       margin-top: 0;
       font-size: 2.25rem;
-    }
-  }
-
-  @media (min-width: $large-screen) {
-    .site-header {
-      flex-wrap: nowrap;
-    }
-
-    .top-nav {
-      width: auto;
-      align-self: center;
-      order: 2;
-    }
-
-    .page-title {
-      order: 3;
     }
   }
 }

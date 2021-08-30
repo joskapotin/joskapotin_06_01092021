@@ -7,6 +7,11 @@
 .card-link {
   display: block;
   text-decoration: none;
+
+  > * {
+    //important. Need this for the eventlistener in js
+    pointer-events: none;
+  }
 }
 
 .card__img {

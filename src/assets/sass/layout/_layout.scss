@@ -2,23 +2,32 @@
 body {
   overflow-y: scroll; // prevent screen flickering when loading content
 }
-.container {
+.page {
+  position: relative;
   max-width: 90rem;
+  padding: 0 1.25rem;
   margin-right: auto;
   margin-left: auto;
-}
-
-.page-wrapper {
-  position: relative;
-  padding: 0 1.25rem;
 }
 
 .site-header {
   padding: 2.5rem 0 2.875rem;
 }
 
+.nav-home {
+  position: absolute;
+  z-index: 20;
+  top: 2.5rem;
+  left: 1.25rem;
+}
+
 .link-home {
   display: inline-flex;
+
+  > * {
+    //important. Need this for the eventlistener in js
+    pointer-events: none;
+  }
 }
 
 .banner {

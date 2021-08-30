@@ -1,8 +1,7 @@
 import config from "../../api/config.js"
 import { getPhotographersById } from "./photographer.service.js"
-import { tagList } from "../tags/tag.list.js"
-import { showMedias } from "../../pages/page.photographer.js"
-import { getMediasByPhotographer, getMediasByPhotographerAndTag } from "../medias/media.service.js"
+import { getMediasByPhotographer } from "../medias/media.service.js"
+import tagNav from "../tags/tag.nav.js"
 
 const countTotalLikes = async photographerId => {
   const medias = await getMediasByPhotographer(photographerId)
@@ -34,17 +33,8 @@ const photographerResume = async photographerId => {
   uiTagline.className = "photographer__tagline"
   uiTagline.textContent = tagline
 
-  const uiTagNav = tagList(tags)
-  const uiTagLink = uiTagNav.querySelectorAll(".tag-link")
-  uiTagLink.forEach(uiTagLink => {
-    uiTagLink.addEventListener("click", async event => {
-      event.preventDefault()
-      const tag = event.target.dataset.tag
-      const params = { id: id, tag: tag }
-      const medias = await getMediasByPhotographerAndTag(params)
-      showMedias(medias)
-    })
-  })
+  const tagPrefix = `/photographer/${id}`
+  const uiTagNav = await tagNav(tags, tagPrefix)
 
   const uiContactBtn = document.createElement("button")
   uiContactBtn.classList = "btn photographer__btn-contact"
