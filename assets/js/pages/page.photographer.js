@@ -5,11 +5,13 @@ import { getMediasByPhotographer } from "../components/medias/media.service.js"
 import { uiSortNav } from "../layout/sort-nav.js"
 import { mediasList } from "../components/medias/media.list.js"
 import Lightbox from "../modules/lightbox/lightbox.js"
+import lightbox2 from "../modules/lightbox/lightbox2.js"
 
 const showMedias = medias => {
   removeNode(document.getElementById("media-gallery"))
   config.uiMain.append(mediasList(medias))
   Lightbox.init()
+  // lightbox2()
 }
 
 const initPhotographerPage = async photographerId => {
