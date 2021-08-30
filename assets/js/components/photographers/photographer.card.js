@@ -1,9 +1,7 @@
 import config from "../../api/config.js"
-import { tagList } from "../tags/tag.list.js"
-import { showPhotographersByTag } from "../../pages/page.home.js"
-import { initPhotographerPage } from "../../pages/page.photographer.js"
+import tagNav from "../tags/tag.nav.js"
 
-const photographerCard = ({ name, id, city, country, tags, tagline, price, portrait }) => {
+const photographerCard = async ({ name, id, city, country, tags, tagline, price, portrait }) => {
   const uiArticle = document.createElement("article")
   uiArticle.classList = "card card-photographer"
   uiArticle.dataset.id = "id"
@@ -30,24 +28,12 @@ const photographerCard = ({ name, id, city, country, tags, tagline, price, portr
   uiPrice.className = "card__pricing"
   uiPrice.textContent = `${price}€/jour`
 
-  const uiTagNav = tagList(tags)
-  const uiTagLink = uiTagNav.querySelectorAll(".tag-link")
-  uiTagLink.forEach(uiTagLink => {
-    uiTagLink.addEventListener("click", event => {
-      event.preventDefault()
-      const tag = event.target.dataset.tag
-      showPhotographersByTag(tag)
-    })
-  })
+  const uiTagNav = await tagNav(tags)
 
   const uiLink = document.createElement("a")
-  uiLink.href = `#photographer-${id}`
+  uiLink.href = `/photographer/${id}`
   uiLink.className = "card-link"
-
-  uiLink.addEventListener("click", event => {
-    event.preventDefault()
-    initPhotographerPage(id)
-  })
+  uiLink.dataset.link = ""
 
   uiLink.append(uiPortrait, uiName, uiLocation, uiTagline, uiPrice)
   uiArticle.append(uiLink, uiTagNav)

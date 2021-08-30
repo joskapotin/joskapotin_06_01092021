@@ -1,6 +1,6 @@
 import config from "../../api/config.js"
 
-const getAllTags = async () => {
+const getTags = async () => {
   try {
     const response = await fetch(config.apiUrl)
     const { media } = await response.json()
@@ -13,4 +13,4 @@ const getAllTags = async () => {
   }
 }
 
-export default getAllTags
+export default getTags
