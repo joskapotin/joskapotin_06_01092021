@@ -7,6 +7,10 @@ export default class {
     document.title = title
   }
 
+  LoadAction(action) {
+    return action
+  }
+
   async getHtml() {
     return ""
   }

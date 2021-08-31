@@ -6,12 +6,13 @@
  */
 export default class Lightbox {
   static init() {
-    const links = Array.from(document.querySelectorAll('a[href$=".png"], a[href$=".jpg"], a[href$=".jpeg"]'))
+    const links = Array.from(document.querySelectorAll("[data-lightbox]"))
     const images = links.map(link => link.getAttribute("href"))
+
     links.forEach(link =>
       link.addEventListener("click", e => {
         e.preventDefault()
-        const lightbox = new Lightbox(e.currentTarget.getAttribute("href"), images)
+        new Lightbox(e.currentTarget.getAttribute("href"), images)
       }),
     )
   }
@@ -117,14 +118,6 @@ export default class Lightbox {
     closeBtn.appendChild(closeBtnTxt)
     closeBtn.addEventListener("click", this.close.bind(this))
 
-    const nextBtn = document.createElement("button")
-    nextBtn.className = "lightbox__next"
-    const nextBtnTxt = document.createElement("span")
-    nextBtnTxt.className = "visually-hidden"
-    nextBtnTxt.textContent = "Suivant"
-    nextBtn.appendChild(nextBtnTxt)
-    nextBtn.addEventListener("click", this.next.bind(this))
-
     const prevBtn = document.createElement("button")
     prevBtn.className = "lightbox__prev"
     const prevBtnTxt = document.createElement("span")
@@ -133,13 +126,21 @@ export default class Lightbox {
     prevBtn.appendChild(prevBtnTxt)
     prevBtn.addEventListener("click", this.prev.bind(this))
 
+    const nextBtn = document.createElement("button")
+    nextBtn.className = "lightbox__next"
+    const nextBtnTxt = document.createElement("span")
+    nextBtnTxt.className = "visually-hidden"
+    nextBtnTxt.textContent = "Suivant"
+    nextBtn.appendChild(nextBtnTxt)
+    nextBtn.addEventListener("click", this.next.bind(this))
+
     const container = document.createElement("div")
     container.className = "lightbox__container"
 
     const figure = document.createElement("figure")
     figure.className = "lightbox__figure"
 
-    container.append(closeBtn, nextBtn, prevBtn, figure)
+    container.append(closeBtn, prevBtn, nextBtn, figure)
     box.appendChild(container)
 
     return box

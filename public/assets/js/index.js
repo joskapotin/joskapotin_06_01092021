@@ -1,5 +1,6 @@
 import Homepage from "./views/Home.view.js"
 import Photographer from "./views/Photographer.view.js"
+import Lightbox from "./modules/lightbox/lightbox.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
@@ -47,6 +48,8 @@ const router = async () => {
   const view = new match.route.View(getParams(match))
 
   document.querySelector("#app").replaceChildren(await view.getHtml())
+
+  document.querySelector("#app").addEventListener("load", Lightbox.init())
 }
 
 window.addEventListener("popstate", router)
