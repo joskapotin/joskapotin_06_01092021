@@ -29,6 +29,7 @@ const photographerCard = async ({ photographer: { name, id, city, country, tags,
   uiPrice.textContent = `${price}€/jour`
 
   const uiTagNav = await tagNav({ tags, currentTag })
+  uiTagNav.ariaLabel = "Secondary"
 
   const uiLink = document.createElement("a")
   uiLink.href = `/photographer/${id}`

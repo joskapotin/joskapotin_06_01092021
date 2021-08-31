@@ -55,11 +55,11 @@
     border-bottom-right-radius: 0;
     color: $white;
     content: attr(data-tooltip);
-    font-size: 0.7em;
+    font-size: 0.875rem;
     opacity: 0;
     transform: scale(0);
     transform-origin: bottom right;
-    transition: transform 100ms ease-out, opacity 150ms linear;
+    transition: transform 50ms ease-out, opacity 100ms linear;
     white-space: nowrap;
   }
 
@@ -68,6 +68,7 @@
     top: 1px;
     width: var(--heart-size);
     height: var(--heart-size);
+    margin: 0;
     fill: $color-primary;
     grid-area: grid;
     transform: scale(1);

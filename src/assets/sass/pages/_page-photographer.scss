@@ -1,9 +1,18 @@
-.photographer-section {
+.photographer__header {
   position: relative;
   z-index: 10;
-  display: flex;
-  margin-top: 3.125rem;
-  column-gap: 1rem;
+  padding-top: 6.25rem;
+}
+
+.photographer__picture {
+  float: right;
+}
+
+.photographer__img {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .photographer__resume {
@@ -32,12 +41,12 @@
   font-weight: normal;
 }
 
-.photographer-section .tag-nav {
+.photographer__header .tag-nav {
   padding: 0;
   margin: 0.3rem 0 0;
 }
 
-.photographer-section .tag-list {
+.photographer__header .tag-list {
   justify-content: flex-start;
 }
 
@@ -50,18 +59,6 @@
   transform: translateX(-50%);
 }
 
-.photographer__picture {
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.photographer__img {
-  width: 6.25rem;
-  height: 6.25rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .photographer__aside {
   position: fixed;
   right: 2.25rem;
@@ -72,14 +69,10 @@
   border-radius: 5px 5px 0 0;
 }
 
-.photographer__likes {
-  &::after {
-    margin-left: 0.375rem;
-    color: $black;
-    content: "\2665";
-    font-size: 1.2em;
-    line-height: 1;
-  }
+.btn-like__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-left: 0.4375rem;
 }
 
 .photographer__likes,
@@ -89,16 +82,24 @@
 }
 
 @media (min-width: $medium-screen) {
-  .photographer-section {
-    margin-top: 6.25rem;
+  .photographer__header {
+    padding-top: 9.375rem;
+  }
+
+  .photographer__img {
+    width: 12.5rem;
+    height: 12.5rem;
   }
 
   .photographer__name {
+    margin-right: 1em;
     margin-bottom: 1rem;
+    float: left;
     font-size: 4rem;
   }
 
   .photographer__location {
+    clear: left;
     font-size: 1.5rem;
   }
 
@@ -115,16 +116,10 @@
     font-size: 1.125rem;
   }
 
-  .photographer__img {
-    width: 12.5rem;
-    height: 12.5rem;
-  }
-
   .photographer__btn-contact {
     position: static;
-    align-self: flex-start;
     padding: 1.3125rem 0.6875rem;
-    margin-right: auto;
+    float: left;
     font-size: 1.25rem;
     transform: translateX(0);
     white-space: nowrap;

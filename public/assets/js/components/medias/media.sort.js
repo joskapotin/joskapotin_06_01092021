@@ -32,18 +32,21 @@ const sortNav = photographerId => {
   uiLikesBtn.dataset.sorter = "Likes"
   uiLikesBtn.role = "option"
   uiLikesBtn.textContent = "Popularité"
+  uiLikesBtn.ariaLabel = "Trier par popularité"
 
   const uiDateBtn = document.createElement("button")
   uiDateBtn.classList = "btn sort-nav__item"
   uiDateBtn.dataset.sorter = "Date"
   uiDateBtn.role = "option"
   uiDateBtn.textContent = "Date"
+  uiLikesBtn.ariaLabel = "Trier par date"
 
   const uiTitleBtn = document.createElement("button")
   uiTitleBtn.classList = "btn sort-nav__item"
   uiTitleBtn.dataset.sorter = "Title"
   uiTitleBtn.role = "option"
   uiTitleBtn.textContent = "Titre"
+  uiLikesBtn.ariaLabel = "Trier par titre"
 
   uiList.append(uiLikesBtn, uiDateBtn, uiTitleBtn)
   uiSortNav.append(uiLabel, uiList)
