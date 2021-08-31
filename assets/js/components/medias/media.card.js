@@ -4,6 +4,23 @@ const formatAlternativeText = text => {
   return text.slice(0, -4).replaceAll("_", " ")
 }
 
+const createLikeIcon = () => {
+  const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+  iconSvg.setAttribute("fill", "inherit")
+  iconSvg.setAttribute("viewBox", "0 0 19 19")
+  iconSvg.classList.add("btn-like__icon")
+
+  const iconPath = document.createElementNS("http://www.w3.org/2000/svg", "path")
+  iconPath.setAttribute(
+    "d",
+    "M9.5 18.35l-1.269-1.32C3.725 12.36.75 9.28.75 5.5.75 2.42 2.868 0 5.563 0 7.085 0 8.546.81 9.5 2.09 10.454.81 11.915 0 13.438 0c2.694 0 4.812 2.42 4.812 5.5 0 3.78-2.975 6.86-7.481 11.54L9.5 18.35z",
+  )
+
+  iconSvg.appendChild(iconPath)
+
+  return iconSvg
+}
+
 const mediaCard = ({ id, photographerId, title, image, video, likes, date, price }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const uiAlt = image ? formatAlternativeText(image) : formatAlternativeText(video)
@@ -59,7 +76,7 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
 
   const uiPrice = document.createElement("span")
   uiPrice.className = "media__price"
-  uiPrice.textContent = price
+  uiPrice.textContent = `${price}€`
 
   const uiLikes = document.createElement("span")
   uiLikes.className = "media__likes"
@@ -67,15 +84,22 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
 
   const uiLikeBtn = document.createElement("button")
   uiLikeBtn.className = "btn-like"
+  uiLikeBtn.dataset.tooltip = "Click if you like"
+  const uiLikeIcon = createLikeIcon()
   const uiLikeTxt = document.createElement("span")
   uiLikeTxt.classList.add("btn-like__txt", "visually-hidden")
   uiLikeTxt.textContent = "Like this media"
 
-  uiLikeBtn.appendChild(uiLikeTxt)
+  uiLikeBtn.addEventListener("click", e => {
+    e.preventDefault()
+    console.log("like +1")
+  })
+
+  uiLikeBtn.append(uiLikeIcon, uiLikeTxt)
   uiLikes.appendChild(uiLikeBtn)
   uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes)
-  uiLink.append(uiFigure, uiFooter)
-  uiMedia.appendChild(uiLink)
+  uiLink.appendChild(uiFigure)
+  uiMedia.append(uiLink, uiFooter)
 
   return uiMedia
 }

@@ -1,16 +1,16 @@
 import getTags from "./tag.service.js"
 import tagItem from "./tag.item.js"
 
-const tagNav = async (array, prefix) => {
-  const tags = array || (await getTags())
+const tagNav = async ({ tags, currentTag, tagPrefix }) => {
+  const tagsArray = tags || (await getTags())
   const uiTagNav = document.createElement("nav")
   uiTagNav.className = "tag-nav"
 
   const uiList = document.createElement("ul")
   uiList.className = "tag-list"
 
-  for (const tag of tags) {
-    uiList.append(tagItem(tag, prefix))
+  for (const tag of tagsArray) {
+    uiList.append(tagItem({ tag, currentTag, tagPrefix }))
   }
 
   uiTagNav.append(uiList)
