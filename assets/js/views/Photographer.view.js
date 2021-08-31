@@ -6,7 +6,6 @@ import mediasList from "../components/medias/media.list.js"
 export default class extends Abstract {
   constructor(params) {
     super(params)
-    this.params = params
     this.setTitle("FishEye - Photographer")
   }
 

@@ -5,7 +5,6 @@ import photographersList from "../components/photographers/photographer.list.js"
 export default class extends Abstract {
   constructor(params) {
     super(params)
-    this.params = params
     this.setTitle("FishEye - Homepage")
   }
 

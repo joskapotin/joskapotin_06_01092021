@@ -17,6 +17,7 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   const uiLink = document.createElement("a")
   uiLink.href = image ? `${photographerMediaPath}/${image}` : `${photographerMediaPath}/${video}`
   uiLink.className = "media__link"
+  uiLink.dataset.lightbox = ""
 
   const uiFigure = document.createElement("figure")
   uiFigure.className = "media__figure"
@@ -68,9 +69,9 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   uiLikeBtn.className = "btn-like"
   uiLikeBtn.textContent = "Like"
 
-  uiLink.appendChild(uiFigure)
   uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes, uiLikeBtn)
-  uiMedia.append(uiLink, uiFooter)
+  uiLink.append(uiFigure, uiFooter)
+  uiMedia.appendChild(uiLink)
 
   return uiMedia
 }
