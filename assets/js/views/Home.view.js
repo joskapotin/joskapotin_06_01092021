@@ -17,6 +17,7 @@ export default class extends Abstract {
 
     const uiTagNav = await tagNav({ currentTag: this.params?.tag })
     uiTagNav.classList.add("top-nav")
+    uiTagNav.ariaLabel = "Primary"
 
     const uiTitle = document.createElement("h1")
     uiTitle.className = "page-title"
