@@ -62,14 +62,18 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   uiPrice.textContent = price
 
   const uiLikes = document.createElement("span")
-  uiLikes.className = "media__total-likes"
+  uiLikes.className = "media__likes"
   uiLikes.textContent = likes
 
   const uiLikeBtn = document.createElement("button")
   uiLikeBtn.className = "btn-like"
-  uiLikeBtn.textContent = "Like"
+  const uiLikeTxt = document.createElement("span")
+  uiLikeTxt.classList.add("btn-like__txt", "visually-hidden")
+  uiLikeTxt.textContent = "Like this media"
 
-  uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes, uiLikeBtn)
+  uiLikeBtn.appendChild(uiLikeTxt)
+  uiLikes.appendChild(uiLikeBtn)
+  uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes)
   uiLink.append(uiFigure, uiFooter)
   uiMedia.appendChild(uiLink)
 
