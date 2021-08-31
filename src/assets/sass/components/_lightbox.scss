@@ -22,13 +22,13 @@
   padding: 0 2.5rem;
 }
 
-.lightbox__next,
 .lightbox__prev,
+.lightbox__next,
 .lightbox__close {
   position: absolute;
   z-index: 110;
   top: 0;
-  right: 0;
+  left: 0;
   width: 2.5rem;
   height: 100%;
   padding: 0;
@@ -40,23 +40,29 @@
 }
 
 .lightbox__prev {
-  right: auto;
-  left: 0;
   transform: rotate(180deg);
+}
+
+.lightbox__next {
+  right: 0;
+  left: auto;
 }
 
 .lightbox__close {
   z-index: 120;
+  top: 1rem;
+  right: 0;
+  left: auto;
   width: 2.5rem;
   height: 1.25rem;
-  background: url("../images/lightbox/close.svg") center center / 0.75rem 0.75rem no-repeat transparent;
+  background: url("../images/lightbox/close.svg") center center / 100% 100% no-repeat transparent;
 }
 
-.lightbox__next:hover,
 .lightbox__prev:hover,
+.lightbox__next:hover,
 .lightbox__close:hover,
-.lightbox__next:focus-visible,
 .lightbox__prev:focus-visible,
+.lightbox__next:focus-visible,
 .lightbox__close:focus-visible {
   opacity: 1;
 }
@@ -83,5 +89,28 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (min-width: $small-screen) {
+  .lightbox__container {
+    padding: 0 7.5rem;
+  }
+
+  .lightbox__prev,
+  .lightbox__next {
+    left: 2.5rem;
+    background-size: 1.8125rem 3rem;
+  }
+
+  .lightbox__next {
+    right: 2.5rem;
+    left: auto;
+  }
+
+  .lightbox__close {
+    right: 2.5rem;
+    width: 2.625rem;
+    height: 2.625rem;
   }
 }
