@@ -9,14 +9,12 @@ const countTotalLikes = async photographerId => {
   return totalLikes
 }
 
-const photographerResume = async photographerId => {
+const photographerResume = async ({ photographerId, currentTag }) => {
   const { name, id, city, country, tags, tagline, price, portrait } = await getPhotographersById(photographerId)
 
   const uiSection = document.createElement("section")
   uiSection.id = "photographer-section"
   uiSection.className = "photographer-section"
-  uiSection.dataset.id = id
-  uiSection.dataset.reset = ""
 
   const uiArticle = document.createElement("article")
   uiArticle.className = "photographer__resume"
@@ -34,7 +32,7 @@ const photographerResume = async photographerId => {
   uiTagline.textContent = tagline
 
   const tagPrefix = `/photographer/${id}`
-  const uiTagNav = await tagNav(tags, tagPrefix)
+  const uiTagNav = await tagNav({ tags, currentTag, tagPrefix })
 
   const uiContactBtn = document.createElement("button")
   uiContactBtn.classList = "btn photographer__btn-contact"

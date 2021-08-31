@@ -1,7 +1,7 @@
 import config from "../../api/config.js"
 import tagNav from "../tags/tag.nav.js"
 
-const photographerCard = async ({ name, id, city, country, tags, tagline, price, portrait }) => {
+const photographerCard = async ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
   const uiArticle = document.createElement("article")
   uiArticle.classList = "card card-photographer"
   uiArticle.dataset.id = "id"
@@ -28,7 +28,7 @@ const photographerCard = async ({ name, id, city, country, tags, tagline, price,
   uiPrice.className = "card__pricing"
   uiPrice.textContent = `${price}€/jour`
 
-  const uiTagNav = await tagNav(tags)
+  const uiTagNav = await tagNav({ tags, currentTag })
 
   const uiLink = document.createElement("a")
   uiLink.href = `/photographer/${id}`

@@ -25,7 +25,13 @@
     color: $color-primary;
     font-size: 0.875rem;
     grid-area: title;
+
     @media (min-width: $small-screen) {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    @media (min-width: $medium-screen) {
       margin-top: 0;
       font-size: 2.25rem;
     }

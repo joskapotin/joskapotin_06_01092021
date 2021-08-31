@@ -15,7 +15,7 @@ export default class extends Abstract {
     const uiHeader = document.createElement("header")
     uiHeader.classList.add("site-header")
 
-    const uiTagNav = await tagNav()
+    const uiTagNav = await tagNav({ currentTag: this.params?.tag })
     uiTagNav.classList.add("top-nav")
 
     const uiTitle = document.createElement("h1")
@@ -26,10 +26,11 @@ export default class extends Abstract {
     const uiMain = document.createElement("main")
     uiMain.classList.add("site-main")
     uiMain.id = "main-content"
+    uiMain.tabIndex = "-1"
 
     uiHeader.append(uiTagNav, uiTitle)
 
-    uiMain.appendChild(await photographersList(this.params?.tag))
+    uiMain.appendChild(await photographersList({ tag: this.params?.tag, currentTag: this.params?.tag }))
 
     uiPage.append(uiHeader, uiMain)
 

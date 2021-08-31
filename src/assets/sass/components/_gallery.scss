@@ -16,10 +16,19 @@
 
 .media__content {
   @include opacify;
+  min-width: 0; //need this because white-space: nowrap fight with the grid items that can't be smaller than there content
 }
 
 .media__link {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.3125rem;
   text-decoration: none;
+
+  &:hover .media,
+  &:focus-visible .media {
+    transform: scale(1.1);
+  }
 }
 
 .media__figure {
@@ -76,37 +85,54 @@
   display: block;
   width: 100%;
   height: 11.875rem;
-  border-radius: 0.3125rem;
   object-fit: cover;
   transform: scale(1);
-  transition: transform 300ms linear;
+  transition: transform 1s linear;
 
   @media (min-width: $small-screen) {
     height: 18.75rem;
   }
-
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 
 .media__footer {
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   padding: 0.625rem 0;
   color: $color-primary;
   font-size: 0.875rem;
+
+  @media (min-width: $medium-screen) {
+    font-size: 1.5rem;
+  }
+}
+.media__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media__date,
+.media__price {
+  position: absolute;
+  bottom: 100%;
+  padding: 0.2em 1em 0;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .media__date {
-  // display: none;
+  border-top-right-radius: 4em;
 }
 
 .media__price {
-  display: none;
+  right: 0;
+  border-top-left-radius: 1rem;
 }
 
-.media__like {
-  display: flex;
+.media__likes {
+  flex-shrink: 0;
+  .btn-like {
+    margin-left: 0.5em;
+  }
 }

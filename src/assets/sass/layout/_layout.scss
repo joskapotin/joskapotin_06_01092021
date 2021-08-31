@@ -21,21 +21,32 @@ body {
     //important. Need this for the eventlistener in js
     pointer-events: none;
   }
+
+  &:hover .banner,
+  &:focus .banner {
+    fill: $color-secondary;
+  }
+
+  &:focus-visible .banner {
+    fill: $color-focus;
+  }
+}
+
+.banner {
+  width: 9.375rem;
+  height: 2.375rem;
+  fill: $color-primary;
+
+  @media (min-width: $medium-screen) {
+    width: 12.5rem;
+    height: 3.125rem;
+  }
 }
 
 .site-header {
   padding: 2.5rem 0 2.875rem;
 }
 
-.banner {
-  width: 9.375rem;
-  height: 2.375rem;
-
-  @media (min-width: $small-screen) {
-    width: 12.5rem;
-    height: 3.125rem;
-  }
-}
 .site-main {
   padding-bottom: 4.75rem;
 }

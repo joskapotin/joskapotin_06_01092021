@@ -19,8 +19,9 @@ export default class extends Abstract {
     const uiMain = document.createElement("main")
     uiMain.classList.add("site-main")
     uiMain.id = "main-content"
+    uiMain.tabIndex = "-1"
 
-    uiHeader.appendChild(await photographerResume(this.params.id))
+    uiHeader.appendChild(await photographerResume({ photographerId: this.params.id, currentTag: this.params.tag }))
     uiMain.append(sortNav(this.params.id), await mediasList(this.params))
 
     uiPage.append(uiHeader, uiMain)
