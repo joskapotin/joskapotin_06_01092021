@@ -23,6 +23,7 @@
 }
 
 .media__figure {
+  overflow: hidden;
   margin: 0;
 }
 
@@ -77,9 +78,15 @@
   height: 11.875rem;
   border-radius: 0.3125rem;
   object-fit: cover;
+  transform: scale(1);
+  transition: transform 300ms linear;
 
   @media (min-width: $small-screen) {
     height: 18.75rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
@@ -98,4 +105,8 @@
 
 .media__price {
   display: none;
+}
+
+.media__like {
+  display: flex;
 }

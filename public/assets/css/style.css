@@ -141,28 +141,31 @@ select {
   color: #000;
 }
 
-.btn-like,
-.btn-like::after {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
 .btn-like {
   position: relative;
   display: inline-block;
   overflow: hidden;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
   border: 0;
   background: transparent;
+  border-radius: 50%;
+  transition: box-shadow 200ms linear;
 }
 .btn-like::after {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  background-color: #fff;
   color: #901c1c;
   content: "♥";
   font-size: 1.2rem;
-  line-height: 1.1;
+  line-height: 1;
+}
+.btn-like:hover {
+  box-shadow: 0 0 0 0.125rem #901c1c;
 }
 
 /* Images */
@@ -282,6 +285,7 @@ select {
 }
 
 .media__figure {
+  overflow: hidden;
   margin: 0;
 }
 
@@ -330,11 +334,16 @@ select {
   height: 11.875rem;
   border-radius: 0.3125rem;
   object-fit: cover;
+  transform: scale(1);
+  transition: transform 300ms linear;
 }
 @media (min-width: 45.3125rem) {
   .media {
     height: 18.75rem;
   }
+}
+.media:hover {
+  transform: scale(1.1);
 }
 
 .media__footer {
@@ -348,6 +357,10 @@ select {
 
 .media__price {
   display: none;
+}
+
+.media__like {
+  display: flex;
 }
 
 .sort-nav {
