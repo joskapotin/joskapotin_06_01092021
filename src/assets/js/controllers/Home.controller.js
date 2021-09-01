@@ -1,4 +1,4 @@
-import Controller from "./controller.js"
+import Controller from "./Controller.js"
 import { getAllPhotographers, getAllTags, getPhotographersByTag } from "../database/database.js"
 import Phototographer from "../models/Photographer.js"
 import HomeView from "../views/Home.view.js"
