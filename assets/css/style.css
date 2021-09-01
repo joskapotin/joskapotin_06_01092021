@@ -133,13 +133,18 @@ a:focus-visible,
 
 /* Buttons */
 .btn {
-  padding: clamp(0.375rem, 5%, 1.4375rem) clamp(1.125rem, 5%, 1.125rem);
+  padding: 0.375rem 1.125rem;
   border: 0;
   background-color: #901c1c;
   border-radius: 5px;
   color: #fff;
   font-size: 1.125rem;
   font-weight: bold;
+}
+@media (min-width: 62rem) {
+  .btn {
+    padding: 1.4375rem 1.125rem;
+  }
 }
 .btn:hover, .btn:focus {
   background-color: #db8876;
@@ -617,10 +622,17 @@ a:focus-visible,
 .lightbox__prev:hover,
 .lightbox__next:hover,
 .lightbox__close:hover,
+.lightbox__prev:focus,
+.lightbox__next:focus,
+.lightbox__close:focus {
+  opacity: 1;
+}
+
 .lightbox__prev:focus-visible,
 .lightbox__next:focus-visible,
 .lightbox__close:focus-visible {
-  opacity: 1;
+  box-shadow: none;
+  outline: none;
 }
 
 .lightbox__figure {
@@ -670,20 +682,18 @@ a:focus-visible,
   }
 }
 .modal {
+  animation: opacify 300ms ease-in-out forwards;
   position: fixed;
   z-index: 1000;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   background-color: rgba(196, 196, 196, 0.4);
-}
-@media (min-width: 45.3125rem) {
-  .modal {
-    align-items: center;
-  }
+  opacity: 0;
+  transition: opacity 200ms linear;
 }
 
 .modal__content {
@@ -692,7 +702,7 @@ a:focus-visible,
   padding: 1.25rem;
   background-color: #db8876;
 }
-@media (min-width: 45.3125rem) {
+@media (min-width: 62rem) {
   .modal__content {
     max-width: 41.8125rem;
   }
@@ -707,8 +717,15 @@ a:focus-visible,
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
+  display: flex;
   padding: 0;
   background: 0;
+}
+.btn-close-modal:hover .close-modal__icon, .btn-close-modal:focus .close-modal__icon {
+  fill: #901c1c;
+}
+.btn-close-modal:focus-visible .close-modal__icon {
+  fill: #05469f;
 }
 
 .close-modal__icon {
@@ -716,11 +733,18 @@ a:focus-visible,
   height: 1.125rem;
   fill: #fff;
 }
-@media (min-width: 45.3125rem) {
+@media (min-width: 62rem) {
   .close-modal__icon {
     width: 2.625rem;
     height: 2.625rem;
   }
+}
+
+.form-contact {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+  gap: 1em;
 }
 
 .text-label {
@@ -733,6 +757,21 @@ a:focus-visible,
   width: 100%;
 }
 
+.btn-submit {
+  display: block;
+  margin: 0 auto;
+  font-size: 1.125rem;
+}
+@media (min-width: 62rem) {
+  .btn-submit {
+    margin: 0 auto 0 0;
+  }
+}
+.btn-submit:hover, .btn-submit:focus, .btn-submit:focus-visible {
+  background-color: #05469f;
+  color: #fff;
+}
+
 /* Layouts */
 body {
   overflow-y: scroll;
@@ -743,20 +782,20 @@ body {
   padding: 0 1.25rem;
 }
 
-.nav-home {
+.site-header {
+  padding: 2.5rem 0 2.875rem;
+}
+
+.link-home {
   position: absolute;
   z-index: 20;
   top: 2.5rem;
   left: 1.25rem;
 }
-
-.link-home {
-  display: inline-flex;
-}
 .link-home > * {
   pointer-events: none;
 }
-.link-home:hover .banner, .link-home:focus .banner {
+.link-home:hover .banner {
   fill: #d3573c;
 }
 .link-home:focus-visible .banner {
@@ -775,52 +814,38 @@ body {
   }
 }
 
-.site-header {
-  padding: 2.5rem 0 2.875rem;
-}
-
 .site-main {
   padding-bottom: 4.75rem;
   clear: both;
 }
 
 /* Pages */
-.page-home .site-header {
-  display: grid;
-  column-gap: 2.5rem;
-  grid-template-areas: "home-link empty title" "nav nav nav";
-  grid-template-columns: auto 1fr auto;
-  row-gap: 1.875rem;
+.top-nav {
+  margin-top: 4.375rem;
 }
-@media (min-width: 75rem) {
-  .page-home .site-header {
-    grid-template-areas: "home-link nav title";
-    grid-template-columns: 12.5rem 1fr auto;
+@media (min-width: 62rem) {
+  .top-nav {
+    padding: 0 20.3125rem 0 13.75rem;
+    margin-top: 0.8rem;
   }
-}
-.page-home .top-nav {
-  width: 100%;
-  align-self: center;
-  order: 3;
-  margin: 0 auto;
-  grid-area: nav;
 }
 
 .page-title {
-  margin-top: 0.5em;
+  position: absolute;
+  top: 3.4em;
+  right: 1.25rem;
   color: #901c1c;
   font-size: 0.875rem;
-  grid-area: title;
 }
 @media (min-width: 45.3125rem) {
   .page-title {
-    margin-top: 0;
+    top: 1.8em;
     font-size: 1.5rem;
   }
 }
 @media (min-width: 62rem) {
   .page-title {
-    margin-top: 0;
+    top: 1.1em;
     font-size: 2.25rem;
   }
 }
@@ -836,7 +861,7 @@ body {
 .photographer__resume {
   position: relative;
   z-index: 10;
-  padding-top: 6.25rem;
+  padding-top: 3.75rem;
 }
 
 .photographer__picture {
@@ -884,7 +909,6 @@ body {
   position: fixed;
   bottom: 30px;
   left: 50%;
-  padding: 0.375rem 1.125rem;
   font-size: 1.125rem;
   transform: translateX(-50%);
 }
@@ -913,7 +937,7 @@ body {
 
 @media (min-width: 62rem) {
   .photographer__resume {
-    padding-top: 9.375rem;
+    padding-top: 8.125rem;
   }
 
   .photographer__img {
@@ -948,7 +972,6 @@ body {
 
   .photographer__btn-contact {
     position: static;
-    padding: 1.3125rem 0.6875rem;
     float: left;
     font-size: 1.25rem;
     transform: translateX(0);

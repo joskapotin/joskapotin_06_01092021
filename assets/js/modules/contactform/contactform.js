@@ -1,21 +1,66 @@
-/**
- * @property {HTMLElement} element
- */
 export default class ContactForm {
   static init(name) {
-    const contactForm = new ContactForm(name)
-    contactForm()
+    new ContactForm(name)
   }
 
   constructor(name) {
     this.name = name
+
     this.element = this.buildDOM()
     document.body.appendChild(this.element)
+
+    this.onKeyUp = this.onKeyUp.bind(this)
+    document.addEventListener("keyup", this.onKeyUp)
+
+    this.focusableElements = "button, input, textarea"
+    this.firstFocusableElement = this.element.querySelectorAll(this.focusableElements)[0] // get first element to be focused inside modal
+    this.focusableContent = this.element.querySelectorAll(this.focusableElements)
+    this.lastFocusableElement = this.focusableContent[this.focusableContent.length - 1] // get last element to be focused inside modal
+    this.firstFocusableElement.focus()
+    this.onKeyDown = this.onKeyDown.bind(this)
+    document.addEventListener("keydown", this.onKeyDown)
+  }
+
+  onKeyDown(e) {
+    const isTabPressed = e.key === "Tab" || e.keyCode === 9
+
+    if (!isTabPressed) {
+      return
+    }
+
+    if (e.shiftKey) {
+      // if shift key pressed for shift + tab combination
+      if (document.activeElement === this.firstFocusableElement) {
+        this.lastFocusableElement.focus() // add focus for the last focusable element
+        e.preventDefault()
+      }
+    } else {
+      // if tab key is pressed
+      if (document.activeElement === this.lastFocusableElement) {
+        // if focused has reached to last focusable element then focus first focusable element after pressing tab
+        this.firstFocusableElement.focus() // add focus for the first focusable element
+        e.preventDefault()
+      }
+    }
+  }
+
+  onKeyUp(e) {
+    if (e.key === "Escape") {
+      this.close(e)
+    }
+  }
+
+  close(e) {
+    this.element.parentElement.removeChild(this.element)
+    document.removeEventListener("keyup", this.onKeyUp)
+    document.removeEventListener("keydown", this.onKeyDown)
   }
 
   buildDOM() {
-    const uiModal = document.createElement("aside")
-    uiModal.classList.add("form-contact", "modal")
+    const uiContactForm = document.createElement("aside")
+    uiContactForm.classList.add("modal")
+    uiContactForm.setAttribute("role", "dialog")
+    uiContactForm.setAttribute("aria-labelledby", "dialog1Title")
 
     const uiContent = document.createElement("section")
     uiContent.classList.add("modal__content")
@@ -40,6 +85,7 @@ export default class ContactForm {
     const uiTitle = document.createElement("h4")
     uiTitle.classList.add("form__title")
     uiTitle.textContent = "Contactez moi"
+    uiTitle.id = "dialog1Title"
 
     const uiSubtitle = document.createElement("h5")
     uiSubtitle.classList.add("form__subtitle")
@@ -97,9 +143,19 @@ export default class ContactForm {
     uiLabelMessage.appendChild(uiInputMessage)
 
     uiForm.append(uiLabelFirstname, uiLabelLastname, uiLabelEmail, uiLabelMessage, uiSubmitButton)
-    uiContent.append(uiHeader, uiCloseBtn, uiForm)
-    uiModal.appendChild(uiContent)
+    uiContent.append(uiHeader, uiForm, uiCloseBtn)
+    uiContactForm.appendChild(uiContent)
 
-    return uiModal
+    uiCloseBtn.addEventListener("click", this.close.bind(this))
+
+    uiSubmitButton.addEventListener("click", e => {
+      e.preventDefault()
+      console.log("Prénom: " + uiInputFirstname.value)
+      console.log("Nom: " + uiInputLastname.value)
+      console.log("Email: " + uiInputEmail.value)
+      console.log("Message: " + uiInputMessage.value)
+    })
+
+    return uiContactForm
   }
 }
