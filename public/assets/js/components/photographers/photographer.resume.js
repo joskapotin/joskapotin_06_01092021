@@ -1,4 +1,4 @@
-import config from "../../api/config.js"
+import config from "../../config/config.js"
 import { getPhotographersById } from "./photographer.service.js"
 import { getMediasByPhotographer } from "../medias/media.service.js"
 import { createLikeIcon } from "../likes/like.service.js"

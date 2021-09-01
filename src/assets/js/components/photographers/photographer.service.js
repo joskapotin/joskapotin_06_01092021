@@ -1,4 +1,4 @@
-import config from "../../api/config.js"
+import config from "../../config/config.js"
 
 const getPhotographers = async () => {
   try {
