@@ -1,6 +1,6 @@
-import Homepage from "./views/Home.view.js"
-import Photographer from "./views/Photographer.view.js"
-import Lightbox from "./modules/lightbox/lightbox.js"
+import HomeController from "./controllers/Home.controller.js"
+import PhotographerController from "./controllers/Photographer.controller.js"
+// import Lightbox from "./modules/lightbox/lightbox.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
@@ -22,10 +22,10 @@ const navigateTo = url => {
 
 const router = async () => {
   const routes = [
-    { path: "/", View: Homepage },
-    { path: "/tags/:tag", View: Homepage },
-    { path: "/photographer/:id/tags/:tag", View: Photographer },
-    { path: "/photographer/:id", View: Photographer },
+    { path: "/", Controller: HomeController },
+    { path: "/tags/:tag", Controller: HomeController },
+    { path: "/photographer/:id/tags/:tag", Controller: PhotographerController },
+    { path: "/photographer/:id", Controller: PhotographerController },
   ]
 
   // Test each route for potential match
@@ -45,11 +45,12 @@ const router = async () => {
     }
   }
 
-  const view = new match.route.View(getParams(match))
+  const view = new match.route.Controller(getParams(match))
+  view.getHtml()
 
-  document.querySelector("#app").replaceChildren(await view.getHtml())
+  // document.querySelector("#app").replaceChildren(await view.getHtml())
 
-  document.querySelector("#app").addEventListener("load", Lightbox.init())
+  // document.querySelector("#app").addEventListener("load", Lightbox.init())
 }
 
 window.addEventListener("popstate", router)

@@ -1,4 +1,4 @@
-.photographer__header {
+.photographer__resume {
   position: relative;
   z-index: 10;
   padding-top: 6.25rem;
@@ -13,10 +13,6 @@
   height: 6.25rem;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.photographer__resume {
-  padding-top: 0.5rem;
 }
 
 .photographer__name {
@@ -41,12 +37,12 @@
   font-weight: normal;
 }
 
-.photographer__header .tag-nav {
+.tag-nav-media {
   padding: 0;
   margin: 0.3rem 0 0;
 }
 
-.photographer__header .tag-list {
+.tag-nav-media .tag-list {
   justify-content: flex-start;
 }
 
@@ -82,7 +78,7 @@
 }
 
 @media (min-width: $medium-screen) {
-  .photographer__header {
+  .photographer__resume {
     padding-top: 9.375rem;
   }
 
@@ -108,11 +104,11 @@
     font-size: 1.125rem;
   }
 
-  .photographer-section .tag-nav {
+  .tag-nav-media {
     margin-top: 1rem;
   }
 
-  .photographer-section .tag-link {
+  .tag-nav-media .tag-link {
     font-size: 1.125rem;
   }
 

@@ -1,29 +1,38 @@
 import Abstract from "./Abstract.view.js"
-import photographerResume from "../components/photographers/photographer.resume.js"
-import sortNav from "../components/medias/media.sort.js"
-import mediasList from "../components/medias/media.list.js"
+import photographerResumeComponent from "./components/photographer.resume.component.js"
+import mediaSortComponent from "./components/media.sort.component.js"
+import mediaCardComponent from "./components/media.card.component.js"
+import Lightbox from "../modules/lightbox/lightbox.js"
 
 export default class extends Abstract {
-  constructor(params) {
-    super(params)
-    this.setTitle("FishEye - Photographer")
+  constructor({ photographer, mediasList, currentTag }) {
+    super()
+    this.setTitle(`FishEye - ${photographer.name}`)
+    if (currentTag) {
+      this.setTitle(`FishEye - ${photographer.name} - ${currentTag}`)
+    }
+    this.setPageClass("page-photographer")
+    this.builHeader({ photographer, currentTag })
+    this.buildMain({ mediasList })
+    Lightbox.init()
   }
 
-  async getHtml() {
-    const uiPage = document.createElement("div")
-    uiPage.classList.add("page", "page-photographer")
+  async builHeader({ photographer, currentTag }) {
+    const siteHeader = document.getElementById("site-header")
 
-    const { uiHeader, uiAside } = await photographerResume({ photographerId: this.params.id, currentTag: this.params.tag })
+    siteHeader.appendChild(await photographerResumeComponent({ photographer, currentTag }))
+  }
 
-    const uiMain = document.createElement("main")
-    uiMain.classList.add("site-main")
-    uiMain.id = "main-content"
-    uiMain.tabIndex = "-1"
+  buildMain({ mediasList }) {
+    const siteMain = document.getElementById("site-main")
 
-    uiMain.append(sortNav(this.params.id), await mediasList(this.params))
+    const uiMediaGallery = document.createElement("section")
+    uiMediaGallery.className = "media-gallery"
 
-    uiPage.append(uiHeader, uiMain, uiAside)
+    for (const media of mediasList) {
+      uiMediaGallery.append(mediaCardComponent(media))
+    }
 
-    return uiPage
+    siteMain.append(mediaSortComponent(), uiMediaGallery)
   }
 }

@@ -1,40 +1,48 @@
 import Abstract from "./Abstract.view.js"
-import tagNav from "../components/tags/tag.nav.js"
-import photographersList from "../components/photographers/photographer.list.js"
+import tagNavComponent from "./components/tag.nav.component.js"
+import photographerCardComponent from "./components/photographer.card.component.js"
 
 export default class extends Abstract {
-  constructor(params) {
-    super(params)
+  constructor({ allTheTags, currentTag, photographersList }) {
+    super()
     this.setTitle("FishEye - Homepage")
+    if (currentTag) {
+      this.setTitle("FishEye - Homepage - " + currentTag)
+    }
+    this.setPageClass("page-home")
+    this.builHeader({ allTheTags, currentTag })
+    this.buildMain({ photographersList, currentTag })
   }
 
-  async getHtml() {
-    const uiPage = document.createElement("div")
-    uiPage.classList.add("page", "page-home")
+  builHeader({ allTheTags, currentTag }) {
+    const siteHeader = document.getElementById("site-header")
 
-    const uiHeader = document.createElement("header")
-    uiHeader.classList.add("site-header")
-
-    const uiTagNav = await tagNav({ currentTag: this.params?.tag })
+    const uiTagNav = tagNavComponent({ tags: allTheTags, currentTag })
     uiTagNav.classList.add("top-nav")
     uiTagNav.ariaLabel = "Primary"
 
+    siteHeader.appendChild(uiTagNav)
+  }
+
+  buildMain({ photographersList, currentTag }) {
+    const siteMain = document.getElementById("site-main")
+
+    const uiPhotographersSection = document.createElement("section")
+    uiPhotographersSection.className = "section-photographers"
+
     const uiTitle = document.createElement("h1")
-    uiTitle.className = "page-title"
-    uiTitle.dataset.reset = "true"
+    uiTitle.classList.add("page-title")
     uiTitle.textContent = "Nos photographes"
 
-    const uiMain = document.createElement("main")
-    uiMain.classList.add("site-main")
-    uiMain.id = "main-content"
-    uiMain.tabIndex = "-1"
+    const uiPhotographersGrid = document.createElement("div")
+    uiPhotographersGrid.classList.add("photographers-grid")
 
-    uiHeader.append(uiTagNav, uiTitle)
+    for (const photographer of photographersList) {
+      uiPhotographersGrid.append(photographerCardComponent({ photographer, currentTag }))
+    }
 
-    uiMain.appendChild(await photographersList({ tag: this.params?.tag, currentTag: this.params?.tag }))
+    uiPhotographersSection.append(uiTitle, uiPhotographersGrid)
 
-    uiPage.append(uiHeader, uiMain)
-
-    return uiPage
+    siteMain.appendChild(uiPhotographersSection)
   }
 }

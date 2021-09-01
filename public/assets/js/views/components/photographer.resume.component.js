@@ -1,0 +1,65 @@
+import config from "../../config/config.js"
+import tagNavComponent from "./tag.nav.component.js"
+import likeIconComponent from "./like.icon.component.js"
+import ContactForm from "../../modules/contactform/contactform.js"
+
+const photographerResumeComponent = async ({ photographer, currentTag }) => {
+  const { name, id, city, country, tags, tagline, price, portrait } = photographer
+
+  const uiResume = document.createElement("section")
+  uiResume.classList.add("photographer__resume")
+
+  const uiPicture = document.createElement("picture")
+  uiPicture.className = "photographer__picture"
+
+  const uiImage = document.createElement("img")
+  uiImage.src = `${config.photographeThumbPath}/${portrait}`
+  uiImage.alt = ""
+  uiImage.className = "photographer__img"
+
+  const uiName = document.createElement("h1")
+  uiName.className = "photographer__name"
+  uiName.textContent = name
+
+  const uiLocation = document.createElement("h2")
+  uiLocation.className = "photographer__location"
+  uiLocation.textContent = `${city}, ${country}`
+
+  const uiTagline = document.createElement("p")
+  uiTagline.className = "photographer__tagline"
+  uiTagline.textContent = tagline
+
+  const tagPrefix = `/photographer/${id}`
+  const uiTagNav = tagNavComponent({ tags, currentTag, tagPrefix })
+  uiTagNav.classList.add("tag-nav-media")
+  uiTagNav.ariaLabel = "Primary"
+
+  const uiContactBtn = document.createElement("button")
+  uiContactBtn.classList = "btn photographer__btn-contact"
+  uiContactBtn.textContent = "Contactez-moi"
+  uiContactBtn.addEventListener("click", e => {
+    e.preventDefault()
+    ContactForm.init(name)
+  })
+
+  const uiAside = document.createElement("aside")
+  uiAside.className = "photographer__aside"
+
+  const uiLikes = document.createElement("span")
+  uiLikes.className = "photographer__likes"
+  uiLikes.textContent = await photographer.getLikes()
+  const uiLikeIcon = likeIconComponent()
+
+  const uiPricing = document.createElement("span")
+  uiPricing.className = "photographer__pricing"
+  uiPricing.textContent = `${price}€/jour`
+
+  uiPicture.appendChild(uiImage)
+  uiLikes.appendChild(uiLikeIcon)
+  uiAside.append(uiLikes, uiPricing)
+  uiResume.append(uiPicture, uiName, uiContactBtn, uiLocation, uiTagline, uiTagNav, uiAside)
+
+  return uiResume
+}
+
+export default photographerResumeComponent
