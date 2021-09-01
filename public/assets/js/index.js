@@ -1,6 +1,5 @@
 import HomeController from "./controllers/Home.controller.js"
 import PhotographerController from "./controllers/Photographer.controller.js"
-// import Lightbox from "./modules/lightbox/lightbox.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
@@ -46,11 +45,7 @@ const router = async () => {
   }
 
   const view = new match.route.Controller(getParams(match))
-  view.getHtml()
-
-  // document.querySelector("#app").replaceChildren(await view.getHtml())
-
-  // document.querySelector("#app").addEventListener("load", Lightbox.init())
+  view.render()
 }
 
 window.addEventListener("popstate", router)

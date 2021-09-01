@@ -6,8 +6,8 @@ import ContactForm from "../../modules/contactform/contactform.js"
 const photographerResumeComponent = async ({ photographer, currentTag }) => {
   const { name, id, city, country, tags, tagline, price, portrait } = photographer
 
-  const uiResume = document.createElement("section")
-  uiResume.classList.add("photographer__resume")
+  const uiPhotographerResume = document.createElement("section")
+  uiPhotographerResume.classList.add("photographer__resume")
 
   const uiPicture = document.createElement("picture")
   uiPicture.className = "photographer__picture"
@@ -57,9 +57,9 @@ const photographerResumeComponent = async ({ photographer, currentTag }) => {
   uiPicture.appendChild(uiImage)
   uiLikes.appendChild(uiLikeIcon)
   uiAside.append(uiLikes, uiPricing)
-  uiResume.append(uiPicture, uiName, uiContactBtn, uiLocation, uiTagline, uiTagNav, uiAside)
+  uiPhotographerResume.append(uiPicture, uiName, uiContactBtn, uiLocation, uiTagline, uiTagNav, uiAside)
 
-  return uiResume
+  return uiPhotographerResume
 }
 
 export default photographerResumeComponent

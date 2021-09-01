@@ -10,10 +10,10 @@ const mediaCardComponent = ({ photographerId, title, image, video, likes, date, 
   const uiAlt = image ? formatAlternativeText(image) : formatAlternativeText(video)
   const ext = video?.substr(video.lastIndexOf(".") + 1)
 
-  const uiMedia = document.createElement("article")
-  uiMedia.className = "media__content"
-  uiMedia.dataset.id = "id"
-  uiMedia.dataset.tagFiltrable = "true"
+  const uiMediaCard = document.createElement("article")
+  uiMediaCard.className = "media__content"
+  uiMediaCard.dataset.id = "id"
+  uiMediaCard.dataset.tagFiltrable = "true"
 
   const uiLink = document.createElement("a")
   uiLink.href = image ? `${photographerMediaPath}/${image}` : `${photographerMediaPath}/${video}`
@@ -83,9 +83,9 @@ const mediaCardComponent = ({ photographerId, title, image, video, likes, date, 
   uiLikes.appendChild(uiLikeBtn)
   uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes)
   uiLink.appendChild(uiFigure)
-  uiMedia.append(uiLink, uiFooter)
+  uiMediaCard.append(uiLink, uiFooter)
 
-  return uiMedia
+  return uiMediaCard
 }
 
 export default mediaCardComponent

@@ -27,14 +27,6 @@ export default class extends Controller {
     return this.medias.map(media => new Media(media))
   }
 
-  async getHtml() {
-    const photographer = await this.getPhotographer()
-    const currentTag = this.params.tag
-    const mediasList = await this.getMediasList()
-
-    return new PhotographerView({ photographer, mediasList, currentTag })
-  }
-
   async sortMediasByPopularity() {
     const unsortedMedias = await this.photographer.getMedias()
     return unsortedMedias.sort((a, b) => b.likes - a.likes)
@@ -48,5 +40,13 @@ export default class extends Controller {
   async sortMediasByTitle() {
     const unsortedMedias = await this.photographer.getMedias()
     return unsortedMedias.sort((a, b) => a.title.localeCompare(b.title))
+  }
+
+  async render() {
+    const photographer = await this.getPhotographer()
+    const currentTag = this.params.tag
+    const mediasList = await this.getMediasList()
+
+    return new PhotographerView({ photographer, mediasList, currentTag })
   }
 }
