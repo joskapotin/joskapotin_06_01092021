@@ -2,10 +2,10 @@ import config from "../../config/config.js"
 import tagNav from "./tag.nav.component.js"
 
 const photographerCardComponent = ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
-  const uiArticle = document.createElement("article")
-  uiArticle.classList = "card card-photographer"
-  uiArticle.dataset.id = "id"
-  uiArticle.dataset.tagFiltrable = "true"
+  const uiPhotographerCard = document.createElement("article")
+  uiPhotographerCard.classList = "card card-photographer"
+  uiPhotographerCard.dataset.id = "id"
+  uiPhotographerCard.dataset.tagFiltrable = "true"
 
   const uiPortrait = document.createElement("img")
   uiPortrait.src = `${config.photographeThumbPath}/${portrait}`
@@ -37,9 +37,9 @@ const photographerCardComponent = ({ photographer: { name, id, city, country, ta
   uiLink.dataset.link = ""
 
   uiLink.append(uiPortrait, uiName, uiLocation, uiTagline, uiPrice)
-  uiArticle.append(uiLink, uiTagNav)
+  uiPhotographerCard.append(uiLink, uiTagNav)
 
-  return uiArticle
+  return uiPhotographerCard
 }
 
 export default photographerCardComponent
