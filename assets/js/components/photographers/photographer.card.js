@@ -1,4 +1,4 @@
-import config from "../../api/config.js"
+import config from "../../config/config.js"
 import tagNav from "../tags/tag.nav.js"
 
 const photographerCard = async ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
