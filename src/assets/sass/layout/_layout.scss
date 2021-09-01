@@ -7,23 +7,22 @@ body {
   padding: 0 1.25rem;
 }
 
-.nav-home {
+.site-header {
+  padding: 2.5rem 0 2.875rem;
+}
+
+.link-home {
   position: absolute;
   z-index: 20;
   top: 2.5rem;
   left: 1.25rem;
-}
-
-.link-home {
-  display: inline-flex;
 
   > * {
     //important. Need this for the eventlistener in js
     pointer-events: none;
   }
 
-  &:hover .banner,
-  &:focus .banner {
+  &:hover .banner {
     fill: $color-secondary;
   }
 
@@ -41,10 +40,6 @@ body {
     width: 12.5rem;
     height: 3.125rem;
   }
-}
-
-.site-header {
-  padding: 2.5rem 0 2.875rem;
 }
 
 .site-main {

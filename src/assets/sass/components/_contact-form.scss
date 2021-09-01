@@ -1,17 +1,16 @@
 .modal {
+  @include opacify;
   position: fixed;
   z-index: 1000;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   background-color: hsla(0, 0%, 77%, 0.4);
-
-  @media (min-width: $small-screen) {
-    align-items: center;
-  }
+  opacity: 0;
+  transition: opacity 200ms linear;
 }
 
 .modal__content {
@@ -20,7 +19,7 @@
   padding: 1.25rem;
   background-color: $color-tertiary;
 
-  @media (min-width: $small-screen) {
+  @media (min-width: $medium-screen) {
     max-width: 41.8125rem;
   }
 }
@@ -34,8 +33,18 @@
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
+  display: flex;
   padding: 0;
   background: 0;
+
+  &:hover .close-modal__icon,
+  &:focus .close-modal__icon {
+    fill: $color-primary;
+  }
+
+  &:focus-visible .close-modal__icon {
+    fill: $color-focus;
+  }
 }
 
 .close-modal__icon {
@@ -43,10 +52,17 @@
   height: 1.125rem;
   fill: $white;
 
-  @media (min-width: $small-screen) {
+  @media (min-width: $medium-screen) {
     width: 2.625rem;
     height: 2.625rem;
   }
+}
+
+.form-contact {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+  gap: 1em;
 }
 
 .text-label {
@@ -57,4 +73,21 @@
 .text-control {
   display: block;
   width: 100%;
+}
+
+.btn-submit {
+  display: block;
+  margin: 0 auto;
+  font-size: 1.125rem;
+
+  @media (min-width: $medium-screen) {
+    margin: 0 auto 0 0;
+  }
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    background-color: $color-focus;
+    color: $white;
+  }
 }

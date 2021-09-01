@@ -1,7 +1,7 @@
 export default class {
   constructor(params) {
     this.params = params
-    this.remove([".top-nav", ".section-photographers", ".photographer__resume", ".sort-nav", ".media-gallery", ".form-contact"])
+    this.remove([".top-nav", ".section-photographers", ".photographer__resume", ".sort-nav", ".media-gallery", ".lightbox", ".modal"])
   }
 
   setPageClass(pageClass) {

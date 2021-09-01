@@ -12,8 +12,7 @@ export default class Lightbox {
     links.forEach(link =>
       link.addEventListener("click", e => {
         e.preventDefault()
-        const lightbox = new Lightbox(e.currentTarget.getAttribute("href"), images)
-        lightbox()
+        new Lightbox(e.currentTarget.getAttribute("href"), images)
       }),
     )
   }
@@ -26,9 +25,18 @@ export default class Lightbox {
     this.element = this.buildDOM(url)
     this.images = images
     this.loadImage(url)
-    this.onKeyUp = this.onKeyUp.bind(this)
     document.body.appendChild(this.element)
+
+    this.onKeyUp = this.onKeyUp.bind(this)
     document.addEventListener("keyup", this.onKeyUp)
+
+    this.focusableElements = "button"
+    this.firstFocusableElement = this.element.querySelectorAll(this.focusableElements)[0] // get first element to be focused inside modal
+    this.focusableContent = this.element.querySelectorAll(this.focusableElements)
+    this.lastFocusableElement = this.focusableContent[this.focusableContent.length - 1] // get last element to be focused inside modal
+    this.firstFocusableElement.focus()
+    this.onKeyDown = this.onKeyDown.bind(this)
+    document.addEventListener("keydown", this.onKeyDown)
   }
 
   /**
@@ -50,6 +58,29 @@ export default class Lightbox {
     }
     image.src = url
     image.className = "lightbox__img"
+  }
+
+  onKeyDown(e) {
+    const isTabPressed = e.key === "Tab" || e.keyCode === 9
+
+    if (!isTabPressed) {
+      return
+    }
+
+    if (e.shiftKey) {
+      // if shift key pressed for shift + tab combination
+      if (document.activeElement === this.firstFocusableElement) {
+        this.lastFocusableElement.focus() // add focus for the last focusable element
+        e.preventDefault()
+      }
+    } else {
+      // if tab key is pressed
+      if (document.activeElement === this.lastFocusableElement) {
+        // if focused has reached to last focusable element then focus first focusable element after pressing tab
+        this.firstFocusableElement.focus() // add focus for the first focusable element
+        e.preventDefault()
+      }
+    }
   }
 
   /**
@@ -75,6 +106,7 @@ export default class Lightbox {
       this.element.parentElement.removeChild(this.element)
     }, 500)
     document.removeEventListener("keyup", this.onKeyUp)
+    document.removeEventListener("keydown", this.onKeyDown)
   }
 
   /**
@@ -141,7 +173,7 @@ export default class Lightbox {
     const figure = document.createElement("figure")
     figure.className = "lightbox__figure"
 
-    container.append(closeBtn, prevBtn, nextBtn, figure)
+    container.append(prevBtn, nextBtn, closeBtn, figure)
     box.appendChild(container)
 
     return box

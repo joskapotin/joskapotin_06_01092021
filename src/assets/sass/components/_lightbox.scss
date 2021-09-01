@@ -61,10 +61,17 @@
 .lightbox__prev:hover,
 .lightbox__next:hover,
 .lightbox__close:hover,
+.lightbox__prev:focus,
+.lightbox__next:focus,
+.lightbox__close:focus {
+  opacity: 1;
+}
+
 .lightbox__prev:focus-visible,
 .lightbox__next:focus-visible,
 .lightbox__close:focus-visible {
-  opacity: 1;
+  box-shadow: none;
+  outline: none;
 }
 
 .lightbox__figure {
