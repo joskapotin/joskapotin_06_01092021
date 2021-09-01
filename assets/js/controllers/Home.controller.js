@@ -14,7 +14,7 @@ export default class extends Controller {
     return photographers.map(photographer => new Phototographer(photographer))
   }
 
-  async getHtml() {
+  async render() {
     const allTheTags = await getAllTags()
     const currentTag = this.params.tag
     const photographersList = await this.getPhotographersList()
