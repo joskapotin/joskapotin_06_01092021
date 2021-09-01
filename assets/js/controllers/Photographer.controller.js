@@ -1,4 +1,4 @@
-import Controller from "./controller.js"
+import Controller from "./Controller.js"
 import { getPhotographersById } from "../database/database.js"
 import Photographer from "../models/Photographer.js"
 import Media from "../models/Media.js"

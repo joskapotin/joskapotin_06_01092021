@@ -3,7 +3,8 @@
  */
 export default class ContactForm {
   static init(name) {
-    new ContactForm(name)
+    const contactForm = new ContactForm(name)
+    contactForm()
   }
 
   constructor(name) {
