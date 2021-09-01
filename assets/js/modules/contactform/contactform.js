@@ -9,8 +9,7 @@ export default class ContactForm {
   constructor(name) {
     this.name = name
     this.element = this.buildDOM()
-    const uiApp = document.getElementById("app")
-    uiApp.appendChild(this.element)
+    document.body.appendChild(this.element)
   }
 
   buildDOM() {

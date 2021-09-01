@@ -15,4 +15,20 @@ const tagItem = ({ tag, currentTag, tagPrefix }) => {
   return item
 }
 
-export default tagItem
+const tagNavComponent = ({ tags, currentTag, tagPrefix }) => {
+  const uiTagNav = document.createElement("nav")
+  uiTagNav.className = "tag-nav"
+
+  const uiList = document.createElement("ul")
+  uiList.className = "tag-list"
+
+  for (const tag of tags) {
+    uiList.append(tagItem({ tag, currentTag, tagPrefix }))
+  }
+
+  uiTagNav.append(uiList)
+
+  return uiTagNav
+}
+
+export default tagNavComponent

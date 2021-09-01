@@ -1,7 +1,7 @@
 import config from "../../config/config.js"
-import tagNav from "../tags/tag.nav.js"
+import tagNav from "./tag.nav.component.js"
 
-const photographerCard = async ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
+const photographerCardComponent = ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
   const uiArticle = document.createElement("article")
   uiArticle.classList = "card card-photographer"
   uiArticle.dataset.id = "id"
@@ -28,7 +28,7 @@ const photographerCard = async ({ photographer: { name, id, city, country, tags,
   uiPrice.className = "card__pricing"
   uiPrice.textContent = `${price}€/jour`
 
-  const uiTagNav = await tagNav({ tags, currentTag })
+  const uiTagNav = tagNav({ tags, currentTag })
   uiTagNav.ariaLabel = "Secondary"
 
   const uiLink = document.createElement("a")
@@ -42,4 +42,4 @@ const photographerCard = async ({ photographer: { name, id, city, country, tags,
   return uiArticle
 }
 
-export default photographerCard
+export default photographerCardComponent

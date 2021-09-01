@@ -1,4 +1,4 @@
-const createLikeIcon = () => {
+const likeIconComponent = () => {
   const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
   iconSvg.setAttribute("fill", "inherit")
   iconSvg.setAttribute("viewBox", "0 0 19 19")
@@ -15,4 +15,4 @@ const createLikeIcon = () => {
   return iconSvg
 }
 
-export { createLikeIcon }
+export default likeIconComponent

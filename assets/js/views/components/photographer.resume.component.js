@@ -1,21 +1,13 @@
 import config from "../../config/config.js"
-import { getPhotographersById } from "./photographer.service.js"
-import { getMediasByPhotographer } from "../medias/media.service.js"
-import { createLikeIcon } from "../likes/like.service.js"
-import tagNav from "../tags/tag.nav.js"
-import ContactForm from "../contact/contact.form.js"
+import tagNavComponent from "./tag.nav.component.js"
+import likeIconComponent from "./like.icon.component.js"
+import ContactForm from "../../modules/contactform/contactform.js"
 
-const countTotalLikes = async photographerId => {
-  const medias = await getMediasByPhotographer(photographerId)
-  const totalLikes = medias.reduce((accumulateur, media) => accumulateur + media.likes, 0)
-  return totalLikes
-}
+const photographerResumeComponent = async ({ photographer, currentTag }) => {
+  const { name, id, city, country, tags, tagline, price, portrait } = photographer
 
-const photographerResume = async ({ photographerId, currentTag }) => {
-  const { name, id, city, country, tags, tagline, price, portrait } = await getPhotographersById(photographerId)
-
-  const uiHeader = document.createElement("header")
-  uiHeader.classList.add("site-header", "photographer__header")
+  const uiResume = document.createElement("section")
+  uiResume.classList.add("photographer__resume")
 
   const uiPicture = document.createElement("picture")
   uiPicture.className = "photographer__picture"
@@ -38,7 +30,8 @@ const photographerResume = async ({ photographerId, currentTag }) => {
   uiTagline.textContent = tagline
 
   const tagPrefix = `/photographer/${id}`
-  const uiTagNav = await tagNav({ tags, currentTag, tagPrefix })
+  const uiTagNav = tagNavComponent({ tags, currentTag, tagPrefix })
+  uiTagNav.classList.add("tag-nav-media")
   uiTagNav.ariaLabel = "Primary"
 
   const uiContactBtn = document.createElement("button")
@@ -54,8 +47,8 @@ const photographerResume = async ({ photographerId, currentTag }) => {
 
   const uiLikes = document.createElement("span")
   uiLikes.className = "photographer__likes"
-  uiLikes.textContent = await countTotalLikes(photographerId)
-  const uiLikeIcon = createLikeIcon()
+  uiLikes.textContent = await photographer.getLikes()
+  const uiLikeIcon = likeIconComponent()
 
   const uiPricing = document.createElement("span")
   uiPricing.className = "photographer__pricing"
@@ -63,10 +56,10 @@ const photographerResume = async ({ photographerId, currentTag }) => {
 
   uiPicture.appendChild(uiImage)
   uiLikes.appendChild(uiLikeIcon)
-  uiHeader.append(uiPicture, uiName, uiContactBtn, uiLocation, uiTagline, uiTagNav)
   uiAside.append(uiLikes, uiPricing)
+  uiResume.append(uiPicture, uiName, uiContactBtn, uiLocation, uiTagline, uiTagNav, uiAside)
 
-  return { uiHeader, uiAside }
+  return uiResume
 }
 
-export default photographerResume
+export default photographerResumeComponent

@@ -1,21 +1,4 @@
-import { getMediasByPhotographer } from "./media.service.js"
-
-const sortMediasByPopularity = async photographerId => {
-  const unsortedMedias = await getMediasByPhotographer(photographerId)
-  return unsortedMedias.sort((a, b) => b.likes - a.likes)
-}
-
-const sortMediasByDate = async photographerId => {
-  const unsortedMedias = await getMediasByPhotographer(photographerId)
-  return unsortedMedias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-}
-
-const sortMediasByTitle = async photographerId => {
-  const unsortedMedias = await getMediasByPhotographer(photographerId)
-  return unsortedMedias.sort((a, b) => a.title.localeCompare(b.title))
-}
-
-const sortNav = photographerId => {
+const mediaSortComponent = () => {
   const uiSortNav = document.createElement("nav")
   uiSortNav.className = "sort-nav"
 
@@ -75,4 +58,5 @@ const sortNav = photographerId => {
 
   return uiSortNav
 }
-export default sortNav
+
+export default mediaSortComponent

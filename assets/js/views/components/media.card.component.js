@@ -1,11 +1,11 @@
-import config from "../../api/config.js"
-import { createLikeIcon } from "../likes/like.service.js"
+import config from "../../config/config.js"
+import likeIconComponent from "./like.icon.component.js"
 
 const formatAlternativeText = text => {
   return text.slice(0, -4).replaceAll("_", " ")
 }
 
-const mediaCard = ({ id, photographerId, title, image, video, likes, date, price }) => {
+const mediaCardComponent = ({ photographerId, title, image, video, likes, date, price }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const uiAlt = image ? formatAlternativeText(image) : formatAlternativeText(video)
   const ext = video?.substr(video.lastIndexOf(".") + 1)
@@ -69,7 +69,7 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   const uiLikeBtn = document.createElement("button")
   uiLikeBtn.className = "btn-like"
   uiLikeBtn.dataset.tooltip = "Click if you like"
-  const uiLikeIcon = createLikeIcon()
+  const uiLikeIcon = likeIconComponent()
   const uiLikeTxt = document.createElement("span")
   uiLikeTxt.classList.add("btn-like__txt", "visually-hidden")
   uiLikeTxt.textContent = "Like this media"
@@ -88,4 +88,4 @@ const mediaCard = ({ id, photographerId, title, image, video, likes, date, price
   return uiMedia
 }
 
-export default mediaCard
+export default mediaCardComponent
