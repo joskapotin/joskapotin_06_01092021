@@ -5,10 +5,9 @@ const formatAlternativeText = text => {
   return text.slice(0, -4).replaceAll("_", " ")
 }
 
-const mediaCardComponent = ({ photographerId, title, image, video, likes, date, price }) => {
+const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
-  const uiAlt = image ? formatAlternativeText(image) : formatAlternativeText(video)
-  const ext = video?.substr(video.lastIndexOf(".") + 1)
+  const uiAlt = formatAlternativeText(media)
 
   const uiMediaCard = document.createElement("article")
   uiMediaCard.className = "media__content"
@@ -16,27 +15,29 @@ const mediaCardComponent = ({ photographerId, title, image, video, likes, date, 
   uiMediaCard.dataset.tagFiltrable = "true"
 
   const uiLink = document.createElement("a")
-  uiLink.href = image ? `${photographerMediaPath}/${image}` : `${photographerMediaPath}/${video}`
+  uiLink.href = `${photographerMediaPath}/${media}`
   uiLink.className = "media__link"
   uiLink.dataset.lightbox = ""
 
   const uiFigure = document.createElement("figure")
   uiFigure.className = "media__figure"
-  if (video) uiFigure.classList.add("media__figure-video")
 
-  const uiThumbnail = image ? document.createElement("img") : document.createElement("video")
-
-  if (image) {
-    uiThumbnail.classList = "media media-img"
+  if (type === "image") {
+    const uiThumbnail = document.createElement("img")
+    uiThumbnail.classList.add("media", "media-img")
     uiThumbnail.alt = uiAlt
-    uiThumbnail.dataset.src = `${photographerMediaPath}/${image}`
-    uiThumbnail.src = `${photographerMediaPath}/${image}`
+    uiThumbnail.src = `${photographerMediaPath}/${media}`
+    uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
 
-    uiFigure.append(uiThumbnail)
-  } else if (video) {
-    uiThumbnail.classList = "media media-video"
-    uiThumbnail.dataset.src = `${photographerMediaPath}/${video}`
-    uiThumbnail.src = `${photographerMediaPath}/${video}`
+    uiFigure.appendChild(uiThumbnail)
+  } else if (type === "video") {
+    const uiThumbnail = document.createElement("video")
+    uiFigure.classList.add("media__figure-video")
+    uiThumbnail.classList.add("media", "media-video")
+    uiThumbnail.src = `${photographerMediaPath}/${media}`
+    uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
+
+    const ext = media.substr(media.lastIndexOf(".") + 1)
     uiThumbnail.type = `video/${ext}`
     uiThumbnail.tabIndex = "-1"
 
@@ -64,23 +65,21 @@ const mediaCardComponent = ({ photographerId, title, image, video, likes, date, 
 
   const uiLikes = document.createElement("span")
   uiLikes.className = "media__likes"
-  uiLikes.textContent = likes
+
+  const uiLikesNbr = document.createElement("span")
+  uiLikesNbr.classList.add("media__likes-number")
+  uiLikesNbr.textContent = likes
 
   const uiLikeBtn = document.createElement("button")
   uiLikeBtn.className = "btn-like"
   uiLikeBtn.dataset.tooltip = "Click if you like"
-  const uiLikeIcon = likeIconComponent()
   const uiLikeTxt = document.createElement("span")
   uiLikeTxt.classList.add("btn-like__txt", "visually-hidden")
   uiLikeTxt.textContent = "Like this media"
-
-  uiLikeBtn.addEventListener("click", e => {
-    e.preventDefault()
-    console.log("like +1")
-  })
+  const uiLikeIcon = likeIconComponent()
 
   uiLikeBtn.append(uiLikeIcon, uiLikeTxt)
-  uiLikes.appendChild(uiLikeBtn)
+  uiLikes.append(uiLikesNbr, uiLikeBtn)
   uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes)
   uiLink.appendChild(uiFigure)
   uiMediaCard.append(uiLink, uiFooter)

@@ -5,7 +5,7 @@
 const URL = window.location.href
 
 const config = {
-  apiUrl: URL + "data/fisheyedata.json",
+  apiUrl: URL + "assets/js/database/fisheyedata.json",
   mediasPath: URL + "medias",
   photographeThumbPath: URL + "medias/photographers-id-photos",
 }

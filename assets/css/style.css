@@ -165,6 +165,9 @@ a:focus-visible,
     --heart-size: 1.1875rem;
   }
 }
+.btn-like > * {
+  pointer-events: none;
+}
 .btn-like::before {
   z-index: -1;
   width: var(--heart-size);
