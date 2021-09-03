@@ -33,6 +33,10 @@
   grid-template-areas: "grid";
   isolation: isolate;
 
+  > * {
+    pointer-events: none;
+  }
+
   &::before {
     z-index: -1;
     width: var(--heart-size);

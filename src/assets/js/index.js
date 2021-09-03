@@ -44,8 +44,8 @@ const router = async () => {
     }
   }
 
-  const view = new match.route.Controller(getParams(match))
-  view.render()
+  const controller = new match.route.Controller(getParams(match))
+  controller.render()
 }
 
 window.addEventListener("popstate", router)

@@ -1,7 +1,7 @@
 import Controller from "./Controller.js"
-import { getPhotographersById } from "../database/database.js"
+import { getAllPhotographers } from "../database/services.js"
 import Photographer from "../models/Photographer.js"
-import Media from "../models/Media.js"
+import mediaFactory from "../utils/factory.js"
 import PhotographerView from "../views/Photographer.view.js"
 
 export default class extends Controller {
@@ -11,7 +11,9 @@ export default class extends Controller {
   }
 
   async getPhotographer() {
-    return new Photographer(await getPhotographersById({ id: this.params.id }))
+    const AllPhotographers = await getAllPhotographers()
+    const photographer = AllPhotographers.find(element => element.id === parseInt(this.params.id))
+    return new Photographer(photographer)
   }
 
   async getMediasList() {
@@ -24,28 +26,17 @@ export default class extends Controller {
       this.medias = await this.photographer.getMedias()
     }
 
-    return this.medias.map(media => new Media(media))
+    return this.medias.map(media => mediaFactory(media))
   }
 
-  async sortMediasByPopularity() {
-    const unsortedMedias = await this.photographer.getMedias()
-    return unsortedMedias.sort((a, b) => b.likes - a.likes)
-  }
-
-  async sortMediasByDate() {
-    const unsortedMedias = await this.photographer.getMedias()
-    return unsortedMedias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-  }
-
-  async sortMediasByTitle() {
-    const unsortedMedias = await this.photographer.getMedias()
-    return unsortedMedias.sort((a, b) => a.title.localeCompare(b.title))
+  sortMediasByPopularity(medias) {
+    return medias.sort((a, b) => b.likes - a.likes)
   }
 
   async render() {
     const photographer = await this.getPhotographer()
     const currentTag = this.params.tag
-    const mediasList = await this.getMediasList()
+    const mediasList = this.sortMediasByPopularity(await this.getMediasList())
 
     return new PhotographerView({ photographer, mediasList, currentTag })
   }

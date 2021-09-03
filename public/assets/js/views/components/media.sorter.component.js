@@ -1,4 +1,4 @@
-const mediaSortComponent = () => {
+const mediaSorterComponent = () => {
   const uiSortNav = document.createElement("nav")
   uiSortNav.className = "sort-nav"
 
@@ -34,29 +34,29 @@ const mediaSortComponent = () => {
   uiList.append(uiLikesBtn, uiDateBtn, uiTitleBtn)
   uiSortNav.append(uiLabel, uiList)
 
-  // uiList.childNodes.forEach(uiElement => {
-  //   uiElement.addEventListener("click", e => {
-  //     e.preventDefault()
-  //     e.stopPropagation()
-  //     // The first option is the current so we do nothing
-  //     const target = e.target
-  //     const parent = e.target.parentNode
-  //     const current = parent.firstChild
-  //     if (target.isSameNode(current)) {
-  //       return
-  //     }
-  //     parent.insertBefore(target, parent.firstChild)
-  //     const sortBy = target.dataset.sorter
-  //     if (sortBy === "Date") {
-  //       return sortMediasByDate(photographerId)
-  //     } else if (sortBy === "Title") {
-  //       return sortMediasByTitle(photographerId)
-  //     }
-  //     sortMediasByPopularity(photographerId)
-  //   })
-  // })
+  uiList.childNodes.forEach(uiElement => {
+    uiElement.addEventListener("click", e => {
+      e.preventDefault()
+      e.stopPropagation()
+      // The first option is the current so we do nothing
+      const target = e.target
+      const parent = e.target.parentNode
+      const current = parent.firstChild
+      if (target.isSameNode(current)) {
+        return
+      }
+      parent.insertBefore(target, parent.firstChild)
+      const sortBy = target.dataset.sorter
+      if (sortBy === "Date") {
+        return console.log("sort by date")
+      } else if (sortBy === "Title") {
+        return console.log("sort by title")
+      }
+      console.log("sort by Popularity")
+    })
+  })
 
   return uiSortNav
 }
 
-export default mediaSortComponent
+export default mediaSorterComponent

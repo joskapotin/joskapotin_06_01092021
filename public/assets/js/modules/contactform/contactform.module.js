@@ -1,6 +1,11 @@
 export default class ContactForm {
   static init(name) {
-    new ContactForm(name)
+    document.addEventListener("click", e => {
+      if (e.target.id === "contact-form") {
+        e.preventDefault()
+        new ContactForm(name)
+      }
+    })
   }
 
   constructor(name) {

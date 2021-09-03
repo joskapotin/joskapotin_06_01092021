@@ -33,20 +33,4 @@ const getAllTags = async () => {
   }
 }
 
-const getPhotographersById = async ({ id }) => {
-  const photographers = await getAllPhotographers()
-  return photographers.find(element => element.id === parseInt(id))
-}
-
-const getPhotographersByTag = async ({ tag }) => {
-  const photographers = await getAllPhotographers()
-  return photographers.filter(element => element.tags.find(element => element === tag))
-}
-
-const getMediasByPhotographer = async ({ id }) => {
-  const AllMedias = await getAllMedias()
-  const medias = AllMedias.filter(element => element.photographerId === parseInt(id))
-  return medias
-}
-
-export { getAllPhotographers, getAllTags, getPhotographersById, getPhotographersByTag, getMediasByPhotographer }
+export { getAllPhotographers, getAllMedias, getAllTags }

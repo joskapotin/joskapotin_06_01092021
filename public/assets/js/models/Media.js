@@ -1,18 +1,17 @@
-import { getPhotographersById } from "../database/database.js"
+import { getAllPhotographers } from "../database/services.js"
 
 export default class {
-  constructor({ id, photographerId, title, image, video, likes, date, price }) {
+  constructor({ id, photographerId, title, likes, date, price }) {
     this.id = id
     this.photographerId = photographerId
     this.title = title
-    this.image = image
-    this.video = video
     this.likes = likes
     this.date = date
     this.price = price
   }
 
   async gePhotographer() {
-    return await getPhotographersById(this.photographerId)
+    const photographers = await getAllPhotographers()
+    return photographers.find(element => element.id === parseInt(this.id))
   }
 }

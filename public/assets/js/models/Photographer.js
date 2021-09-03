@@ -1,4 +1,4 @@
-import { getMediasByPhotographer } from "../database/database.js"
+import { getAllMedias } from "../database/services.js"
 
 export default class {
   constructor({ name, id, city, country, tags, tagline, price, portrait }) {
@@ -13,7 +13,8 @@ export default class {
   }
 
   async getMedias() {
-    return await getMediasByPhotographer({ id: this.id })
+    const AllMedias = await getAllMedias()
+    return AllMedias.filter(element => element.photographerId === parseInt(this.id))
   }
 
   async getLikes() {
