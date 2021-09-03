@@ -1,30 +1,33 @@
 /**
  * Lightbox from https://grafikart.fr/tutoriels/lightbox-javascript-1224
  * @property {HTMLElement} element
- * @property {string[]} images Lightbox images path
- * @property {string} image Current image
+ * @property {Object[]} medias URL and type of all medias
+ * @property {string} currentMedia Current image
  */
 export default class Lightbox {
   static init() {
     const links = Array.from(document.querySelectorAll("[data-lightbox]"))
-    const images = links.map(link => link.getAttribute("href"))
+    const medias = links.map(link => {
+      return { url: link.getAttribute("href"), type: link.dataset.type }
+    })
 
     links.forEach(link =>
       link.addEventListener("click", e => {
         e.preventDefault()
-        new Lightbox(e.currentTarget.getAttribute("href"), images)
+        const currentMedia = { url: e.currentTarget.getAttribute("href"), type: e.currentTarget.dataset.type }
+        new Lightbox(currentMedia, medias)
       }),
     )
   }
 
   /**
-   * @param {string} url URL du medias
-   * @param {string[]} images Lightbox images path
+   * @property {Object[]} medias URL and type of all medias
+   * @property {string} currentMedia Current image
    */
-  constructor(url, images) {
-    this.element = this.buildDOM(url)
-    this.images = images
-    this.loadImage(url)
+  constructor(currentMedia, medias) {
+    this.element = this.buildDOM()
+    this.medias = medias
+    this.loadMedia(currentMedia)
     document.body.appendChild(this.element)
 
     this.onKeyUp = this.onKeyUp.bind(this)
@@ -43,21 +46,42 @@ export default class Lightbox {
    *
    * @param {string} url du media
    */
-  loadImage(url) {
+  loadMedia({ url, type }) {
     this.url = null
-    const image = new Image()
+
     const figure = this.element.querySelector(".lightbox__figure")
+    figure.innerHTML = ""
+
     const loader = document.createElement("div")
     loader.classList.add("lightbox__loader")
-    figure.innerHTML = ""
+
+    const media = type === "image" ? document.createElement("img") : document.createElement("video")
+    media.className = "lightbox__media"
+
     figure.appendChild(loader)
-    image.onload = () => {
+
+    if (type === "image") {
+      media.src = url
+
+      media.onload = () => {
+        figure.removeChild(loader)
+        figure.appendChild(media)
+        this.url = url
+      }
+    } else if (type === "video") {
+      const ext = url.substr(url.lastIndexOf(".") + 1)
+      const source = document.createElement("source")
+      source.src = url
+      source.type = `video/${ext}`
+      media.controls = "controls"
+      media.appendChild(source)
+
       figure.removeChild(loader)
-      figure.appendChild(image)
+      figure.appendChild(media)
       this.url = url
     }
-    image.src = url
-    image.className = "lightbox__img"
+
+    console.log(media)
   }
 
   onKeyDown(e) {
@@ -115,11 +139,11 @@ export default class Lightbox {
    */
   next(e) {
     e.preventDefault()
-    let i = this.images.findIndex(image => image === this.url)
-    if (i === this.images.length - 1) {
+    let i = this.medias.findIndex(media => media.url === this.url)
+    if (i === this.medias.length - 1) {
       i = -1
     }
-    this.loadImage(this.images[i + 1])
+    this.loadMedia(this.medias[i + 1])
   }
 
   /**
@@ -128,18 +152,17 @@ export default class Lightbox {
    */
   prev(e) {
     e.preventDefault()
-    let i = this.images.findIndex(image => image === this.url)
+    let i = this.medias.findIndex(media => media.url === this.url)
     if (i === 0) {
-      i = this.images.length
+      i = this.medias.length
     }
-    this.loadImage(this.images[i - 1])
+    this.loadMedia(this.medias[i - 1])
   }
 
   /**
-   * @param {string} url URL du media
    * @returns {HTMLElement}
    */
-  buildDOM(url) {
+  buildDOM() {
     const box = document.createElement("div")
     box.className = "lightbox"
 

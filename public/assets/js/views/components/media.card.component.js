@@ -17,7 +17,8 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
   const uiLink = document.createElement("a")
   uiLink.href = `${photographerMediaPath}/${media}`
   uiLink.className = "media__link"
-  uiLink.dataset.lightbox = ""
+  uiLink.dataset.type = type
+  uiLink.dataset.lightbox = "true"
 
   const uiFigure = document.createElement("figure")
   uiFigure.className = "media__figure"
@@ -34,12 +35,14 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
     const uiThumbnail = document.createElement("video")
     uiFigure.classList.add("media__figure-video")
     uiThumbnail.classList.add("media", "media-video")
-    uiThumbnail.src = `${photographerMediaPath}/${media}`
-    uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
+    uiThumbnail.tabIndex = "-1"
 
     const ext = media.substr(media.lastIndexOf(".") + 1)
-    uiThumbnail.type = `video/${ext}`
-    uiThumbnail.tabIndex = "-1"
+    const source = document.createElement("source")
+    source.src = `${photographerMediaPath}/${media}`
+    source.type = `video/${ext}`
+
+    uiThumbnail.append(source)
 
     const uiFigcaption = document.createElement("figcaption")
     uiFigcaption.className = "visually-hidden"
