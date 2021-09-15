@@ -33,11 +33,29 @@ export default class extends Controller {
     return medias.sort((a, b) => b.likes - a.likes)
   }
 
+  sortMediasByDate(medias) {
+    return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+  }
+
+  sortMediasByTitle(medias) {
+    return medias.sort((a, b) => a.title.localeCompare(b.title))
+  }
+
   async render() {
     const photographer = await this.getPhotographer()
+    const totalLikes = await photographer.getLikes()
     const currentTag = this.params.tag
-    const mediasList = this.sortMediasByPopularity(await this.getMediasList())
+    const sortBy = this.params.sortBy
+    let mediasList = []
 
-    return new PhotographerView({ photographer, mediasList, currentTag })
+    if (sortBy === "DATE") {
+      mediasList = this.sortMediasByDate(await this.getMediasList())
+    } else if (sortBy === "TITLE") {
+      mediasList = this.sortMediasByTitle(await this.getMediasList())
+    } else if (!sortBy || sortBy === "POPULARITY") {
+      mediasList = this.sortMediasByPopularity(await this.getMediasList())
+    }
+
+    return new PhotographerView({ photographer, totalLikes, mediasList, currentTag, sortBy })
   }
 }

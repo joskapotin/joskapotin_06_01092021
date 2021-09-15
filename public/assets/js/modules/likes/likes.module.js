@@ -1,6 +1,6 @@
 const likes = () => {
-  const target = document.getElementById("media-gallery")
-  target.addEventListener("click", e => {
+  const uiTarget = document.getElementById("media-gallery")
+  uiTarget.addEventListener("click", e => {
     if (e.target.matches(".btn-like")) {
       e.preventDefault()
       const uiLikes = e.target.previousSibling

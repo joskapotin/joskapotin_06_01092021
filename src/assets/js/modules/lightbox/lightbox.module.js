@@ -80,8 +80,6 @@ export default class Lightbox {
       figure.appendChild(media)
       this.url = url
     }
-
-    console.log(media)
   }
 
   onKeyDown(e) {

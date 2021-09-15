@@ -7,27 +7,27 @@ import likes from "../modules/likes/likes.module.js"
 import MediaSorter from "../modules/mediaSorter/media.sorter.module.js"
 
 export default class extends Abstract {
-  constructor({ photographer, mediasList, currentTag }) {
+  constructor({ photographer, totalLikes, mediasList, currentTag, sortBy }) {
     super()
     this.setTitle(`FishEye - ${photographer.name}`)
     if (currentTag) {
       this.setTitle(`FishEye - ${photographer.name} - ${currentTag}`)
     }
     this.setPageClass("page-photographer")
-    this.builHeader({ photographer, currentTag })
-    this.buildMain({ photographer, mediasList, currentTag })
+    this.builHeader({ photographer, totalLikes, currentTag })
+    this.buildMain({ photographer, mediasList, currentTag, sortBy })
     Lightbox.init()
     ContactForm.init(photographer.name)
     likes()
   }
 
-  async builHeader({ photographer, currentTag }) {
+  builHeader({ photographer, totalLikes, currentTag }) {
     const siteHeader = document.getElementById("site-header")
 
-    siteHeader.appendChild(await photographerResumeComponent({ photographer, currentTag }))
+    siteHeader.appendChild(photographerResumeComponent({ photographer, totalLikes, currentTag }))
   }
 
-  buildMain({ mediasList }) {
+  buildMain({ photographer, mediasList, currentTag, sortBy }) {
     const siteMain = document.getElementById("site-main")
 
     const uiMediaGallery = document.createElement("section")
@@ -38,7 +38,7 @@ export default class extends Abstract {
       uiMediaGallery.append(mediaCardComponent(media))
     }
 
-    const mediaSorter = new MediaSorter()
+    const mediaSorter = new MediaSorter({ id: photographer.id, tag: currentTag, sortBy })
 
     siteMain.append(mediaSorter.renderNav(), uiMediaGallery)
   }

@@ -75,6 +75,7 @@
 }
 
 .lightbox__figure {
+  display: flex;
   margin: 0;
 }
 
@@ -86,7 +87,7 @@
 }
 
 .lightbox__media {
-  max-height: 100vh;
+  height: 100vh;
   animation: lightbox-in 300ms linear;
 }
 
