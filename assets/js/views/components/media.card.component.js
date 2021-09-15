@@ -24,17 +24,18 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
   uiFigure.className = "media__figure"
 
   if (type === "image") {
+    uiFigure.classList.add("media__figure--img")
     const uiThumbnail = document.createElement("img")
-    uiThumbnail.classList.add("media", "media-img")
+    uiThumbnail.classList.add("media", "media--img")
     uiThumbnail.alt = uiAlt
     uiThumbnail.src = `${photographerMediaPath}/${media}`
     uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
 
     uiFigure.appendChild(uiThumbnail)
   } else if (type === "video") {
+    uiFigure.classList.add("media__figure--video")
     const uiThumbnail = document.createElement("video")
-    uiFigure.classList.add("media__figure-video")
-    uiThumbnail.classList.add("media", "media-video")
+    uiThumbnail.classList.add("media", "media--video")
     uiThumbnail.tabIndex = "-1"
 
     const ext = media.substr(media.lastIndexOf(".") + 1)

@@ -1,18 +1,8 @@
+import PhotographerController from "../../controllers/Photographer.controller.js"
 export default class MediaSorter {
-  constructor() {
+  constructor(params) {
+    this.params = params
     this.element = this.renderNav()
-  }
-
-  sortMediasByPopularity(medias) {
-    return medias.sort((a, b) => b.likes - a.likes)
-  }
-
-  sortMediasByDate(medias) {
-    return medias.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-  }
-
-  sortMediasByTitle(medias) {
-    return medias.sort((a, b) => a.title.localeCompare(b.title))
   }
 
   renderNav() {
@@ -29,26 +19,33 @@ export default class MediaSorter {
 
     const uiLikesBtn = document.createElement("button")
     uiLikesBtn.classList = "btn sort-nav__item"
-    uiLikesBtn.dataset.sorter = "Likes"
+    uiLikesBtn.dataset.sorter = "POPULARITY"
     uiLikesBtn.role = "option"
     uiLikesBtn.textContent = "Popularité"
     uiLikesBtn.ariaLabel = "Trier par popularité"
 
     const uiDateBtn = document.createElement("button")
     uiDateBtn.classList = "btn sort-nav__item"
-    uiDateBtn.dataset.sorter = "Date"
+    uiDateBtn.dataset.sorter = "DATE"
     uiDateBtn.role = "option"
     uiDateBtn.textContent = "Date"
     uiLikesBtn.ariaLabel = "Trier par date"
 
     const uiTitleBtn = document.createElement("button")
     uiTitleBtn.classList = "btn sort-nav__item"
-    uiTitleBtn.dataset.sorter = "Title"
+    uiTitleBtn.dataset.sorter = "TITLE"
     uiTitleBtn.role = "option"
     uiTitleBtn.textContent = "Titre"
     uiLikesBtn.ariaLabel = "Trier par titre"
 
-    uiList.append(uiLikesBtn, uiDateBtn, uiTitleBtn)
+    if (this.params.sortBy === "DATE") {
+      uiList.append(uiDateBtn, uiLikesBtn, uiTitleBtn)
+    } else if (this.params.sortBy === "TITLE") {
+      uiList.append(uiTitleBtn, uiLikesBtn, uiDateBtn)
+    } else {
+      uiList.append(uiLikesBtn, uiDateBtn, uiTitleBtn)
+    }
+
     uiSortNav.append(uiLabel, uiList)
 
     uiList.childNodes.forEach(uiElement => {
@@ -64,12 +61,18 @@ export default class MediaSorter {
         }
         parent.insertBefore(target, parent.firstChild)
         const sortBy = target.dataset.sorter
-        if (sortBy === "Date") {
-          return console.log("sort by date")
-        } else if (sortBy === "Title") {
-          return console.log("sort by title")
+        if (sortBy === "DATE") {
+          this.params.sortBy = sortBy
+          const controller = new PhotographerController(this.params)
+          return controller.render()
+        } else if (sortBy === "TITLE") {
+          this.params.sortBy = sortBy
+          const controller = new PhotographerController(this.params)
+          return controller.render()
         }
-        console.log("sort by Popularity")
+        this.params.sortBy = sortBy
+        const controller = new PhotographerController(this.params)
+        return controller.render()
       })
     })
 

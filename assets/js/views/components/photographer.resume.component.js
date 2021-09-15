@@ -2,7 +2,7 @@ import config from "../../config/config.js"
 import tagNavComponent from "./tag.nav.component.js"
 import likeIconComponent from "./like.icon.component.js"
 
-const photographerResumeComponent = async ({ photographer, currentTag }) => {
+const photographerResumeComponent = ({ photographer, totalLikes, currentTag }) => {
   const { name, id, city, country, tags, tagline, price, portrait } = photographer
 
   const uiPhotographerResume = document.createElement("section")
@@ -34,7 +34,7 @@ const photographerResumeComponent = async ({ photographer, currentTag }) => {
   uiTagNav.ariaLabel = "Primary"
 
   const uiContactBtn = document.createElement("button")
-  uiContactBtn.id = "contact-form"
+  uiContactBtn.id = "contact-form-btn"
   uiContactBtn.classList = "btn photographer__btn-contact"
   uiContactBtn.textContent = "Contactez-moi"
 
@@ -45,7 +45,7 @@ const photographerResumeComponent = async ({ photographer, currentTag }) => {
   uiLikes.className = "photographer__likes"
   const uiLikesNbr = document.createElement("span")
   uiLikesNbr.classList.add("photographer__likes-number")
-  uiLikesNbr.textContent = await photographer.getLikes()
+  uiLikesNbr.textContent = totalLikes
   const uiLikeIcon = likeIconComponent()
 
   const uiPricing = document.createElement("span")

@@ -1,6 +1,7 @@
 export default class ContactForm {
   static init(name) {
-    document.addEventListener("click", e => {
+    const uiTarget = document.getElementById("contact-form-btn")
+    uiTarget.addEventListener("click", e => {
       if (e.target.id === "contact-form") {
         e.preventDefault()
         new ContactForm(name)
