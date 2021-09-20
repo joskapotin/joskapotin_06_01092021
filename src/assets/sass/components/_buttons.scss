@@ -37,40 +37,6 @@
     pointer-events: none;
   }
 
-  &::before {
-    z-index: -1;
-    width: var(--heart-size);
-    height: var(--heart-size);
-    margin: auto;
-    background-color: hsla(0, 0%, 50%, 0.5);
-    border-radius: var(--heart-size);
-    content: "";
-    grid-area: grid;
-    opacity: 1;
-    transform: scale(0);
-    transform-origin: center center;
-    transition: transform 100ms ease-out, opacity 200ms 100ms ease-out;
-  }
-
-  &::after {
-    position: absolute;
-    z-index: 10;
-    right: 0;
-    bottom: 110%;
-    padding: 0.3em 0.7em;
-    background-color: $color-primary;
-    border-radius: 0.7em;
-    border-bottom-right-radius: 0;
-    color: $white;
-    content: attr(data-tooltip);
-    font-size: 0.875rem;
-    opacity: 0;
-    transform: scale(0);
-    transform-origin: bottom right;
-    transition: transform 50ms ease-out, opacity 100ms linear;
-    white-space: nowrap;
-  }
-
   .btn-like__icon {
     position: relative;
     top: 1px;
@@ -84,15 +50,13 @@
     transition: transform 100ms ease-out;
   }
 
-  &:hover::after,
-  &:focus-visible::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-
   &:hover .btn-like__icon,
   &:focus-visible .btn-like__icon {
     transform: scale(1.2);
+  }
+
+  &:active .btn-like__icon {
+    transform: scale(1.1);
   }
 
   &:focus-visible {
@@ -102,14 +66,5 @@
 
   &:focus-visible .btn-like__icon {
     fill: $color-focus;
-  }
-
-  &:focus-visible::after {
-    background-color: $color-focus;
-  }
-
-  &:active::before {
-    opacity: 0;
-    transform: scale(1.7);
   }
 }
