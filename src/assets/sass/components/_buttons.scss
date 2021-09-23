@@ -30,8 +30,7 @@
   display: inline-grid;
   padding: 0;
   border: 0;
-  grid-template-areas: "grid";
-  isolation: isolate;
+  background-color: transparent;
 
   > * {
     pointer-events: none;
@@ -44,7 +43,6 @@
     height: var(--heart-size);
     margin: 0;
     fill: $color-primary;
-    grid-area: grid;
     transform: scale(1);
     transform-origin: center;
     transition: transform 100ms ease-out;
