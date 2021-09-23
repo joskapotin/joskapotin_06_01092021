@@ -157,8 +157,7 @@ a:focus-visible,
   display: inline-grid;
   padding: 0;
   border: 0;
-  grid-template-areas: "grid";
-  isolation: isolate;
+  background-color: transparent;
 }
 @media (min-width: 62rem) {
   .btn-like {
@@ -175,7 +174,6 @@ a:focus-visible,
   height: var(--heart-size);
   margin: 0;
   fill: #901c1c;
-  grid-area: grid;
   transform: scale(1);
   transform-origin: center;
   transition: transform 100ms ease-out;
