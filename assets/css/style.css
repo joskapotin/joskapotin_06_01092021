@@ -612,6 +612,7 @@ a:focus-visible,
 
 .lightbox__media {
   max-width: 100%;
+  max-height: 100vh;
   animation: lightbox-in 300ms linear;
 }
 
