@@ -604,8 +604,8 @@ a:focus-visible,
 }
 
 .lightbox__loader {
-  width: 6.25rem;
-  height: 6.25rem;
+  width: 18.75rem;
+  height: 18.75rem;
   background: url("../images/lightbox/loader.svg") center center no-repeat;
   opacity: 0.5;
 }
