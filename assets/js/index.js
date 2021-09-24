@@ -1,8 +1,18 @@
 import HomeController from "./controllers/Home.controller.js"
 import PhotographerController from "./controllers/Photographer.controller.js"
 
+/**
+ *
+ * @param {string} path
+ * @returns
+ */
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
+/**
+ * Extract controller and keys from path
+ * @param {{route: {path: string, Controller: object}, result: string}} match
+ * @returns
+ */
 const getParams = match => {
   const values = match.result.slice(1)
   const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1])
@@ -14,6 +24,10 @@ const getParams = match => {
   )
 }
 
+/**
+ * handle history navigation
+ * @param {string} url
+ */
 const navigateTo = url => {
   history.pushState(null, null, url)
   router()
