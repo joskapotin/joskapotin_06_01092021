@@ -18,6 +18,7 @@
   width: 100%;
   padding: 1.25rem;
   background-color: $color-tertiary;
+  overflow-y: auto;
 
   @media (min-width: $medium-screen) {
     max-width: 41.8125rem;

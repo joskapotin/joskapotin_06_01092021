@@ -1,9 +1,9 @@
+const URL = window.location.href
+
 /**
  * Objet contenant les variables de configuration
  * @type {{apiUrl: string, mediasPath: string, photographeThumbPath: string}}
  */
-const URL = window.location.href
-
 const config = {
   apiUrl: URL + "assets/js/database/fisheyedata.json",
   mediasPath: URL + "medias",
