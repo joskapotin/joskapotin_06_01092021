@@ -11,8 +11,6 @@ export default class Lightbox {
       return { url: link.getAttribute("href"), type: link.dataset.type, title: link.dataset.title, alt: link.dataset.alt }
     })
 
-    console.log(medias)
-
     links.forEach(link =>
       link.addEventListener("click", e => {
         e.preventDefault()
@@ -71,7 +69,7 @@ export default class Lightbox {
 
       media.onload = () => {
         figure.removeChild(loader)
-        figure.appendChild(media)
+        figure.append(media, uiTitle)
         this.url = url
       }
     } else if (type === "video") {
@@ -83,11 +81,9 @@ export default class Lightbox {
       media.appendChild(source)
 
       figure.removeChild(loader)
-      figure.appendChild(media)
+      figure.append(media, uiTitle)
       this.url = url
     }
-
-    figure.appendChild(uiTitle)
   }
 
   onKeyDown(e) {
