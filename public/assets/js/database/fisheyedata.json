@@ -70,7 +70,8 @@
       "tags": ["fashion"],
       "likes": 62,
       "date": "2011-12-08",
-      "price": 55
+      "price": 55,
+      "alt": "Femme en survêtement jaune, bottines blanches à talons, pose sur fond de ciel bleu"
     },
     {
       "id": 8520927,
@@ -80,7 +81,8 @@
       "tags": ["fashion"],
       "likes": 11,
       "date": "2011-11-06",
-      "price": 55
+      "price": 55,
+      "alt": "Femme blonde en pantalon et haut imprimé jungle, pose accroupie au milieu de la route sur fond de gratte-ciels"
     },
     {
       "id": 9025895,
@@ -90,7 +92,8 @@
       "tags": ["fashion"],
       "likes": 72,
       "date": "2013-08-12",
-      "price": 55
+      "price": 55,
+      "alt": "Femme brune en robe courte à rayures vericales noires et jaune, pose devant un mur en damier noir et blanc"
     },
     {
       "id": 9275938,
@@ -100,7 +103,8 @@
       "tags": ["events"],
       "likes": 69,
       "date": "2018-02-22",
-      "price": 55
+      "price": 55,
+      "alt": "Kiosque de marriage sur fond d'arbres"
     },
     {
       "id": 2053494,
@@ -110,7 +114,8 @@
       "tags": ["events"],
       "likes": 2,
       "date": "2020-05-25",
-      "price": 55
+      "price": 55,
+      "alt": "Un couple de dos face à des gens tenant des cierges magiques"
     },
     {
       "id": 7324238,
@@ -120,7 +125,8 @@
       "tags": ["events"],
       "likes": 33,
       "date": "2019-06-12",
-      "price": 55
+      "price": 55,
+      "alt": "Salle de récéption avec au premier plan un table dressée et plus loin des ballons en forme de dix huit"
     },
     {
       "id": 8328953,
@@ -140,7 +146,8 @@
       "tags": ["art"],
       "likes": 88,
       "date": "2007-05-07",
-      "price": 55
+      "price": 55,
+      "alt": "Peinture stylisée d'un homme la tête en arrière sur un mur bleu"
     },
     {
       "id": 8523492,
@@ -150,7 +157,8 @@
       "tags": ["art"],
       "likes": 24,
       "date": "2018-05-05",
-      "price": 55
+      "price": 55,
+      "alt": "Tunnel faiblement éclairé d'une lumiere pourpre avec des graphitis sur les murs"
     },
     {
       "id": 75902334,
@@ -160,7 +168,8 @@
       "tags": ["art"],
       "likes": 75,
       "date": "2019-11-25",
-      "price": 55
+      "price": 55,
+      "alt": "Peinture stylisée d'oiseaux rouges et bleus formant un pattern"
     },
 
     {
@@ -171,7 +180,8 @@
       "tags": ["sport"],
       "likes": 52,
       "date": "2013-02-30",
-      "price": 70
+      "price": 70,
+      "alt": "équipe d'aviron vue du dessus, eau noire"
     },
     {
       "id": 92758372,
@@ -181,7 +191,8 @@
       "tags": ["fashion"],
       "likes": 58,
       "date": "2018-07-17",
-      "price": 70
+      "price": 70,
+      "alt": "Une femme en combinaison bleu ciel les yeux fermés levant le bras gauche, derrière elle un homme les yeux fermés levant le bras droit"
     },
     {
       "id": 32958383,
@@ -191,7 +202,8 @@
       "tags": ["fashion"],
       "likes": 11,
       "date": "2019-08-12",
-      "price": 70
+      "price": 70,
+      "alt": "Une femme descend des escaliers en robe rouge"
     },
     {
       "id": 928587383,
@@ -201,7 +213,8 @@
       "tags": ["events"],
       "likes": 2,
       "date": "2019-01-02",
-      "price": 70
+      "price": 70,
+      "alt": "Réunion de bureau, ordinateur portable, tableau blanc et post-it"
     },
     {
       "id": 725639493,
@@ -211,7 +224,8 @@
       "tags": ["events"],
       "likes": 3,
       "date": "2019-05-20",
-      "price": 70
+      "price": 70,
+      "alt": "Un homme présente un produit à des personnes assises en face de lui"
     },
     {
       "id": 23394384,
@@ -221,7 +235,8 @@
       "tags": ["events"],
       "likes": 52,
       "date": "2019-07-18",
-      "price": 70
+      "price": 70,
+      "alt": "Gros plan d'un femme sur scène assise derrière un piano électrique"
     },
     {
       "id": 87367293,
@@ -231,7 +246,8 @@
       "tags": ["events"],
       "likes": 23,
       "date": "2018-02-22",
-      "price": 70
+      "price": 70,
+      "alt": "Chanteuse sur scène, micro dans la main et gilet à franges"
     },
     {
       "id": 593834784,
@@ -241,7 +257,8 @@
       "tags": ["animals"],
       "likes": 52,
       "date": "2017-03-13",
-      "price": 70
+      "price": 70,
+      "alt": "Jeune cerf à l'orée d'un bois"
     },
     {
       "id": 83958935,
@@ -272,7 +289,8 @@
       "tags": ["travel"],
       "likes": 101,
       "date": "2017-04-03",
-      "price": 45
+      "price": 45,
+      "alt": "Des gens qui se baigne dans une sources chaude"
     },
     {
       "id": 73434243,
@@ -282,7 +300,8 @@
       "tags": ["travel"],
       "likes": 99,
       "date": "2018-04-30",
-      "price": 45
+      "price": 45,
+      "alt": "Panorama de petites collines traversé par une route en lacets"
     },
     {
       "id": 23425523,
@@ -292,7 +311,8 @@
       "tags": ["travel"],
       "likes": 34,
       "date": "2016-04-05",
-      "price": 45
+      "price": 45,
+      "alt": "Vue d'une forêt depuis une petite passerelle"
     },
     {
       "id": 23134513,
@@ -302,7 +322,8 @@
       "tags": ["travel"],
       "likes": 23,
       "date": "2017-03-18",
-      "price": 45
+      "price": 45,
+      "alt": "Vues sur des montagnes depuis une barque au milieu d'une large rivière"
     },
     {
       "id": 92352352,
@@ -312,7 +333,8 @@
       "tags": ["portrait"],
       "likes": 66,
       "date": "2018-05-24",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'une souriante jeune fille rousse, cheveux en chignons et rouge aux lèvres"
     },
     {
       "id": 34513453,
@@ -322,7 +344,8 @@
       "tags": ["portait"],
       "likes": 52,
       "date": "2017-04-21",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'un homme, coupr afro, visage de trois quart sur fond noir"
     },
     {
       "id": 23523533,
@@ -332,7 +355,8 @@
       "tags": ["portait"],
       "likes": 95,
       "date": "2018-11-02",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'une femme de face, cheveux et sourcils blanc sur fond blanc"
     },
     {
       "id": 525834234,
@@ -342,7 +366,8 @@
       "tags": ["portait"],
       "likes": 25,
       "date": "2019-01-02",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'un homme de face, cigarette à la main sur fond blanc"
     },
 
     {
@@ -353,7 +378,8 @@
       "tags": ["travel"],
       "likes": 88,
       "date": "2019-02-03",
-      "price": 45
+      "price": 45,
+      "alt": "Panorama de montagne"
     },
     {
       "id": 625025343,
@@ -363,7 +389,8 @@
       "tags": ["travel"],
       "likes": 85,
       "date": "2019-04-03",
-      "price": 45
+      "price": 45,
+      "alt": "Vue d'un village sur une falaise avec des maisons colorées"
     },
     {
       "id": 2525345343,
@@ -373,7 +400,8 @@
       "tags": ["portait"],
       "likes": 34,
       "date": "2019-04-07",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'un enfant la tête posée sur ses mains"
     },
     {
       "id": 2523434634,
@@ -383,7 +411,8 @@
       "tags": ["portait"],
       "likes": 63,
       "date": "2019-04-07",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait d'une jeune femme portant des lunettes sous des néons"
     },
     {
       "id": 398847109,
@@ -393,7 +422,8 @@
       "tags": ["portait"],
       "likes": 55,
       "date": "2019-06-20",
-      "price": 45
+      "price": 45,
+      "alt": "Portrait de femme menton levé sur fond noir"
     },
     {
       "id": 2534342,
@@ -403,7 +433,8 @@
       "tags": ["events"],
       "likes": 25,
       "date": "2019-06-21",
-      "price": 45
+      "price": 45,
+      "alt": "Table dressée sur la plage"
     },
     {
       "id": 65235234,
@@ -413,7 +444,8 @@
       "tags": ["events"],
       "likes": 52,
       "date": "2019-06-25",
-      "price": 45
+      "price": 45,
+      "alt": "Couple de mariés au milieu des rochers"
     },
     {
       "id": 23523434,
@@ -423,7 +455,8 @@
       "tags": ["events"],
       "likes": 77,
       "date": "2019-06-28",
-      "price": 45
+      "price": 45,
+      "alt": "Couple de marié sous la lumière des guirlandes"
     },
     {
       "id": 5234343,
@@ -443,7 +476,8 @@
       "tags": ["animals"],
       "likes": 59,
       "date": "2019-07-02",
-      "price": 60
+      "price": 60,
+      "alt": "Petit oiseau coloré pourpre, bleu et jaune sur une branche"
     },
 
     {
@@ -454,7 +488,8 @@
       "tags": ["travel"],
       "likes": 25,
       "date": "2019-04-03",
-      "price": 60
+      "price": 60,
+      "alt": "2 japonaises en kimono au milieu d'une rue pietone avec temple au fond"
     },
     {
       "id": 2523434,
@@ -464,7 +499,8 @@
       "tags": ["travel"],
       "likes": 53,
       "date": "2019-05-06",
-      "price": 60
+      "price": 60,
+      "alt": "couché de soleil sur un canal de venise"
     },
     {
       "id": 95293534,
@@ -474,7 +510,8 @@
       "tags": ["travel"],
       "likes": 33,
       "date": "2019-05-12",
-      "price": 60
+      "price": 60,
+      "alt": "Vue sur un lac de montagne entouré de forêt"
     },
     {
       "id": 356234343,
@@ -484,7 +521,8 @@
       "tags": ["travel"],
       "likes": 53,
       "date": "2019-06-20",
-      "price": 60
+      "price": 60,
+      "alt": "Vélo au pied d'un escalier sur fond de lampadaire et d'immeuble parisien"
     },
     {
       "id": 235234343,
@@ -494,7 +532,8 @@
       "tags": ["travel"],
       "likes": 63,
       "date": "2019-06-26",
-      "price": 60
+      "price": 60,
+      "alt": "Mur en pierre avec des bas relief, ouvert sur un paysage"
     },
     {
       "id": 6234234343,
@@ -504,7 +543,8 @@
       "tags": ["architecture"],
       "likes": 52,
       "date": "2019-06-30",
-      "price": 60
+      "price": 60,
+      "alt": "Vue sur les domes de batiment de style baroque"
     },
     {
       "id": 6525666253,
@@ -514,7 +554,8 @@
       "tags": ["architecture"],
       "likes": 63,
       "date": "2019-07-20",
-      "price": 60
+      "price": 60,
+      "alt": "Panorama de montagne avec un village escarpé en premier plan"
     },
     {
       "id": 98252523433,
@@ -524,7 +565,8 @@
       "tags": ["architecture"],
       "likes": 88,
       "date": "2020-01-05",
-      "price": 60
+      "price": 60,
+      "alt": "La tour de pise"
     },
     {
       "id": 9259398453,
@@ -544,7 +586,8 @@
       "tags": ["architecture"],
       "likes": 54,
       "date": "2020-05-05",
-      "price": 60
+      "price": 60,
+      "alt": "Haut d'un immeuble en coin"
     },
 
     {
@@ -565,7 +608,8 @@
       "tags": ["sport"],
       "likes": 101,
       "date": "2018-03-05",
-      "price": 65
+      "price": 65,
+      "alt": "Personne escaladant à main nue"
     },
     {
       "id": 235343222,
@@ -575,7 +619,8 @@
       "tags": ["sport"],
       "likes": 103,
       "date": "2018-03-10",
-      "price": 70
+      "price": 70,
+      "alt": "Surfeur dans le tube d'une vague"
     },
     {
       "id": 7775342343,
@@ -585,7 +630,8 @@
       "tags": ["sport"],
       "likes": 77,
       "date": "2018-04-16",
-      "price": 50
+      "price": 50,
+      "alt": "Skieur en plein saut, les skis croisés. Vue en contre plongée sur fond de ciel bleu"
     },
     {
       "id": 9253445784,
@@ -595,7 +641,8 @@
       "tags": ["sport"],
       "likes": 88,
       "date": "2018-04-22",
-      "price": 65
+      "price": 65,
+      "alt": "Gros plan sur un groupe de coureuse, dans un stade, pendant une competition"
     },
     {
       "id": 22299394,
@@ -605,7 +652,8 @@
       "tags": ["sport"],
       "likes": 95,
       "date": "2018-04-27",
-      "price": 70
+      "price": 70,
+      "alt": "Skateur en plein saut, dans un skate park en bords de mer"
     },
     {
       "id": 3452342633,
@@ -615,7 +663,8 @@
       "tags": ["architecture"],
       "likes": 52,
       "date": "2018-05-03",
-      "price": 75
+      "price": 75,
+      "alt": "Verriere blanche, vue de dessous"
     },
     {
       "id": 939234243,
@@ -625,7 +674,8 @@
       "tags": ["architecture"],
       "likes": 55,
       "date": "2018-05-10",
-      "price": 72
+      "price": 72,
+      "alt": "Architecture moderne, plan d'eau."
     },
     {
       "id": 222959233,
@@ -635,7 +685,8 @@
       "tags": ["architecture"],
       "likes": 85,
       "date": "2018-05-15",
-      "price": 71
+      "price": 71,
+      "alt": "Immeuble moderne de plusieurs étages, en forme de fer à cheval. Vue de dessous"
     },
     {
       "id": 965933434,
@@ -645,7 +696,8 @@
       "tags": ["architecture"],
       "likes": 66,
       "date": "2018-05-20",
-      "price": 58
+      "price": 58,
+      "alt": "Grand immeuble moderne. Acier et verre grimpant vers le ciel. Vue de dessous"
     },
     {
       "id": 777723343,
@@ -655,7 +707,8 @@
       "tags": ["architecture"],
       "likes": 79,
       "date": "2018-05-21",
-      "price": 80
+      "price": 80,
+      "alt": "Immeuble blanc moderne. Tout en courbe"
     }
   ]
 }

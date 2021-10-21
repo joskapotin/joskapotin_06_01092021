@@ -1,13 +1,9 @@
 import config from "../../config/config.js"
 import likeIconComponent from "./like.icon.component.js"
 
-const formatAlternativeText = text => {
-  return text.slice(0, -4).replaceAll("_", " ")
-}
-
-const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, tags }) => {
+const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, tags, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
-  const altText = formatAlternativeText(media)
+  const altText = alt
 
   const uiMediaCard = document.createElement("article")
   uiMediaCard.className = "media__content"
