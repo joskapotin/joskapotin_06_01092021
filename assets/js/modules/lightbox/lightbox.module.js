@@ -8,13 +8,15 @@ export default class Lightbox {
   static init() {
     const links = Array.from(document.querySelectorAll("[data-lightbox]"))
     const medias = links.map(link => {
-      return { url: link.getAttribute("href"), type: link.dataset.type }
+      return { url: link.getAttribute("href"), type: link.dataset.type, title: link.dataset.title, alt: link.dataset.alt }
     })
+
+    console.log(medias)
 
     links.forEach(link =>
       link.addEventListener("click", e => {
         e.preventDefault()
-        const currentMedia = { url: e.currentTarget.getAttribute("href"), type: e.currentTarget.dataset.type }
+        const currentMedia = { url: e.currentTarget.getAttribute("href"), type: e.currentTarget.dataset.type, title: link.dataset.title, alt: link.dataset.alt }
         new Lightbox(currentMedia, medias)
       }),
     )
@@ -46,17 +48,21 @@ export default class Lightbox {
    *
    * @param {string} url du media
    */
-  loadMedia({ url, type }) {
+  loadMedia({ url, type, title, alt }) {
     this.url = null
 
     const figure = this.element.querySelector(".lightbox__figure")
     figure.innerHTML = ""
+
+    const uiTitle = document.createElement("figcaption")
+    uiTitle.textContent = title
 
     const loader = document.createElement("div")
     loader.classList.add("lightbox__loader")
 
     const media = type === "image" ? document.createElement("img") : document.createElement("video")
     media.className = "lightbox__media"
+    media.alt = alt
 
     figure.appendChild(loader)
 
@@ -80,6 +86,8 @@ export default class Lightbox {
       figure.appendChild(media)
       this.url = url
     }
+
+    figure.appendChild(uiTitle)
   }
 
   onKeyDown(e) {

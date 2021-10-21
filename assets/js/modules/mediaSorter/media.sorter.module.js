@@ -29,14 +29,14 @@ export default class MediaSorter {
     uiDateBtn.dataset.sorter = "DATE"
     uiDateBtn.role = "option"
     uiDateBtn.textContent = "Date"
-    uiLikesBtn.ariaLabel = "Trier par date"
+    uiDateBtn.ariaLabel = "Trier par date"
 
     const uiTitleBtn = document.createElement("button")
     uiTitleBtn.classList = "btn sort-nav__item"
     uiTitleBtn.dataset.sorter = "TITLE"
     uiTitleBtn.role = "option"
     uiTitleBtn.textContent = "Titre"
-    uiLikesBtn.ariaLabel = "Trier par titre"
+    uiTitleBtn.ariaLabel = "Trier par titre"
 
     if (this.params.sortBy === "DATE") {
       uiList.append(uiDateBtn, uiLikesBtn, uiTitleBtn)
