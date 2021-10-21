@@ -5,9 +5,9 @@ const formatAlternativeText = text => {
   return text.slice(0, -4).replaceAll("_", " ")
 }
 
-const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price }) => {
+const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, tags }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
-  const uiAlt = formatAlternativeText(media)
+  const altText = formatAlternativeText(media)
 
   const uiMediaCard = document.createElement("article")
   uiMediaCard.className = "media__content"
@@ -19,6 +19,8 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
   uiLink.className = "media__link"
   uiLink.dataset.type = type
   uiLink.dataset.lightbox = "true"
+  uiLink.dataset.title = title
+  uiLink.dataset.alt = altText
 
   const uiFigure = document.createElement("figure")
   uiFigure.className = "media__figure"
@@ -27,7 +29,7 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
     uiFigure.classList.add("media__figure--img")
     const uiThumbnail = document.createElement("img")
     uiThumbnail.classList.add("media", "media--img")
-    uiThumbnail.alt = uiAlt
+    uiThumbnail.alt = altText
     uiThumbnail.src = `${photographerMediaPath}/${media}`
     uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
 
@@ -47,7 +49,7 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
 
     const uiFigcaption = document.createElement("figcaption")
     uiFigcaption.className = "visually-hidden"
-    uiFigcaption.textContent = uiAlt
+    uiFigcaption.textContent = altText
 
     uiFigure.append(uiThumbnail, uiFigcaption)
   }
@@ -61,10 +63,12 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
 
   const uiDate = document.createElement("span")
   uiDate.className = "media__date"
+  uiDate.ariaLabel = "Date"
   uiDate.textContent = date
 
   const uiPrice = document.createElement("span")
   uiPrice.className = "media__price"
+  uiPrice.ariaLabel = "Price"
   uiPrice.textContent = `${price}€`
 
   const uiLikes = document.createElement("span")
@@ -72,6 +76,7 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
 
   const uiLikesNbr = document.createElement("span")
   uiLikesNbr.classList.add("media__likes-number")
+  uiLikesNbr.ariaLabel = "Total likes number"
   uiLikesNbr.textContent = likes
 
   const uiLikeBtn = document.createElement("button")

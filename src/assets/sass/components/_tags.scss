@@ -18,6 +18,10 @@
   color: $color-primary;
   font-size: 0.75rem;
   text-decoration: none;
+
+  &::before {
+    content: "#";
+  }
 }
 
 .tag-link:hover,

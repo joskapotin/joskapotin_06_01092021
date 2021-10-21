@@ -26,6 +26,7 @@ const photographerCardComponent = ({ photographer: { name, id, city, country, ta
 
   const uiPrice = document.createElement("p")
   uiPrice.className = "card__pricing"
+  uiPrice.ariaLabel = `${price}€ par jour`
   uiPrice.textContent = `${price}€/jour`
 
   const uiTagNav = tagNav({ tags, currentTag })

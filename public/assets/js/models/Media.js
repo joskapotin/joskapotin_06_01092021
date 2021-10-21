@@ -1,13 +1,14 @@
 import { getAllPhotographers } from "../database/services.js"
 
 export default class {
-  constructor({ id, photographerId, title, likes, date, price }) {
+  constructor({ id, photographerId, title, likes, date, price, tags }) {
     this.id = id
     this.photographerId = photographerId
     this.title = title
     this.likes = likes
     this.date = date
     this.price = price
+    this.tags = tags
   }
 
   async gePhotographer() {

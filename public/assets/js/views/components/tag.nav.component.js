@@ -5,7 +5,7 @@ const tagItem = ({ tag, currentTag, tagPrefix }) => {
   link.href = tagPrefix ? `${tagPrefix}/tags/${tag}` : `/tags/${tag}`
   link.className = "tag-link"
   link.dataset.link = "true"
-  link.textContent = `#${tag}`
+  link.textContent = tag
   if (tag === currentTag) {
     link.classList.add("tag-active")
   }
