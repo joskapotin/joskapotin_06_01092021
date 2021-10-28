@@ -17,6 +17,7 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
   uiLink.dataset.lightbox = "true"
   uiLink.dataset.title = title
   uiLink.dataset.alt = altText
+  uiLink.title = altText
 
   const uiFigure = document.createElement("figure")
   uiFigure.className = "media__figure"
