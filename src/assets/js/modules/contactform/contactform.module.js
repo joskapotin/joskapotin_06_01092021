@@ -146,7 +146,7 @@ export default class ContactForm {
     uiLabelEmail.appendChild(uiInputEmail)
     uiLabelMessage.appendChild(uiInputMessage)
 
-    uiForm.append(uiLabelFirstname, uiLabelLastname, uiLabelEmail, uiLabelMessage, uiSubmitButton)
+    uiForm.append(uiLabelLastname, uiLabelEmail, uiLabelMessage, uiSubmitButton)
     uiContent.append(uiHeader, uiForm, uiCloseBtn)
     uiContactForm.appendChild(uiContent)
 
@@ -154,7 +154,6 @@ export default class ContactForm {
 
     uiSubmitButton.addEventListener("click", e => {
       e.preventDefault()
-      console.log("Prénom: " + uiInputFirstname.value)
       console.log("Nom: " + uiInputLastname.value)
       console.log("Email: " + uiInputEmail.value)
       console.log("Message: " + uiInputMessage.value)

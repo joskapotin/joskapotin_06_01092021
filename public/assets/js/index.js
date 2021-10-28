@@ -1,12 +1,12 @@
-import HomeController from "./controllers/Home.controller.js"
-import PhotographerController from "./controllers/Photographer.controller.js"
+import HomeController from './controllers/Home.controller.js'
+import PhotographerController from './controllers/Photographer.controller.js'
 
 /**
  *
  * @param {string} path
  * @returns
  */
-const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
+const pathToRegex = path => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$')
 
 /**
  * Extract controller and keys from path
@@ -20,7 +20,7 @@ const getParams = match => {
   return Object.fromEntries(
     keys.map((key, i) => {
       return [key, values[i]]
-    }),
+    })
   )
 }
 
@@ -35,17 +35,17 @@ const navigateTo = url => {
 
 const router = async () => {
   const routes = [
-    { path: "/", Controller: HomeController },
-    { path: "/tags/:tag", Controller: HomeController },
-    { path: "/photographer/:id/tags/:tag", Controller: PhotographerController },
-    { path: "/photographer/:id", Controller: PhotographerController },
+    { path: '/', Controller: HomeController },
+    { path: '/tags/:tag', Controller: HomeController },
+    { path: '/photographer/:id/tags/:tag', Controller: PhotographerController },
+    { path: '/photographer/:id', Controller: PhotographerController }
   ]
 
   // Test each route for potential match
   const potentialMatches = routes.map(route => {
     return {
       route: route,
-      result: location.pathname.match(pathToRegex(route.path)),
+      result: location.pathname.match(pathToRegex(route.path))
     }
   })
 
@@ -54,7 +54,7 @@ const router = async () => {
   if (!match) {
     match = {
       route: routes[0],
-      result: [location.pathname],
+      result: [location.pathname]
     }
   }
 
@@ -62,11 +62,11 @@ const router = async () => {
   controller.render()
 }
 
-window.addEventListener("popstate", router)
+window.addEventListener('popstate', router)
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.addEventListener("click", e => {
-    if (e.target.matches("[data-link]")) {
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('click', e => {
+    if (e.target.matches('[data-link]')) {
       e.preventDefault()
       navigateTo(e.target.href)
     }

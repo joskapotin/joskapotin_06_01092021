@@ -1,5 +1,6 @@
 import config from "../../config/config.js"
 import likeIconComponent from "./like.icon.component.js"
+import mediaFactory from "./media.component.factory.js"
 
 const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, tags, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
@@ -18,38 +19,6 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
   uiLink.dataset.title = title
   uiLink.dataset.alt = altText
   uiLink.title = altText
-
-  const uiFigure = document.createElement("figure")
-  uiFigure.className = "media__figure"
-
-  if (type === "image") {
-    uiFigure.classList.add("media__figure--img")
-    const uiThumbnail = document.createElement("img")
-    uiThumbnail.classList.add("media", "media--img")
-    uiThumbnail.alt = altText
-    uiThumbnail.src = `${photographerMediaPath}/${media}`
-    uiThumbnail.dataset.src = `${photographerMediaPath}/${media}`
-
-    uiFigure.appendChild(uiThumbnail)
-  } else if (type === "video") {
-    uiFigure.classList.add("media__figure--video")
-    const uiThumbnail = document.createElement("video")
-    uiThumbnail.classList.add("media", "media--video")
-    // uiThumbnail.tabIndex = "-1"
-
-    const ext = media.substr(media.lastIndexOf(".") + 1)
-    const source = document.createElement("source")
-    source.src = `${photographerMediaPath}/${media}`
-    source.type = `video/${ext}`
-
-    uiThumbnail.append(source)
-
-    const uiFigcaption = document.createElement("figcaption")
-    uiFigcaption.className = "visually-hidden"
-    uiFigcaption.textContent = altText
-
-    uiFigure.append(uiThumbnail, uiFigcaption)
-  }
 
   const uiFooter = document.createElement("footer")
   uiFooter.className = "media__footer"
@@ -86,8 +55,8 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
 
   uiLikeBtn.append(uiLikeIcon, uiLikeTxt)
   uiLikes.append(uiLikesNbr, uiLikeBtn)
-  uiFooter.append(uiTitle, uiDate, uiPrice, uiLikes)
-  uiLink.appendChild(uiFigure)
+  uiFooter.append(uiTitle, uiDate, uiLikes)
+  uiLink.appendChild(mediaFactory({ photographerId, media, type, alt }))
   uiMediaCard.append(uiLink, uiFooter)
 
   return uiMediaCard

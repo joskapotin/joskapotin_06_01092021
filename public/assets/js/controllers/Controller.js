@@ -1,5 +1,5 @@
 export default class {
-  constructor(params) {
+  constructor (params) {
     this.params = params
   }
 }
