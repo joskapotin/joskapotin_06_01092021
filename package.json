@@ -29,8 +29,7 @@
     "lint": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss -f verbose --color  || echo 'lint failed for some file(s).'",
     "lint:fix": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss --fix -f verbose --color || echo 'lint failed for some file(s).'",
     "stylelint-check": "stylelint-config-prettier-check",
-    "test": "standard && node 'src/js/**/*.js' -f verbose --color  || echo 'standard failed for some file(s).'",
-    "test:fix": "standard --fix && node 'src/js/**/*.js' -f verbose --color  || echo 'standard failed for some file(s).'"
+    "eslint": "eslint --ext 'src/js/**/*.js'"
   },
   "browserslist": [
     "last 4 versions"

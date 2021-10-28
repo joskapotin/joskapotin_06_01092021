@@ -1,5 +1,13 @@
 import config from "../../config/config.js"
 
+/**
+ * factory function. Return corresponding DOM element
+ * @param {string} photographerId
+ * @param {string} media - media filename
+ * @param {string} type - type of media
+ * @param {string} alt - alternative text
+ * @returns {HTMLElement} uiFigure
+ */
 const mediaFactory = ({ photographerId, media, type, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
@@ -20,7 +28,6 @@ const mediaFactory = ({ photographerId, media, type, alt }) => {
     uiFigure.classList.add("media__figure--video")
     const uiThumbnail = document.createElement("video")
     uiThumbnail.classList.add("media", "media--video")
-    // uiThumbnail.tabIndex = "-1"
 
     const ext = media.substr(media.lastIndexOf(".") + 1)
     const source = document.createElement("source")

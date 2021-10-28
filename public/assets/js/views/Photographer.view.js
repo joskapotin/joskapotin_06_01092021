@@ -6,6 +6,16 @@ import ContactForm from "../modules/contactform/contactform.module.js"
 import likes from "../modules/likes/likes.module.js"
 import MediaSorter from "../modules/mediaSorter/media.sorter.module.js"
 
+/**
+ * @class
+ * @classdesc photographer page view
+ * @param {object} photographer
+ * @param {number} totalLikes
+ * @param {object[]} mediasList
+ * @param {string} currentTag
+ * @param {string} sortBy
+ * @extends Abstract
+ */
 export default class extends Abstract {
   constructor({ photographer, totalLikes, mediasList, currentTag, sortBy }) {
     super()
