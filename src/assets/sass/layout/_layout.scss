@@ -5,6 +5,9 @@ body {
 .page {
   position: relative;
   padding: 0 1.25rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .site-header {
