@@ -9,7 +9,7 @@ const photographerCardComponent = ({ photographer: { name, id, city, country, ta
 
   const uiPortrait = document.createElement("img")
   uiPortrait.src = `${config.photographeThumbPath}/${portrait}`
-  uiPortrait.alt = ""
+  uiPortrait.alt = "Portrait du Photographe"
   uiPortrait.className = "card__img"
 
   const uiName = document.createElement("h2")

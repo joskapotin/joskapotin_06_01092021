@@ -34,7 +34,7 @@ const mediaCardComponent = ({ photographerId, title, media, type, likes, date, p
     uiFigure.classList.add("media__figure--video")
     const uiThumbnail = document.createElement("video")
     uiThumbnail.classList.add("media", "media--video")
-    uiThumbnail.tabIndex = "-1"
+    // uiThumbnail.tabIndex = "-1"
 
     const ext = media.substr(media.lastIndexOf(".") + 1)
     const source = document.createElement("source")
