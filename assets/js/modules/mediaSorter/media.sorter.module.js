@@ -1,46 +1,46 @@
-import PhotographerController from "../../controllers/Photographer.controller.js"
+import PhotographerController from '../../controllers/Photographer.controller.js'
 export default class MediaSorter {
-  constructor(params) {
+  constructor (params) {
     this.params = params
     this.element = this.renderNav()
   }
 
-  renderNav() {
-    const uiSortNav = document.createElement("nav")
-    uiSortNav.className = "sort-nav"
+  renderNav () {
+    const uiSortNav = document.createElement('nav')
+    uiSortNav.className = 'sort-nav'
 
-    const uiLabel = document.createElement("span")
-    uiLabel.className = "sort-nav__label"
-    uiLabel.textContent = "Trier par"
+    const uiLabel = document.createElement('span')
+    uiLabel.className = 'sort-nav__label'
+    uiLabel.textContent = 'Trier par'
 
-    const uiList = document.createElement("div")
-    uiList.className = "sort-nav__list"
-    uiList.role = "listbox"
+    const uiList = document.createElement('div')
+    uiList.className = 'sort-nav__list'
+    uiList.role = 'listbox'
 
-    const uiLikesBtn = document.createElement("button")
-    uiLikesBtn.classList = "btn sort-nav__item"
-    uiLikesBtn.dataset.sorter = "POPULARITY"
-    uiLikesBtn.role = "option"
-    uiLikesBtn.textContent = "Popularité"
-    uiLikesBtn.ariaLabel = "Trier par popularité"
+    const uiLikesBtn = document.createElement('button')
+    uiLikesBtn.classList = 'btn sort-nav__item'
+    uiLikesBtn.dataset.sorter = 'POPULARITY'
+    uiLikesBtn.role = 'option'
+    uiLikesBtn.textContent = 'Popularité'
+    uiLikesBtn.ariaLabel = 'Trier par popularité'
 
-    const uiDateBtn = document.createElement("button")
-    uiDateBtn.classList = "btn sort-nav__item"
-    uiDateBtn.dataset.sorter = "DATE"
-    uiDateBtn.role = "option"
-    uiDateBtn.textContent = "Date"
-    uiDateBtn.ariaLabel = "Trier par date"
+    const uiDateBtn = document.createElement('button')
+    uiDateBtn.classList = 'btn sort-nav__item'
+    uiDateBtn.dataset.sorter = 'DATE'
+    uiDateBtn.role = 'option'
+    uiDateBtn.textContent = 'Date'
+    uiDateBtn.ariaLabel = 'Trier par date'
 
-    const uiTitleBtn = document.createElement("button")
-    uiTitleBtn.classList = "btn sort-nav__item"
-    uiTitleBtn.dataset.sorter = "TITLE"
-    uiTitleBtn.role = "option"
-    uiTitleBtn.textContent = "Titre"
-    uiTitleBtn.ariaLabel = "Trier par titre"
+    const uiTitleBtn = document.createElement('button')
+    uiTitleBtn.classList = 'btn sort-nav__item'
+    uiTitleBtn.dataset.sorter = 'TITLE'
+    uiTitleBtn.role = 'option'
+    uiTitleBtn.textContent = 'Titre'
+    uiTitleBtn.ariaLabel = 'Trier par titre'
 
-    if (this.params.sortBy === "DATE") {
+    if (this.params.sortBy === 'DATE') {
       uiList.append(uiDateBtn, uiLikesBtn, uiTitleBtn)
-    } else if (this.params.sortBy === "TITLE") {
+    } else if (this.params.sortBy === 'TITLE') {
       uiList.append(uiTitleBtn, uiLikesBtn, uiDateBtn)
     } else {
       uiList.append(uiLikesBtn, uiDateBtn, uiTitleBtn)
@@ -49,7 +49,7 @@ export default class MediaSorter {
     uiSortNav.append(uiLabel, uiList)
 
     uiList.childNodes.forEach(uiElement => {
-      uiElement.addEventListener("click", e => {
+      uiElement.addEventListener('click', e => {
         e.preventDefault()
         e.stopPropagation()
         // The first option is the current so we do nothing
@@ -61,11 +61,11 @@ export default class MediaSorter {
         }
         parent.insertBefore(target, parent.firstChild)
         const sortBy = target.dataset.sorter
-        if (sortBy === "DATE") {
+        if (sortBy === 'DATE') {
           this.params.sortBy = sortBy
           const controller = new PhotographerController(this.params)
           return controller.render()
-        } else if (sortBy === "TITLE") {
+        } else if (sortBy === 'TITLE') {
           this.params.sortBy = sortBy
           const controller = new PhotographerController(this.params)
           return controller.render()

@@ -1,7 +1,7 @@
-import { getAllMedias } from "../database/services.js"
+import { getAllMedias } from '../database/services.js'
 
 export default class {
-  constructor({ name, id, city, country, tags, tagline, price, portrait }) {
+  constructor ({ name, id, city, country, tags, tagline, price, portrait }) {
     this.name = name
     this.id = id
     this.city = city
@@ -12,12 +12,12 @@ export default class {
     this.portrait = portrait
   }
 
-  async getMedias() {
+  async getMedias () {
     const AllMedias = await getAllMedias()
     return AllMedias.filter(element => element.photographerId === parseInt(this.id))
   }
 
-  async getLikes() {
+  async getLikes () {
     const medias = await this.getMedias()
     return medias.reduce((accumulateur, media) => accumulateur + media.likes, 0)
   }

@@ -1,7 +1,8 @@
 import Controller from "./Controller.js"
 import { getAllPhotographers } from "../database/services.js"
 import Photographer from "../models/Photographer.js"
-import mediaFactory from "../utils/factory.js"
+import Image from "../models/image.js"
+import Video from "../models/Video.js"
 import PhotographerView from "../views/Photographer.view.js"
 
 export default class extends Controller {
@@ -26,7 +27,9 @@ export default class extends Controller {
       this.medias = await this.photographer.getMedias()
     }
 
-    return this.medias.map(media => mediaFactory(media))
+    return this.medias.map(media => {
+      return media.image ? new Image(media) : new Video(media)
+    })
   }
 
   sortMediasByPopularity(medias) {
