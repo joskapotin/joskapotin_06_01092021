@@ -16,6 +16,13 @@ const mediaFactory = ({ photographerId, media, type, alt }) => {
   }
 }
 
+/**
+ * create a html element image
+ * @param {string} photographerId
+ * @param {string} media - media filename
+ * @param {string} alt - alternative text
+ * @returns {HTMLElement} uiFigure
+ */
 const createImage = ({ photographerId, media, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
@@ -33,6 +40,13 @@ const createImage = ({ photographerId, media, alt }) => {
   return uiFigure
 }
 
+/**
+ * create a html element video
+ * @param {string} photographerId
+ * @param {string} media - media filename
+ * @param {string} alt - alternative text
+ * @returns {HTMLElement} uiFigure
+ */
 const createVideo = ({ photographerId, media, type, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
