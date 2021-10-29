@@ -2,10 +2,7 @@ import config from "../../config/config.js"
 
 /**
  * factory function. Return corresponding DOM element
- * @param {string} photographerId
- * @param {string} media - media filename
- * @param {string} type - type of media
- * @param {string} alt - alternative text
+ * @param {{photographerId:string, media:string, type:string, alt:string}}
  * @returns {HTMLElement} uiFigure
  */
 const mediaFactory = ({ photographerId, media, type, alt }) => {
@@ -16,6 +13,11 @@ const mediaFactory = ({ photographerId, media, type, alt }) => {
   }
 }
 
+/**
+ * create a html element image
+ * @param {{photographerId:string, media:string, alt:string}}
+ * @returns {HTMLElement} uiFigure
+ */
 const createImage = ({ photographerId, media, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
@@ -33,7 +35,12 @@ const createImage = ({ photographerId, media, alt }) => {
   return uiFigure
 }
 
-const createVideo = ({ photographerId, media, type, alt }) => {
+/**
+ * create a html element video
+ * @param {{photographerId:string, media:string, alt:string}}
+ * @returns {HTMLElement} uiFigure
+ */
+const createVideo = ({ photographerId, media, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
 

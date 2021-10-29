@@ -5,9 +5,7 @@ import photographerCardComponent from "./components/photographer.card.component.
 /**
  * @class
  * @classdesc home page view
- * @param {string[]} allTheTags
- * @param {string} currentTag
- * @param {object[]} photographersList
+ * @param {{allTheTags:string[], currentTag:string, photographersList:object[]}}
  * @extends Abstract
  */
 export default class extends Abstract {
@@ -22,6 +20,10 @@ export default class extends Abstract {
     this.buildMain({ photographersList, currentTag })
   }
 
+  /**
+   * render tag nav menu
+   * @param {{allTheTags:string[], currentTag:string}}
+   */
   builHeader({ allTheTags, currentTag }) {
     const siteHeader = document.getElementById("site-header")
 
@@ -32,6 +34,10 @@ export default class extends Abstract {
     siteHeader.appendChild(uiTagNav)
   }
 
+  /**
+   * render photographers cards grid
+   * @param {{photographersList:object[], currentTag:string}}
+   */
   buildMain({ photographersList, currentTag }) {
     const siteMain = document.getElementById("site-main")
 
