@@ -9,11 +9,7 @@ import MediaSorter from "../modules/mediaSorter/media.sorter.module.js"
 /**
  * @class
  * @classdesc photographer page view
- * @param {object} photographer
- * @param {number} totalLikes
- * @param {object[]} mediasList
- * @param {string} currentTag
- * @param {string} sortBy
+ * @param {{photographer:object, totalLikes:string, mediasList:object[], currentTag:string, sortBy:string}}
  * @extends Abstract
  */
 export default class extends Abstract {
@@ -31,12 +27,20 @@ export default class extends Abstract {
     likes()
   }
 
+  /**
+   * render photographer resume
+   * @param {{photographer:object, totalLikes:string, currentTag:string}}
+   */
   builHeader({ photographer, totalLikes, currentTag }) {
     const siteHeader = document.getElementById("site-header")
 
     siteHeader.appendChild(photographerResumeComponent({ photographer, totalLikes, currentTag }))
   }
 
+  /**
+   * render media gallery, tag nav, sorter menu
+   * @param {{photographer:object, mediasList:object[], currentTag:string, sortBy:string}}
+   */
   buildMain({ photographer, mediasList, currentTag, sortBy }) {
     const siteMain = document.getElementById("site-main")
 

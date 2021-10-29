@@ -2,7 +2,12 @@ import config from "../../config/config.js"
 import likeIconComponent from "./like.icon.component.js"
 import mediaFactory from "./media.component.factory.js"
 
-const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, tags, alt }) => {
+/**
+ * Create media card element
+ * @param {{photographerId:string, title:string, media:string, type:string, likes:string, date:string, price:string, alt:string}}
+ * @returns {HTMLElement} uiMediaCard
+ */
+const mediaCardComponent = ({ photographerId, title, media, type, likes, date, price, alt }) => {
   const photographerMediaPath = `${config.mediasPath}/photographer-id-${photographerId}`
   const altText = alt
 

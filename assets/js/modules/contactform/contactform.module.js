@@ -54,12 +54,17 @@ export default class ContactForm {
     }
   }
 
+  // close contact form
   close(e) {
     this.element.parentElement.removeChild(this.element)
     document.removeEventListener("keyup", this.onKeyUp)
     document.removeEventListener("keydown", this.onKeyDown)
   }
 
+  /**
+   * create contact form DOM element
+   * @returns {HTMLElement}
+   */
   buildDOM() {
     const uiContactForm = document.createElement("aside")
     uiContactForm.classList.add("modal")

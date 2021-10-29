@@ -1,6 +1,11 @@
 import config from "../../config/config.js"
 import tagNav from "./tag.nav.component.js"
 
+/**
+ * create photographer card
+ * @param {{name:string, id:string, city:string, country:string, tags:string, tagline:string, price:string, portrait:string,currentTag:string }}
+ * @returns {HTMLElement} uiPhotographerCard
+ */
 const photographerCardComponent = ({ photographer: { name, id, city, country, tags, tagline, price, portrait }, currentTag }) => {
   const uiPhotographerCard = document.createElement("article")
   uiPhotographerCard.classList = "card card-photographer"
