@@ -26,10 +26,10 @@
     "serve": "browser-sync start --server public --files public --port 1337",
     "start": "npm-run-all copy:* scss --parallel watch serve",
     "build": "npm-run-all copy:* scss css",
-    "lint": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss -f verbose --color  || echo 'lint failed for some file(s).'",
-    "lint:fix": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss --fix -f verbose --color || echo 'lint failed for some file(s).'",
+    "csslint": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss -f verbose --color  || echo 'lint failed for some file(s).'",
+    "csslint:fix": "stylelint src/assets/sass/**/*.scss src/assets/sass/**/**/*.scss src/assets/sass/**/**/**/*.scss --fix -f verbose --color || echo 'lint failed for some file(s).'",
     "stylelint-check": "stylelint-config-prettier-check",
-    "eslint": "eslint --ext 'src/js/**/*.js'"
+    "jslint": "eslint src/assets/js/**/*.js"
   },
   "browserslist": [
     "last 4 versions"
